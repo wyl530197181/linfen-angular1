@@ -19,5 +19,5 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
                 controller: 'homePageCtrl',
                 templateUrl: 'templates/homePage.html'
             });
-        $urlRouterProvider.otherwise('/homePage');
+        $urlRouterProvider.otherwise('/login');
     });
