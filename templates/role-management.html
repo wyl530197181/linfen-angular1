@@ -1,0 +1,171 @@
+<!--角色管理-->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    新增
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加角色</h4>
+            </div>
+
+
+            <div style="padding:10px">
+                <div>
+                    <label>角色名:</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <fieldset>
+                    <legend>子系统访问</legend>
+                    <form>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 婚丧事宜申报
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 四风问题举报
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 廉政教育
+                        </label>
+                        <label class="checkbox-inline">
+                        <input type="checkbox"> 系统设置
+                        </label>
+                    </form>
+                </fieldset>
+
+                <fieldset>
+                    <legend>婚丧</legend>
+                    <form>
+                        <div>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧申报
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧审批
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧公示
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧现场监督
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧查询统计
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧举报登记
+                            </label>
+                        </div>
+                        <div>
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧举报处理
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧查处处理
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧公开通报查看
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧公开通报管理
+                            </label>
+
+                        </div>
+                        <div>
+                            <label class="checkbox-inline">
+                            <input type="checkbox"> 婚丧纪律处分查看
+                            </label>
+                            <label class="checkbox-inline">
+                            <input type="checkbox"> 婚丧纪律处分管理
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧承诺书查看
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧承诺书管理
+                            </label>
+                        </div>
+                        <div>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧专题教育查看
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧专题教育管理
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧集中整改查看
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox"> 婚丧集中整改管理
+                            </label>
+                        </div>
+                    </form>
+                </fieldset>
+
+                <fieldset>
+                    <legend>投诉</legend>
+                    <form>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 四风问题投诉查看
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 纪委书记信箱查看
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 大操大办查看
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 吃拿卡要查看
+                        </label>
+                    </form>
+                </fieldset>
+
+                <fieldset>
+                    <legend>廉政教育</legend>
+                    <form>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 必修课管理
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 选修课管理
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 廉政视频管理
+                        </label>
+                    </form>
+                </fieldset>
+
+                <fieldset>
+                    <legend>系统设置</legend>
+                    <form>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 用户管理
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 组织管理
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox"> 角色管理
+                        </label>
+                    </form>
+                </fieldset>
+            </div>
+
+            <button class="btn btn-default" style="width: 100%">确定</button>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+<table class="table table-striped">
+    <tr>
+        <td>角色名</td>
+        <td>操作</td>
+
+    </tr>
+</table>
