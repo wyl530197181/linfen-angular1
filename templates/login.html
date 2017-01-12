@@ -8,10 +8,10 @@
                 </div>
                 <form>
                     <div class="form-group m-bottom-md">
-                        <input type="text" class="form-control" placeholder="用户名">
+                        <input ng-model="user.name" type="text" class="form-control" placeholder="用户名">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="密码">
+                        <input ng-model="user.password" type="password" class="form-control" placeholder="密码">
                     </div>
 
                     <div class="form-group">
@@ -23,7 +23,8 @@
                     </div>
 
                     <div class="m-top-md p-top-sm">
-                        <a href="#" class="btn btn-success block">登录</a>
+                        <!--<a href="#" class="btn btn-success block">登录</a>-->
+                        <button ng-click="login()" class="btn btn-success block">登录</button>
                     </div>
                 </form>
             </div>
