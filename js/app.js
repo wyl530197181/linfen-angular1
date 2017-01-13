@@ -86,5 +86,14 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
                     }
                 }
             })
+            .state('homePage.supervision', {
+                url: '/supervision',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/supervision.html'
+                    }
+                }
+            })
         $urlRouterProvider.otherwise('homePage');
     });
