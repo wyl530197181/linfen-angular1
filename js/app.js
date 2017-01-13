@@ -1,7 +1,8 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller', 'ui.router'])
+angular.module("myApp", ['myApp.controller', 'ui.router',
+    'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -16,8 +17,8 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
             })
             .state('homePage.declare', {
                 url: '/declare',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/declare.html'
                     }
@@ -25,8 +26,8 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
             })
             .state('homePage.user-management', {
                 url: '/user-management',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/user-management.html'
                     }
@@ -34,13 +35,14 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
             })
             .state('homePage.role-management', {
                 url: '/role-management',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/role-management.html'
                     }
                 }
             })
+
             .state('homePage.public-notification', {
                 url: '/public-notification',
                 views:{
@@ -95,5 +97,23 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
                     }
                 }
             })
+            .state('homePage.approval', {
+                url: '/approval',
+                views: {
+                    'main': {
+                        controller: 'approvalCtrl',
+                        templateUrl: 'templates/approval.html'
+                    }
+                }
+            })
+            .state('homePage.publicity', {
+                url: '/publicity',
+                views: {
+                    'main': {
+                        controller: 'publicityCtrl',
+                        templateUrl: 'templates/publicity.html'
+                    }
+                }
+            });
         $urlRouterProvider.otherwise('homePage');
     });
