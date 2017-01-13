@@ -95,5 +95,5 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
                     }
                 }
             })
-        $urlRouterProvider.otherwise('homePage');
+        $urlRouterProvider.otherwise('login');
     });
