@@ -13,11 +13,9 @@ angular.module("myApp.controller", [])
         }
     })
     .controller('homePageCtrl', function ($scope, $state) {
-        // $scope.login = 'hello world';
-    })
-    .controller('loginCtrl', function ($scope, $state) {
 
     })
+
     .controller('user-controlCtrl', function ($scope, $state) {
 
     });

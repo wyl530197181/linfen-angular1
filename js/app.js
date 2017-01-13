@@ -1,8 +1,7 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller', 'ui.router',
-    'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+angular.module("myApp", ['myApp.controller', 'ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
