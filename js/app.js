@@ -41,5 +41,50 @@ angular.module("myApp", ['myApp.controller', 'ui.router'])
                     }
                 }
             })
+            .state('homePage.public-notification', {
+                url: '/public-notification',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/public-notification.html'
+                    }
+                }
+            })
+            .state('homePage.diaciplinary-treatment', {
+                url: '/diaciplinary-treatment',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/diaciplinary-treatment.html'
+                    }
+                }
+            })
+            .state('homePage.precise-query', {
+                url: '/precise-query',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/precise-query.html'
+                    }
+                }
+            })
+            .state('homePage.combination-query', {
+                url: '/combination-query',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/combination-query.html'
+                    }
+                }
+            })
+            .state('homePage.quantity-statistics', {
+                url: '/quantity-statistics',
+                views:{
+                    'main':{
+                        controller: '',
+                        templateUrl: 'templates/quantity-statistics.html'
+                    }
+                }
+            })
         $urlRouterProvider.otherwise('homePage');
     });
