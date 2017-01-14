@@ -1,7 +1,7 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller','myApp.service','ui.router'])
+angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.controller2'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -46,7 +46,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router'])
                 url: '/public-notification',
                 views:{
                     'main':{
-                        controller: '',
+                        controller: 'public-notificationCtrl',
                         templateUrl: 'templates/public-notification.html'
                     }
                 }

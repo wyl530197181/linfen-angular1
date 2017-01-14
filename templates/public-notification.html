@@ -10,11 +10,12 @@
         </div>
         <button class="btn btn-default">查询</button>
         <div class="pull-right">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="add()">
                 添加
             </button>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -25,10 +26,10 @@
                         </div>
                         <div style="padding:10px">
                             <label>标题:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control"  ng-model="tittle">
                             <br>
                             <label>人员：</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" ng-model="name">
                             <br>
                             <label>部门：</label>
                             <select style="width: 100%" class="form-control">
@@ -36,8 +37,8 @@
                             </select>
                             <br><br>
                             <label>内容：</label>
-                            <textarea cols="90" rows="4"></textarea>
-                            <button class="btn btn-default" style="width: 100%">确定</button>
+                            <textarea cols="90" rows="4" ng-model="content"></textarea>
+                            <button class="btn btn-default" style="width: 100%" ng-click="addSure()">确定</button>
                         </div>
                     </div>
                 </div>
@@ -54,5 +55,23 @@
         <td>标题</td>
         <td>时间</td>
         <td>操作</td>
+    </tr>
+    <tr ng-repeat="data in tabArr" ng-show="isShow">
+        <td>
+            <span>{{data.name}}</span>
+        </td>
+        <td>
+            <span>{{data.department}}</span>
+        </td>
+        <td>
+            <span>{{data.tittle}}</span>
+        </td>
+        <td>
+            <span>{{data.times}}</span>
+        </td>
+        <td>
+            <button class="btn btn-warning" ng-click="revamp()">修改</button>
+            <button class="btn btn-danger" ng-click="tabArr.splice($index,1)">删除</button>
+        </td>
     </tr>
 </table>

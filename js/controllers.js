@@ -3,16 +3,16 @@
  */
 angular.module("myApp.controller", [])
 
-    .controller('loginCtrl', function ($scope,loginUser) {
-        $scope.user={
-            name:'',
-            password:''
+    .controller('loginCtrl', function ($scope, loginUser) {
+        $scope.user = {
+            name: '',
+            password: ''
         };
-        $scope.nameLogin=function () {
-            if($scope.user.name==''||$scope.user.password==''){
+        $scope.nameLogin = function () {
+            if ($scope.user.name == '' || $scope.user.password == '') {
                 alert('信息不全');
                 return;
-            }else {
+            } else {
                 loginUser.login($scope.user).then(
                     function (data) {
                         console.log(data);
@@ -33,4 +33,4 @@ angular.module("myApp.controller", [])
 
     .controller('user-controlCtrl', function ($scope, $state) {
 
-    });
+    })
