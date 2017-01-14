@@ -1,7 +1,7 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller', 'ui.router'])
+angular.module("myApp", ['myApp.controller','myApp.service','ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
