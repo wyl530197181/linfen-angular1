@@ -33,7 +33,6 @@ angular.module('myApp.service', [])
     })
     .factory('userList',function ($http,$q,$state) {
         var a=sessionStorage.getItem('token');
-        console.log(a);
         var deferred=$q.defer();
         return {
             userlist:function (declare) {

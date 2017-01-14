@@ -48,6 +48,7 @@ angular.module("myApp.controller", [])
             list:'',//邀请名单
             promise:'',//本人承诺
             promiseMen:''//承诺人
+
         };
         $scope.submit=function () {
             userList.userlist($scope.declare).then(

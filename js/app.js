@@ -8,6 +8,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
                 url: '/login',
                 controller: 'loginCtrl',
                 templateUrl: 'templates/login.html'
+
             })
             .state('homePage', {
                 url: '/homePage',
