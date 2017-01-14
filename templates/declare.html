@@ -2,77 +2,75 @@
 
 <form class="form-inline">
     <h3>申报</h3>
-    <div>
-        <label>申报人:</label>
-        <input type="text" class="form-control">
-        <label>与申报人关系:</label>
-        <select class="form-control">
-            <option>本人</option>
-            <option>直系亲属</option>
-        </select>
-        <label>政治面貌:</label>
-        <input type="text" class="form-control">
-        <label>单位职务:</label>
-        <select class="form-control">
-            <option>县级党员干部</option>
-            <option>科级党员干部</option>
-            <option>社区基层干部</option>
-            <option>一般工作人员</option>
-        </select>
-    </div>
+    <label>申报人:</label>
+    <input type="text" class="form-control" ng-model="declare.name">
+    <label>与申报人关系:</label>
+    <select class="form-control" ng-model="declare.relation">
+        <option>本人</option>
+        <option>直系亲属</option>
+    </select>
+    <label>政治面貌:</label>
+    <input type="text" class="form-control" ng-model="declare.political">
+    <label>单位职务:</label>
+    <select class="form-control" ng-model="declare.duty">
+        <option>县级党员干部</option>
+        <option>科级党员干部</option>
+        <option>社区基层干部</option>
+        <option>一般工作人员</option>
+    </select>
     <br><br>
     <div>
         <label>配偶:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="declare.spouse">
         <label>联系电话:</label>
-        <input type="text" class="form-control">
-        <label>单位职务:</label>
-        <select class="form-control">
+        <input type="text" class="form-control" ng-model="declare.phone">
+        <label>操办事项:</label>
+        <select class="form-control" ng-model="declare.matter">
             <option>婚嫁</option>
             <option>丧葬</option>
         </select>
         <label>操办次数:</label>
-        <input type="number" class="form-control">
+        <input type="number" class="form-control" ng-model="declare.number">
     </div>
     <br><br>
     <div>
         <label>操办时间:</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="declare.date">
         <label>操办地点:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="declare.site">
         <label>操办桌数:</label>
-        <input type="number" class="form-control">
+        <input type="number" class="form-control" ng-model="declare.tableNumber">
         <label>参加人数:</label>
-        <input type="number" class="form-control">
+        <input type="number" class="form-control" ng-model="declare.peoples">
     </div>
     <br><br>
     <div>
         <label>邀请范围:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="declare.scope">
         <label>用车数量:</label>
-        <input type="number" class="form-control">
+        <input type="number" class="form-control" ng-model="declare.cars">
         <label>用车来源:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="declare.source">
         <label>所属部门:</label>
-        <select class="form-control">
+        <select class="form-control" ng-model="declare.section">
             <option>根组织</option>
         </select>
     </div>
     <br><br>
     <div>
         <label>宴请名单:</label>
-        <input type="file" class="form-control">
+        <input type="file" class="form-control" ng-model="declare.list">
     </div>
     <br><br>
     <label>本人承诺:</label>
     <div>
-        <textarea cols="100" rows="4"></textarea>
+        <textarea cols="100" rows="4" ng-model="declare.promise"></textarea>
         <label>承诺人:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="declare.promiseMen">
     </div>
     <br><br>
     <div>
-        <button class="btn btn-default">提交申报</button>
+        <button class="btn btn-default" ng-click="submit()">提交申报</button>
     </div>
 </form>
 

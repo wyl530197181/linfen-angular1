@@ -18,7 +18,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
                 url: '/declare',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'declareCtrl',
                         templateUrl: 'templates/declare.html'
                     }
                 }
@@ -100,7 +100,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
                 url: '/approval',
                 views: {
                     'main': {
-                        controller: 'approvalCtrl',
+                        controller: '',
                         templateUrl: 'templates/approval.html'
                     }
                 }
@@ -109,7 +109,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
                 url: '/publicity',
                 views: {
                     'main': {
-                        controller: 'publicityCtrl',
+                        controller: '',
                         templateUrl: 'templates/publicity.html'
                     }
                 }
