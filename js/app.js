@@ -1,7 +1,7 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.controller2'])
+angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router', 'myApp.controller2', 'myApp.approval'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -44,8 +44,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
 
             .state('homePage.public-notification', {
                 url: '/public-notification',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: 'public-notificationCtrl',
                         templateUrl: 'templates/public-notification.html'
                     }
@@ -53,8 +53,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.diaciplinary-treatment', {
                 url: '/diaciplinary-treatment',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/diaciplinary-treatment.html'
                     }
@@ -62,8 +62,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.precise-query', {
                 url: '/precise-query',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/precise-query.html'
                     }
@@ -71,8 +71,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.combination-query', {
                 url: '/combination-query',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/combination-query.html'
                     }
@@ -80,8 +80,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.quantity-statistics', {
                 url: '/quantity-statistics',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/quantity-statistics.html'
                     }
@@ -89,8 +89,8 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.supervision', {
                 url: '/supervision',
-                views:{
-                    'main':{
+                views: {
+                    'main': {
                         controller: '',
                         templateUrl: 'templates/supervision.html'
                     }

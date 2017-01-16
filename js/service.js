@@ -60,7 +60,7 @@ angular.module('myApp.service', [])
                         attachmentFileCode:declare.section,
                         selfPromise:declare.list,
                         promisePeople:declare.promise,
-                        staffOrgId:declare.promiseMen,
+                        staffOrgId:declare.promiseMen
 
                     }
                 }).then(function (v) {
