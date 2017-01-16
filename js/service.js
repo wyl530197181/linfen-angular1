@@ -36,33 +36,33 @@ angular.module('myApp.service', [])
         console.log(a);
         var deferred=$q.defer();
         return {
-            userlist:function (declare) {
+            userlist:function (params) {
                 $http({
                     method:'POST',
                     url:'http://bigbug.tech:8080/wdm-api/api/wdm/event/add.api',
-                    params:{
-                        token:a,
-                        staff:declare.name,
-                        staffRelationship:declare.relation,
-                        staffPoliticalStatus:declare.political,
-                        staffJob:declare.duty,
-                        staffSpouse:declare.spouse,
-                        staffPhone:declare.phone,
-                        eventType:declare.declare,
-                        eventCount:declare.number,
-                        eventDate:declare.date,
-                        location:declare.site,
-                        tableCount:declare.tableNumber,
-                        peopleCount:declare.peoples,
-                        peopleRange:declare.scope,
-                        carCount:declare.cars,
-                        carSource:declare.source,
-                        attachmentFileCode:declare.section,
-                        selfPromise:declare.list,
-                        promisePeople:declare.promise,
-                        staffOrgId:declare.promiseMen
-
-                    }
+                    params:params
+                    // {
+                    //     staff:declare.name,
+                    //     staffRelationship:declare.relation,
+                    //     staffPoliticalStatus:declare.political,
+                    //     staffJob:declare.duty,
+                    //     staffSpouse:declare.spouse,
+                    //     staffPhone:declare.phone,
+                    //     eventType:declare.declare,
+                    //     eventCount:declare.number,
+                    //     eventDate:declare.date,
+                    //     location:declare.site,
+                    //     tableCount:declare.tableNumber,
+                    //     peopleCount:declare.peoples,
+                    //     peopleRange:declare.scope,
+                    //     carCount:declare.cars,
+                    //     carSource:declare.source,
+                    //     attachmentFileCode:declare.section,
+                    //     selfPromise:declare.list,
+                    //     promisePeople:declare.promise,
+                    //     staffOrgId:declare.promiseMen,
+                    //     token:a,
+                    // },
                 }).then(function (v) {
                     console.log(v);
                     deferred.resolve(v);
@@ -73,4 +73,26 @@ angular.module('myApp.service', [])
                 return deferred.promise;
             }
         }
+    })
+    .factory('publicity',function ($http,$q) {
+    var deferred=$q.defer();
+    return{
+        publicityList:function (params) {
+            $http({
+                method:'get',
+                url:'http://bigbug.tech:8080/wdm-api/api/wdm/event/show_bulletin.api',
+                params:params
+                // responseType: 'json',
+                // timeout: 30000
+            }).then(function (v) {
+                console.log(v);
+                // deferred.resolve(v.data.result);
+            },function (e) {
+                console.log(e);
+                // deferred.reject(e);
+            });
+            return deferred.promise;
+        }
+    }
+
     })

@@ -46,7 +46,8 @@ angular.module("myApp.controller", [])
             section: '',//所属部门
             list: '',//邀请名单
             promise: '',//本人承诺
-            promiseMen: ''//承诺人
+            promiseMen: '',//承诺人
+            token:sessionStorage.getItem('token')
         };
         $scope.submit = function () {
             userList.userlist($scope.declare).then(
@@ -82,11 +83,27 @@ angular.module("myApp.controller", [])
                 }
             )
         };
-        $scope.approvals()
+        $scope.approvals();
     })
 
-    .controller('user-controlCtrl', function ($scope, $state) {
-
+    .controller('publicityCtrl', function ($scope, $state,publicity) {
+        publicity.publicityList(
+            {
+                token:sessionStorage.getItem('token'),
+                staff:'',
+                bulletinStatus:-1,
+                page:1,
+                start:0,
+                limit:30
+            }
+        ).then(
+            function (data) {
+                console.log(data);
+            },
+            function () {
+                console.log(arguments);
+            }
+        )
     })
     .controller('approvalCtrl', function ($scope, $state) {
 

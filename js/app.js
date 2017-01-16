@@ -109,7 +109,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router', 'myAp
                 url: '/publicity',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'publicityCtrl',
                         templateUrl: 'templates/publicity.html'
                     }
                 }
