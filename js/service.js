@@ -33,6 +33,7 @@ angular.module('myApp.service', [])
     })
     .factory('userList',function ($http,$q,$state) {
         var a=sessionStorage.getItem('token');
+        console.log(a);
         var deferred=$q.defer();
         return {
             userlist:function (declare) {
@@ -40,6 +41,7 @@ angular.module('myApp.service', [])
                     method:'POST',
                     url:'http://bigbug.tech:8080/wdm-api/api/wdm/event/add.api',
                     params:{
+                        token:a,
                         staff:declare.name,
                         staffRelationship:declare.relation,
                         staffPoliticalStatus:declare.political,
@@ -59,8 +61,8 @@ angular.module('myApp.service', [])
                         selfPromise:declare.list,
                         promisePeople:declare.promise,
                         staffOrgId:declare.promiseMen,
-                        token:a
-                    },
+
+                    }
                 }).then(function (v) {
                     console.log(v);
                     deferred.resolve(v);

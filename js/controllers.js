@@ -59,7 +59,6 @@ angular.module("myApp.controller", [])
                     console.log(arguments);
                 }
             )
-
         }
     })
     .controller('homePageCtrl', function ($scope, $state) {
