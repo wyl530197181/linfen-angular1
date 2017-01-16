@@ -13,7 +13,7 @@ angular.module("myApp.controller2", [])
         $scope.add = function () {
             $scope.name = '';
             $scope.tittle = '';
-            $scope.content=''
+            $scope.content = ''
         };
         //模态框中内容添加到表格
         $scope.addSure = function () {
@@ -23,14 +23,31 @@ angular.module("myApp.controller2", [])
                 department: '根组织',
                 tittle: $scope.tittle,
                 times: $scope.myTime,
-                content:$scope.content,
+                content: $scope.content,
                 isEdit: false
             });
             //隐藏模态框
             $('#myModal').modal('hide');
         };
-        //修改
-        $scope.revamp=function () {
+        $scope.remove = function () {
 
+            swal({
+                    title: "确定删除此项?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确认删除!",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },
+                function () {
+                    swal("已删除!", "", "success");
+
+                });
+            $scope.tabArr.splice(this.$index, 1);
+        };
+        //修改
+        $scope.revamp = function () {
+            $('#myModal').modal('show');
         }
     });
