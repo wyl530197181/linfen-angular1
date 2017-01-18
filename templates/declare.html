@@ -1,78 +1,290 @@
 <!--申报页面-->
 
-<form class="form-inline">
-    <h3>申报</h3>
-    <label>申报人:</label>
-    <input type="text" class="form-control" ng-model="declare.name">
-    <label>与申报人关系:</label>
-    <select class="form-control" ng-model="declare.relation">
-        <option>本人</option>
-        <option>直系亲属</option>
-    </select>
-    <label>政治面貌:</label>
-    <input type="text" class="form-control" ng-model="declare.political">
-    <label>单位职务:</label>
-    <select class="form-control" ng-model="declare.duty">
-        <option>县级党员干部</option>
-        <option>科级党员干部</option>
-        <option>社区基层干部</option>
-        <option>一般工作人员</option>
-    </select>
-    <br><br>
-    <div>
-        <label>配偶:</label>
-        <input type="text" class="form-control" ng-model="declare.spouse">
-        <label>联系电话:</label>
-        <input type="text" class="form-control" ng-model="declare.phone">
-        <label>操办事项:</label>
-        <select class="form-control" ng-model="declare.matter">
-            <option>婚嫁</option>
-            <option>丧葬</option>
-        </select>
-        <label>操办次数:</label>
-        <input type="number" class="form-control" ng-model="declare.number">
-    </div>
-    <br><br>
-    <div>
-        <label>操办时间:</label>
-        <input type="date" class="form-control" ng-model="declare.date">
-        <label>操办地点:</label>
-        <input type="text" class="form-control" ng-model="declare.site">
-        <label>操办桌数:</label>
-        <input type="number" class="form-control" ng-model="declare.tableNumber">
-        <label>参加人数:</label>
-        <input type="number" class="form-control" ng-model="declare.peoples">
-    </div>
-    <br><br>
-    <div>
-        <label>邀请范围:</label>
-        <input type="text" class="form-control" ng-model="declare.scope">
-        <label>用车数量:</label>
-        <input type="number" class="form-control" ng-model="declare.cars">
-        <label>用车来源:</label>
-        <input type="text" class="form-control" ng-model="declare.source">
-        <label>所属部门:</label>
-        <select class="form-control" ng-model="declare.section">
-            <option>根组织</option>
-        </select>
-    </div>
-    <br><br>
-    <div>
-        <label>宴请名单:</label>
-        <input type="file" class="form-control" ng-model="declare.list">
-    </div>
-    <br><br>
-    <label>本人承诺:</label>
-    <div>
-        <textarea cols="100" rows="4" ng-model="declare.promise"></textarea>
-        <label>承诺人:</label>
-        <input type="text" class="form-control" ng-model="declare.promiseMen">
-    </div>
-    <br><br>
-    <div>
-        <button class="btn btn-default" ng-click="submit()">提交申报</button>
-    </div>
-</form>
+<div id="declare">
+    <div class="smart-widget">
+        <div class="smart-widget-header">
+            申报
+        </div>
+        <div class="smart-widget-inner">
+            <form class="no-margin" name="declareForm" data-validate="parsley" novalidate>
+                <div class="smart-widget-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group"
+                                 ng-class="{'has-success':!declareForm.declareName.$dirty&&!declareForm.declareName.$error.required,'has-error':declareForm.declareName.$error.required&&declareForm.$submitted}">
+                                <label class="control-label">申报人:</label>
+                                <input name="declareName" ng-model="declare.staff" type="text"
+                                       class="form-control input-lg"
+                                       required data-parsley-required="true">
+                                <span ng-show="declareForm.declareName.$error.required&&declareForm.$submitted">申报人不能为空</span>
+                            </div>
 
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">与申报人关系:</label>
+                                <select class="form-control" ng-model="declare.staffRelationship"
+                                        ng-change="changeRelationship()" ng-init="declare.staffRelationship='1'">
+                                    <option value="1">本人</option>
+                                    <option value="2">直系亲属</option>
+                                    <!--<option value="3">朋友</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"
+                                 ng-class="{'has-success':!declareForm.declarePhone.$dirty&&!declareForm.declarePhone.$error.required,'has-error':declareForm.declarePhone.$error.required&&declareForm.$submitted}">
+                                <label class="control-label">联系电话:</label>
+                                <input name="declarePhone" ng-model="declare.staffPhone" type="text"
+                                       class="form-control input-lg"
+                                       required data-parsley-required="true">
+                                <span ng-show="declareForm.declarePhone.$error.required&&declareForm.$submitted">电话不能为空</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">政治面貌:</label>
+                                <input class="" type="text" class="form-control input-lg"
+                                       ng-model="declare.staffPoliticalStatus" data-parsley-required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">单位职务:</label>
+                                <select class="form-control" ng-change="changeStaffJob()"
+                                        ng-model="declare.staffJob" ng-init="declare.staffJob='1'">
+                                    <option value="1">县级党员干部</option>
+                                    <option value="2">科级党员干部</option>
+                                    <option value="3">社区基层干部</option>
+                                    <option value="4">一般工作人员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">配偶:</label>
+                                <input class="" type="text" class="form-control input-lg"
+                                       ng-model="declare.staffSpouse" data-parsley-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">操办事项:</label>
+                                <select class="form-control"
+                                        ng-model="declare.eventType" ng-change="changeEventType()"
+                                        ng-init="declare.eventType='1'">
+                                    <option value="1">婚嫁</option>
+                                    <option value="2">丧葬</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">操办次数:</label>
+                                <input type="number" class="form-control input-lg"
+                                       ng-model="declare.eventCount" data-parsley-required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">操办时间:</label>
+                                <input type="date" class="form-control input-lg"
+                                       ng-model="declare.eventDate" data-parsley-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group"
+                                 ng-class="{'has-success':!declareForm.declareWhere.$dirty&&!declareForm.declareWhere.$error.required,'has-error':declareForm.declareWhere.$error.required&&declareForm.$submitted}">
+                                <label class="control-label">操办地点:</label>
+                                <input name="declareWhere" ng-model="declare.location" type="text"
+                                       class="form-control input-lg"
+                                       required data-parsley-required="true">
+                                <span ng-show="declareForm.declareWhere.$error.required&&declareForm.$submitted">地点不能为空</span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">操办桌数:</label>
+                                <input type="number" class="form-control input-lg"
+                                       ng-model="declare.tableCount" ng-init="declare.tableCount=50"
+                                       data-parsley-required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">参加人数:</label>
+                                <input type="number" class="form-control input-lg"
+                                       ng-model="declare.peopleCount" data-parsley-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">邀请范围:</label>
+                                <input type="text" class="form-control input-lg"
+                                       ng-model="declare.peopleRange" data-parsley-required="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">用车数量:</label>
+                                <div class="btn-group">
+                                    <input type="number" class="form-control input-lg"
+                                           ng-model="declare.carCount" data-parsley-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"
+                                 ng-class="{'has-success':!declareForm.declareCar.$dirty&&!declareForm.declareCar.$error.required,'has-error':declareForm.declareCar.$error.required&&declareForm.$submitted}">
+                                <label class="control-label">用车来源:</label>
+                                <input name="declareCar" ng-model="declareCar" type="text" class="form-control input-lg"
+                                       ng-model="declare.carSource" required data-parsley-required="true">
+                                <span ng-show="declareForm.declareCar.$error.required&&declareForm.$submitted">电话不能为空</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">所属部门:</label>
+                                <select class="form-control"
+                                        ng-model="declare.staffOrgId" ng-change="changeStaffOrgId()"
+                                        ng-init="declare.staffOrgId='1'">
+                                    <option value="1">根组织</option>
+                                    <!--<option value="2">根组织</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="control-label">宴会名单:</label>
+                                <div class="alert alert-info alert-custom">
+                                    <i class="fa"></i><span class="m-left-xs">请上传宴会名单</span>
+                                </div>
+                            </div>
+                            <form action="." class="dropzone col-md-4">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="control-label">本人承诺:</label>
+                                <br>
+                                <textarea ng-model="declare.selfPromise" cols="50" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">承诺人:</label>
+                                <input type="text" ng-model="declare.promisePeople"
+                                       class="form-control input-lg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="smart-widget-header text-right">
+                        <button class="btn btn-info" type="submit" ng-click="submit()">提交</button>
+                        <button class="btn btn-default" type="reset">清空</button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- ./smart-widget-inner -->
+    </div><!-- ./smart-widget -->
+</div>
+
+
+<!--<div>-->
+    <!--<form class="form-inline">-->
+        <!--<h3>申报</h3>-->
+        <!--<label>申报人:</label>-->
+        <!--<input type="text" class="form-control" ng-model="declare.staff">-->
+        <!--<label>与申报人关系:</label>-->
+        <!--<select class="form-control" ng-model="declare.staffRelationship" ng-change="relation()"-->
+                <!--ng-init="declare.staffRelationship='1'">-->
+            <!--<option value="1">本人</option>-->
+            <!--<option value="2">直系亲属</option>-->
+        <!--</select>-->
+        <!--<label>政治面貌:</label>-->
+        <!--<input type="text" class="form-control" ng-model="declare.staffPoliticalStatus">-->
+        <!--<label>单位职务:</label>-->
+        <!--<select class="form-control" ng-model="declare.staffJob" ng-change="duty()" ng-init="declare.staffJob='1'">-->
+            <!--<option value="1">县级党员干部</option>-->
+            <!--<option value="2">科级党员干部</option>-->
+            <!--<option value="3">社区基层干部</option>-->
+            <!--<option value="4">一般工作人员</option>-->
+        <!--</select>-->
+        <!--<br><br>-->
+        <!--<div>-->
+            <!--<label>配偶:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.staffSpouse" ng-init="declare.staffSpouse='meng'">-->
+            <!--<label>联系电话:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.staffPhone" ng-init="eclare.staffPhone='1008611'">-->
+            <!--<label>操办事项:</label>-->
+            <!--<select class="form-control" ng-model="declare.eventType" ng-change="matter()" ng-init="declare.eventType='1'">-->
+                <!--<option value="1">婚嫁</option>-->
+                <!--<option value="2">丧葬</option>-->
+            <!--</select>-->
+            <!--<label>操办次数:</label>-->
+            <!--<input type="number" class="form-control" ng-model="declare.eventCount" ng-init="declare.eventCount=1">-->
+        <!--</div>-->
+        <!--<br><br>-->
+        <!--<div>-->
+            <!--<label>操办时间:</label>-->
+            <!--<input type="date" class="form-control" ng-model="declare.eventDate">-->
+            <!--<label>操办地点:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.location">-->
+            <!--<label>操办桌数:</label>-->
+            <!--<input type="number" class="form-control" ng-model="declare.tableCount" ng-init="declare.tableCount=50">-->
+            <!--<label>参加人数:</label>-->
+            <!--<input type="number" class="form-control" ng-model="declare.peopleCount" ng-init="declare.peopleCount=50">-->
+        <!--</div>-->
+        <!--<br><br>-->
+        <!--<div>-->
+            <!--<label>邀请范围:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.peopleRange">-->
+            <!--<label>用车数量:</label>-->
+            <!--<input type="number" class="form-control" ng-model="declare.carCount" ng-init="declare.carCount=10">-->
+            <!--<label>用车来源:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.carSource">-->
+            <!--<label>所属部门:</label>-->
+            <!--<select class="form-control" ng-model="declare.attachmentFileCode" ng-change="section()"-->
+                    <!--ng-init="declare.attachmentFileCode='1'">-->
+                <!--<option value="1">根组织</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<br><br>-->
+        <!--<div>-->
+            <!--<label>宴请名单:</label>-->
+            <!--<input type="file" class="form-control" ng-model="declare.selfPromise">-->
+        <!--</div>-->
+        <!--<br><br>-->
+        <!--<label>本人承诺:</label>-->
+        <!--<div>-->
+            <!--<textarea cols="100" rows="4" ng-model="declare.promisePeople"></textarea>-->
+            <!--<label>承诺人:</label>-->
+            <!--<input type="text" class="form-control" ng-model="declare.staffOrgId">-->
+        <!--</div>-->
+        <!--<br><br>-->
+        <!--<div>-->
+            <!--<button class="btn btn-default" ng-click="submit()">提交申报</button>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
 
 
