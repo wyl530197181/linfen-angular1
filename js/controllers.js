@@ -4,12 +4,12 @@
 angular.module("myApp.controller", [])
     .controller('loginCtrl', function ($scope, loginUser) {
         $scope.user = {
-            name: 'yiyi',
-            password: '123456'
+            name: 'bo',
+            password: '5620198'
         };
         $scope.nameLogin = function () {
             if ($scope.user.name == '' || $scope.user.password == '') {
-                alert('信息不全');
+                swal("信息不全", "请检查用户名密码!", "error");
                 return;
             } else {
                 loginUser.login($scope.user).then(

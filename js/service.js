@@ -15,6 +15,7 @@ angular.module('myApp.service', [])
                         username: user.name,
                         password: user.password
                     }
+
                 }).then(function (v) {
                     // console.log(v);
                     if (v.data.result != null) {
@@ -27,6 +28,7 @@ angular.module('myApp.service', [])
                     console.log(e);
                     deferred.reject(e);
                 });
+
                 return deferred.promise;
             }
         }
@@ -52,23 +54,47 @@ angular.module('myApp.service', [])
             }
         }
     })
-    .factory('publicity', function ($http, $q) {
+    .factory('userList', function ($http, $q, $state) {
+        var a = sessionStorage.getItem('token');
+        console.log(a);
+        var deferred = $q.defer();
         return {
-            publicityList: function (params) {
-                var deferred = $q.defer();
+            userlist: function (declare) {
                 $http({
-                    method: 'get',
-                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/show_bulletin.api',
-                    params: params,
-                    responseType: 'json',
-                    timeout: 30000
-                }).then(function (v) {
-                    console.log(v);
-                    // deferred.resolve(v.data.result);
-                }, function (e) {
-                    console.log(e);
-                    deferred.reject(e);
-                });
+                    method: 'POST',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/add.api',
+                    params: {
+                        token: a,
+                        staff: declare.name,
+                        staffRelationship: declare.relation,
+                        staffPoliticalStatus: declare.political,
+                        staffJob: declare.duty,
+                        staffSpouse: declare.spouse,
+                        staffPhone: declare.phone,
+                        eventType: declare.declare,
+                        eventCount: declare.number,
+                        eventDate: declare.date,
+                        location: declare.site,
+                        tableCount: declare.tableNumber,
+                        peopleCount: declare.peoples,
+                        peopleRange: declare.scope,
+                        carCount: declare.cars,
+                        carSource: declare.source,
+                        attachmentFileCode: declare.section,
+                        selfPromise: declare.list,
+                        promisePeople: declare.promise,
+                        staffOrgId: declare.promiseMen
+
+                    }
+                }).then(
+                    function (v) {
+                        console.log(v);
+                        deferred.resolve(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                        deferred.reject(e);
+                    });
                 return deferred.promise;
             }
         }

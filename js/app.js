@@ -1,7 +1,8 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router', 'myApp.controller2', 'myApp.approval'])
+
+angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.controller2','myApp.bo-service', 'myApp.approval'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -53,9 +54,9 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router', 'myAp
             })
             .state('homePage.diaciplinary-treatment', {
                 url: '/diaciplinary-treatment',
-                views: {
-                    'main': {
-                        controller: '',
+                views:{
+                    'main':{
+                        controller: 'diaciplinary-treatmentCtrl',
                         templateUrl: 'templates/diaciplinary-treatment.html'
                     }
                 }
