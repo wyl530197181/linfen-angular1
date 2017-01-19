@@ -25,8 +25,71 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody ng-repeat="lists in list">
+        <tr>
+            <td>{{lists.staff}}</td>
+            <td>{{lists.staffOrgName}}</td>
+            <td>{{lists.eventType==1?'婚嫁':'丧葬'}}</td>
+            <td>{{lists.peopleCount}}</td>
+            <td>{{lists.createTime}}</td>
+            <td>{{lists.eventDate}}</td>
+            <td>{{lists.superviseStatus==null?'未监督':'已监督'}}</td>
+            <td>
+                <!--监督报告弹框-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="supervise()">
+                    监督报告
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">标题:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="determine.title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">内容:</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="3" ng-model="determine.content"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="reportConfirm()">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--违纪登记弹框-->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal2">
+                    违纪登记
+                </button>
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            </div>
+                            <div class="modal-body">
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

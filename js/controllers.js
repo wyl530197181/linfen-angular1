@@ -2,6 +2,7 @@
  * Created by bobo on 17-1-11.
  */
 angular.module("myApp.controller", [])
+    //登陆
     .controller('loginCtrl', function ($scope, loginUser) {
         $scope.user = {
             name: '',
@@ -24,7 +25,20 @@ angular.module("myApp.controller", [])
             }
         }
     })
-    .controller('declareCtrl', function ($scope, userList) {
+    //申报
+    .controller('declareCtrl', function ($scope, UserList) {
+        $scope.relation = function () {
+            $scope.declare.staffRelationship = this.declare.staffRelationship;
+        };
+        $scope.duty = function () {
+            $scope.declare.staffJob = this.declare.staffJob;
+        };
+        $scope.matter = function () {
+            $scope.declare.eventType =this.declare.eventType;
+        };
+        $scope.section = function () {
+            $scope.declare.attachmentFileCode = this.declare.attachmentFileCode;
+        };
         $scope.declare = {
             name: '',//申报人
             relation: '',//与申报人关系
@@ -50,137 +64,98 @@ angular.module("myApp.controller", [])
             userList.userlist($scope.declare).then(
                 function (data) {
                     console.log(data);
+                    alert('提交成功')
+                },
+                function () {
+                    console.log(arguments);
+                    alert('提交失败')
+                }
+            )
+        }
+    })
+    //主页面
+    .controller('homePageCtrl', function ($scope, $state, approval) {
+        $scope.logout = function () {
+            $state.go('login')
+        };
+        // 跳转审批接口
+        $scope.approvallist = {
+            token: '',
+            staff: '',
+            auditStatus: '',
+            page: '',
+            start: '',
+            limit: ''
+        };
+        $scope.approvals = function () {
+            approval.approvalList().then(
+                function (data) {
+                    // console.log(data);
                 },
                 function () {
                     console.log(arguments);
                 }
             )
-        }
+        };
+        $scope.approvals();
     })
-    .controller('homePageCtrl', function ($scope, $state) {
-        $scope.logout = function () {
-            $state.go('login')
+    //公示
+    .controller('publicityCtrl', function ($scope, $state, publicity) {
+        publicity.publicityList(
+            {
+                token: sessionStorage.getItem('token'),
+                staff: '',
+                bulletinStatus: -1,
+                page: 1,
+                start: 0,
+                limit: 30
+            }
+        ).then(
+            function (data) {
+                // console.log(data);
+            },
+            function () {
+                console.log(arguments);
+            }
+        )
+    })
+    //监督页面
+    .controller('supervisionCtrl',function ($scope,Supervision) {
+        var refresh=function () {
+            Supervision.supervisionList({
+                token: sessionStorage.getItem('token'),
+                staff: '',
+                superviseStatus: '-1',
+                page: 1,
+                start: 0,
+                limit: 30
+            }).then(function (data) {
+                $scope.list=data.data.result;
+                // console.log($scope.list);
+            },function () {
+                alert('信息错误')
+            });
+        };
+        refresh();
+        $scope.supervise=function () {
+            $scope.determine ={
+                title:'',
+                content:'',
+                token: sessionStorage.getItem('token'),
+                eventId:this.lists.id
+            };
         };
 
-    })
-    .controller('user-controlCtrl', function ($scope, $state) {
+        $scope.reportConfirm=function () {
+            console.log($scope.determine);
+            $('#myModal').modal('hide');
+            Supervision.superviseReport($scope.determine).then(
+                function (data) {
+                    console.log(data)
+                },function () {
+                alert('信息错误')
+            });
+            refresh();
+        };
 
     });
-    // // 审批页面开始
-    // .controller('approvalCtrl', function ($scope, $state, approval, passBy, rejectBy, confirmBy) {
-    //     $scope.approvallist = {
-    //         token: sessionStorage.getItem('token'),
-    //         staff: '',
-    //         auditStatus: -1,
-    //         page: 1,
-    //         start: 0,
-    //         limit: 20
-    //     };
-    //     // 更新函数
-    //     $scope.refresh = function () {
-    //         // $scope.pageSplice($scope.approvaArry);
-    //         approval.approvalList($scope.approvallist).then(
-    //             function (succ) {
-    //                 console.log(succ);
-    //                 $scope.approvaArry = succ.data.result;
-    //             },
-    //             function () {
-    //                 console.log(arguments);
-    //             }
-    //         );
-    //     };
-    //     $scope.refresh();
-    //     // 查询函数
-    //     $scope.search = function () {
-    //         $scope.refresh();//调用刷新页面
-    //         approval.approvalList().then(
-    //             function (succ) {
-    //                 // $scope.approvaArry = succ.data.result;
-    //             },
-    //             function () {
-    //                 console.log(arguments);
-    //             }
-    //         )
-    //     };
-    //     $scope.selectStatus = function () {
-    //         console.log(event)
-    //     };
-    //     //审批通过
-    //     $scope.passList = {
-    //         token: sessionStorage.getItem('token'),
-    //         eventId: '',
-    //         //sessionStorage.getItem('eventId'),
-    //         status: 1
-    //     };
-    //     $scope.pass = function (index) {
-    //         console.log(index);
-    //         // console.log( $scope.approvaArry);
-    //         $scope.passList.eventId = $scope.approvaArry[index].id;
-    //         console.log($scope.passList.eventId);
-    //         passBy.userlist($scope.passList).then(
-    //             function (bb) {
-    //                 console.log(bb);
-    //             },
-    //             function () {
-    //             }
-    //         )
-    //     };
-    //     //审批拒绝
-    //     $scope.rejectList = {
-    //         token: sessionStorage.getItem('token'),
-    //         eventId: '',
-    //         status: 2
-    //     };
-    //     $scope.reject = function (index) {
-    //         console.log(index);
-    //         $scope.rejectList.eventId = $scope.approvaArry[index].id;
-    //         passBy.userlist($scope.rejectList).then(
-    //             function (data) {
-    //                 console.log(data);
-    //             },
-    //             function () {
-    //             }
-    //         )
-    //     };
-    //     // 模态框
-    //     $scope.confirmList = {
-    //         token: sessionStorage.getItem('token'),
-    //         eventId: sessionStorage.getItem('eventId'),
-    //         status: 1,
-    //         content: ''
-    //     };
-    //     var aa = $scope.confirmList.content;
-    //     $scope.confirm = function (index) {
-    //         $scope.confirmList.eventId = $scope.approvaArry[index].id;
-    //         // $scope.approvaArry.splice(index, 1);
-    //         confirmBy.userlist($scope.confirmList).then(
-    //             function (data) {
-    //                 console.log(data);
-    //             },
-    //             function () {
-    //             }
-    //         )
-    //     };
-    //     //分页
-    //     $scope.pageSplice = function () {
-    //         $scope.pageNum = 1;
-    //         $scope.count = 5;
-    //         //     Math.ceil( $scope.approvaArry.length / $scope.pageNum);//分几页
-    //         // console.log( $scope.approvaArry.length);
-    //         //按钮点击获取当前点击$index
-    //         $scope.numberClick = function ($index) {
-    //             $scope.tihsnum = $index + 1;
-    //         };
-    //         //上一页
-    //         $scope.myLeft = function () {
-    //             $scope.tihsnum--;
-    //         };
-    //         //下一页
-    //         $scope.myRight = function () {
-    //             $scope.tihsnum++;
-    //         };
-    //     }
-    // });
-// 审批页面结束
-
-

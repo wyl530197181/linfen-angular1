@@ -11,7 +11,7 @@ angular.module('myApp.approval', [])
                     url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/show_audit.api',
                     params: params
                 }).then(function (success) {
-                    console.log(success);
+                    // console.log(success);
                     deferred.resolve(success);
                 }, function (erro) {
                     console.log(erro);

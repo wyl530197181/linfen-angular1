@@ -3,6 +3,7 @@
  */
 
 angular.module('myApp.service', [])
+    //登陆页面接口
     .factory('loginUser', function ($http, $q, $state) {
         //生成deferred异步对象
         return {
@@ -33,6 +34,7 @@ angular.module('myApp.service', [])
             }
         }
     })
+    //申报页面接口
     .factory('UserList', function ($http, $q) {
         return {
             userlist: function (params) {
@@ -54,10 +56,9 @@ angular.module('myApp.service', [])
             }
         }
     })
-    .factory('userList', function ($http, $q, $state) {
-        var a = sessionStorage.getItem('token');
-        console.log(a);
-        var deferred = $q.defer();
+
+    //公示页面接口
+    .factory('publicity', function ($http, $q) {
         return {
             userlist: function (declare) {
                 $http({
@@ -99,4 +100,44 @@ angular.module('myApp.service', [])
             }
         }
 
+    })
+    //现场监督接口
+    .factory('Supervision', function ($http, $q) {
+        return {
+            supervisionList: function (params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/show_supervise.api',
+                    params: params,
+                    responseType: 'json',
+                    timeout: 30000
+                }).then(function (v) {
+                    // console.log(v);
+                    deferred.resolve(v);
+                }, function (e) {
+                    // console.log(e);
+                    deferred.reject(e);
+                });
+                return deferred.promise;
+            },
+            superviseReport:function (params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event_supervise_report/add.api',
+                    params: params,
+                    responseType: 'json',
+                    timeout: 30000
+                }).then(function (v) {
+                    console.log(v);
+                    deferred.resolve(v);
+                }, function (e) {
+                    // console.log(e);
+                    deferred.reject(e);
+                });
+                return deferred.promise;
+            }
+
+        }
     })

@@ -93,7 +93,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/supervision',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'supervisionCtrl',
                         templateUrl: 'templates/supervision.html'
                     }
                 }
