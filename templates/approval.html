@@ -5,10 +5,11 @@
             <label>申报人</label>
             <input type="text" class="form-control" ng-model="approvallist.staff">
         </div>
-        <select class="form-control" ng-change="selectStatus()" ng-model="sel" ng-init="sel='待审核'">
-            <option>待审核</option>
-            <option>通过</option>
-            <option>拒绝</option>
+        <select class="form-control" ng-change="selectStatus()"
+                ng-model="approvallist.auditStatus"  ng-init="approvallist.auditStatus='-1'">
+            <option value="-1">待审核</option>
+            <option value="1">通过</option>
+            <option value="2">拒绝</option>
         </select>
         <button class="btn btn-primary" ng-click="search()">查询</button>
     </form>

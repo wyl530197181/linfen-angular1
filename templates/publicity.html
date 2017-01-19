@@ -3,14 +3,14 @@
     <form class="form-inline" role="form">
         <div class="form-group">
             <label>申报人</label>
-            <input type="email" class="form-control">
+            <input type="text" class="form-control" ng-model="publicityCtrlList.staff">
         </div>
-        <select class="form-control">
-            <option>未公示</option>
-            <option>公示</option>
-
+        <select class="form-control" ng-change="selectStatus()" ng-model="publicityCtrlList.bulletinStatus"
+                ng-init="publicityCtrlList.bulletinStatus='-1'">
+            <option value="-1">未公示</option>
+            <option value="1">公示</option>
         </select>
-        <button class="btn btn-primary">查询</button>
+        <button class="btn btn-primary" ng-click="search()">查询</button>
     </form>
     <table class="table table-striped" style="margin-top: 30px;margin-right:10%">
 
@@ -34,7 +34,7 @@
             <td>{{data.auditStatus==null?'未公示':'公示'}}</td>
             <td>
                 <button type="button" class="btn btn-primary "
-                        data-toggle="modal" data-target="#myModal" ng-click="pass($index)">
+                        data-toggle="modal" data-target="#myModal" ng-click="publicContend()">
                     公示内容
                 </button>
                 <!-- Modal -->
@@ -46,11 +46,11 @@
                                 <h4 class="modal-title" id="myModalLabel">公示内容</h4>
                             </div>
                             <div class="modal-body">
-                                <textarea class="form-control" rows="3" ng-model="confirmList.content"></textarea>
+                                <textarea class="form-control" rows="3" ng-model="publicContendList.content"></textarea>
                                 <input type="file">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default button1" ng-click="confirm($index)"
+                                <button type="button" class="btn btn-default button1" ng-click="publicContendConfirm()"
                                         data-dismiss="modal">确定
                                 </button>
                             </div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-danger " ng-click="reject($index)"
+                <button type="button" class="btn btn-danger " ng-click="publicOutcome()"
                         data-toggle="modal" data-target="#myModals">
                     公示结果
                 </button>
@@ -76,15 +76,19 @@
                                         <td>结果</td>
                                         <td>
                                             <form action="">
-                                                <lable><input type="radio" name="confirm">通过</lable>
-                                                <lable><input type="radio" name="confirm">有异议</lable>
+                                                <lable><input type="radio" name="confirm"
+                                                              ng-model="publicOutcomeList.status" value="1">通过
+                                                </lable>
+                                                <lable><input type="radio" name="confirm"
+                                                              ng-model="publicOutcomeList.status" value="2">有异议
+                                                </lable>
                                             </form>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>内容</td>
                                         <td colspan="2">
-                                            <textarea rows="3" cols="70">
+                                            <textarea rows="3" cols="70" ng-model="publicOutcomeList.content">
 
                                             </textarea>
                                         </td>
@@ -97,7 +101,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default button1" data-dismiss="modal"
-                                        ng-click="confirm($index)">确定
+                                        ng-click="publicOutcomeConfirm()">确定
                                 </button>
                             </div>
                         </div>
@@ -106,5 +110,4 @@
             </td>
         </tr>
     </table>
-
 </div>

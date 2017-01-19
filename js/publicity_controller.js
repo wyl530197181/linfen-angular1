@@ -6,13 +6,13 @@ angular.module('myApp.publicityCtrl', [])
         $scope.publicityCtrlList = {
             token: sessionStorage.getItem('token'),
             staff: '',
-            auditStatus: -1,
+            bulletinStatus: -1,
             page: 1,
             start: 0,
             limit: 20
         };
         $scope.refresh = function () {
-            publicity.publicList( $scope.publicityCtrlList)
+            publicity.publicList($scope.publicityCtrlList)
                 .then(
                     function (success) {
                         console.log(success);
@@ -25,4 +25,71 @@ angular.module('myApp.publicityCtrl', [])
                 )
         };
         $scope.refresh();
+
+
+        $scope.search = function () {
+            $scope.refresh();
+
+        };
+
+// 公示内容
+
+        $scope.publicContend = function () {
+            console.log(this);
+            $scope.publicContendList = {
+                token: sessionStorage.getItem('token'),
+                eventId: this.data.id,
+                content: '',
+                attachmentFileCode: ''
+            };
+        };
+        $scope.publicContendConfirm = function () {
+            publicity.publicContent($scope.publicContendList)
+                .then(
+                    function (success) {
+                        console.log(success);
+                    },
+                    function (error) {
+                        alert('接口出错')
+                    }
+                )
+        };
+        //公示结果
+        $scope.publicOutcome = function () {
+            console.log(this);
+            $scope.publicOutcomeList = {
+                token: sessionStorage.getItem('token'),
+                eventId: this.data.id,
+                content: '',
+                status: ''
+            };
+        };
+        $scope.publicOutcomeConfirm = function () {
+            publicity.publicOutcome($scope.publicOutcomeList)
+                .then(
+                    function (success) {
+                        console.log(success);
+                    },
+                    function (error) {
+                        alert('接口出错')
+                    }
+                )
+        };
     });
+// publicOutcomeList = {
+//     token: sessionStorage.getItem('token'),
+//     eventId: '',
+//     status: '',
+//     content: ''
+// }
+// $scope.publicOutcome = function () {
+//     publicity.publicOutcome($scope.publicOutcomeList)
+//         .then(
+//             function (success) {
+//                 console.log(success);
+//             },
+//             function (error) {
+//                 alert('接口出错')
+//             }
+//         )
+// }
