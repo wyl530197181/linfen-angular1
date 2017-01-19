@@ -1,8 +1,9 @@
 /**
  * Created by bobo on 17-1-11.
  */
-
-angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.controller2','myApp.bo-service', 'myApp.approval'])
+angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
+    'myApp.controller2','myApp.bo-service',
+    'myApp.approval','myApp.approvalCtrl','myApp.publicityCtrl','myApp.publicity'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -54,9 +55,9 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
             })
             .state('homePage.diaciplinary-treatment', {
                 url: '/diaciplinary-treatment',
-                views:{
-                    'main':{
-                        controller: 'diaciplinary-treatmentCtrl',
+                views: {
+                    'main': {
+                        controller: '',
                         templateUrl: 'templates/diaciplinary-treatment.html'
                     }
                 }
@@ -101,7 +102,7 @@ angular.module("myApp", ['myApp.controller','myApp.service','ui.router','myApp.c
                 url: '/approval',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'approvalCtrl',
                         templateUrl: 'templates/approval.html'
                     }
                 }

@@ -189,8 +189,7 @@ angular.module("myApp.controller2", [])
                         swal.close()
                     }, 2000)
                 });
-
         };
-    })
+    });
 
 

@@ -1,34 +1,110 @@
-<div class="container">
-    <div class="row">
-        <h2>公示</h2>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label>申报人</label>
-                <input type="email" class="form-control">
-            </div>
-            <select class="form-control">
-                <option>未公示</option>
-                <option>公示</option>
+<div>
+    <h2>公示</h2>
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label>申报人</label>
+            <input type="email" class="form-control">
+        </div>
+        <select class="form-control">
+            <option>未公示</option>
+            <option>公示</option>
 
-            </select>
-            <button class="btn btn-primary">查询</button>
-        </form>
-        <table class="table table-bordered" style="width:80%;margin-top: 30px;">
-            <tr>
-                <th>申报人</th>
-                <th>部门</th>
-                <th>类型</th>
-                <th>人数</th>
-                <th>申报时间</th>
-                <th>宴请时间</th>
-                <th>状态</th>
-                <th>操作</th>
-            </tr>
-        </table>
-        <center>
-            <ul uib-pagination total-items="totalItems" ng-model="currentPage"
-                ng-change="pageChanged()">
-            </ul>
-        </center>
-    </div>
+        </select>
+        <button class="btn btn-primary">查询</button>
+    </form>
+    <table class="table table-striped" style="margin-top: 30px;margin-right:10%">
+
+        <tr>
+            <th>申报人</th>
+            <th>部门</th>
+            <th>类型</th>
+            <th>人数</th>
+            <th>申报时间</th>
+            <th>宴请时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="data in publicArr">
+            <td>{{data.staff}}</td>
+            <td>{{data.staffOrgName}}</td>
+            <td>{{data.eventType==1?'婚嫁': '丧葬'}}</td>
+            <td>{{data.peopleCount}}</td>
+            <td>{{data.createTime}}</td>
+            <td>{{data.eventDate}}</td>
+            <td>{{data.auditStatus==null?'未公示':'公示'}}</td>
+            <td>
+                <button type="button" class="btn btn-primary "
+                        data-toggle="modal" data-target="#myModal" ng-click="pass($index)">
+                    公示内容
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">公示内容</h4>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control" rows="3" ng-model="confirmList.content"></textarea>
+                                <input type="file">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default button1" ng-click="confirm($index)"
+                                        data-dismiss="modal">确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-danger " ng-click="reject($index)"
+                        data-toggle="modal" data-target="#myModals">
+                    公示结果
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabels">意见内容</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>结果</td>
+                                        <td>
+                                            <form action="">
+                                                <lable><input type="radio" name="confirm">通过</lable>
+                                                <lable><input type="radio" name="confirm">有异议</lable>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>内容</td>
+                                        <td colspan="2">
+                                            <textarea rows="3" cols="70">
+
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>附件</td>
+                                        <td colspan="2"><input type="file"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default button1" data-dismiss="modal"
+                                        ng-click="confirm($index)">确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
 </div>

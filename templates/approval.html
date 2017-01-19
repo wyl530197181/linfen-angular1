@@ -1,30 +1,102 @@
-<div class="container">
-    <div class="row">
-        <h2>审批</h2>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label>申报人</label>
-                <input type="email" class="form-control">
-            </div>
-            <select class="form-control">
-                <option>待审核</option>
-                <option>通过</option>
-                <option>拒绝</option>
-            </select>
-            <button class="btn btn-primary">查询</button>
-        </form>
-        <table class="table table-bordered" style="width:80%;margin-top: 30px;">
-            <tr>
-                <th>申报人</th>
-                <th>部门</th>
-                <th>类型</th>
-                <th>人数</th>
-                <th>申报时间</th>
-                <th>宴请时间</th>
-                <th>状态</th>
-                <th>操作</th>
-            </tr>
+<div>
+    <h2>审批</h2>
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label>申报人</label>
+            <input type="text" class="form-control" ng-model="approvallist.staff">
+        </div>
+        <select class="form-control" ng-change="selectStatus()" ng-model="sel" ng-init="sel='待审核'">
+            <option>待审核</option>
+            <option>通过</option>
+            <option>拒绝</option>
+        </select>
+        <button class="btn btn-primary" ng-click="search()">查询</button>
+    </form>
+    <table class="table table-striped" style="margin-top: 30px;margin-right:10%">
+        <thead>
+        <tr>
+            <th>申报人</th>
+            <th>部门</th>
+            <th>类型</th>
+            <th>人数</th>
+            <th>申报时间</th>
+            .
+            <th>宴请时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="obj in approvalArry">
+            <td>{{obj.staff}}</td>
+            <td>{{obj.staffOrgName}}</td>
+            <td>{{obj.eventType==1?'婚嫁': '丧葬'}}</td>
+            <td>{{obj.peopleCount}}</td>
+            <td>{{obj.createTime}}</td>
+            <td>{{obj.eventDate}}</td>
+            <td>{{obj.auditStatus==-1?'待审核':'通过'&&obj.auditStatus==1?'通过':'待审核'&&obj.auditStatus==2?'拒绝':'待审核'}}</td>
+            <td>
+                <button type="button" class="btn btn-primary "
+                        data-toggle="modal" data-target="#myModal" ng-click="pass($index)">
+                    通过
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">意见内容</h4>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control" rows="3" ng-model="confirmList.content"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default button1" ng-click="confirm($index)"
+                                        data-dismiss="modal">确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </table>
-    </div>
+
+                <button type="button" class="btn btn-danger " ng-click="reject($index)"
+                        data-toggle="modal" data-target="#myModals">
+                    拒绝
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabels">意见内容</h4>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default button1" data-dismiss="modal"
+                                        ng-click="confirm($index)">确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--分页-->
+
+    <ul class="pagination ulli " id="generate">
+        <li class=" ulli" ng-click="myLeft($index)"><a>&laquo;</a></li>
+
+        <li class="lia ulli" ng-click="numberClick($index)"
+            ng-repeat="sum in approvaArry|limitTo:count "><a>{{$index+1}}</a></li>
+
+        <li class=" ulli" ng-click="myRight($index)"><a>&raquo;</a></li>
+    </ul>
 </div>
