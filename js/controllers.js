@@ -5,8 +5,8 @@ angular.module("myApp.controller", [])
     //登陆
     .controller('loginCtrl', function ($scope, loginUser) {
         $scope.user = {
-            name: '',
-            password: ''
+            name: 'yiyi',
+            password: '123456'
         };
         $scope.nameLogin = function () {
             if ($scope.user.name == '' || $scope.user.password == '') {
@@ -40,28 +40,28 @@ angular.module("myApp.controller", [])
             $scope.declare.attachmentFileCode = this.declare.attachmentFileCode;
         };
         $scope.declare = {
-            name: '',//申报人
-            relation: '',//与申报人关系
-            political: '',//政治面貌
-            duty: '',//单位职务
-            spouse: '', //配偶
-            phone: '',//联系电话
-            matter: '',//操办事项
-            number: '',//操办次数
-            date: '',//操办时间
-            site: '',//操办地点
-            tableNumber: '',//操办桌数
-            peoples: '',//参加人数
-            scope: '',//邀请范围
-            cars: '',//用车数量
-            source: '',//用车来源
-            section: '',//所属部门
-            list: '',//邀请名单
-            promise: '',//本人承诺
-            promiseMen: ''//承诺人
+            staff: '',//申报人
+            staffRelationship: '',//与申报人关系
+            staffPoliticalStatus: '',//政治面貌
+            staffJob: '',//单位职务
+            staffSpouse: '', //配偶
+            staffPhone: '',//联系电话
+            eventType: '',//操办事项
+            eventCount: '',//操办次数
+            eventDate: '',//操办时间
+            location: '',//操办地点
+            tableCount: '',//操办桌数
+            peopleCount: '',//参加人数
+            peopleRange: '',//邀请范围
+            carCount: '',//用车数量
+            carSource: '',//用车来源
+            attachmentFileCode: '',//所属部门
+            selfPromise: '',//邀请名单
+            promisePeople: '',//本人承诺
+            staffOrgId: ''//承诺人
         };
         $scope.submit = function () {
-            userList.userlist($scope.declare).then(
+            UserList.userlist($scope.declare).then(
                 function (data) {
                     console.log(data);
                     alert('提交成功')
@@ -121,15 +121,21 @@ angular.module("myApp.controller", [])
     })
     //监督页面
     .controller('supervisionCtrl',function ($scope,Supervision) {
+        //未监督页面展示
+        $scope.queryChange=function () {
+            
+        }
+        $scope.superviseUser={
+            token: sessionStorage.getItem('token'),
+            staff:'',
+            superviseStatus:1,
+            page:1,
+            start:0,
+            limit:30
+        };
         var refresh=function () {
-            Supervision.supervisionList({
-                token: sessionStorage.getItem('token'),
-                staff: '',
-                superviseStatus: '-1',
-                page: 1,
-                start: 0,
-                limit: 30
-            }).then(function (data) {
+            Supervision.supervisionList($scope.superviseUser).then(
+                function (data) {
                 $scope.list=data.data.result;
                 // console.log($scope.list);
             },function () {
@@ -145,10 +151,9 @@ angular.module("myApp.controller", [])
                 eventId:this.lists.id
             };
         };
-
+        //监督报告
         $scope.reportConfirm=function () {
             console.log($scope.determine);
-            $('#myModal').modal('hide');
             Supervision.superviseReport($scope.determine).then(
                 function (data) {
                     console.log(data)
@@ -157,5 +162,41 @@ angular.module("myApp.controller", [])
             });
             refresh();
         };
+        //违纪登记
+        $scope.discipline=function () {
+            Supervision.disciplineData({
+                token: sessionStorage.getItem('token'),
+                eventId:this.lists.id
+            }).then(
+                function (data) {
+                    console.log(data);
+                },function () {
+                    alert('信息错误')
+                });
+            $scope.disciplineData={
+                token: sessionStorage.getItem('token'),
+                eventId:this.lists.id,
+                isCashGiftOutOfLimits:0,//礼金超标
+                isUsePublicCar:0,//使用公车
+                isUsePublicGoods:0,//使用公产
+                isUsePublicAsserts:0,//使用公务
+                isUsePublicMoney:0,//使用公款
+                attachmentFileCode:'',//附件
+                otherQuestion:'',//其他问题
+                content:''//意见内容
+            }
+        };
+        $scope.disciplineConfirm=function () {
+            Supervision.disciplineList($scope.disciplineData).then(
+                function (data) {
+                    console.log(data);
+                },function () {
+                    alert('信息错误')
+                });
+        };
+        //现场监督--已监督
+        $scope.query=function () {
+            refresh();
+        }
 
     });
