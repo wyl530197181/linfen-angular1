@@ -2,10 +2,10 @@
 
 
 <div id="declare">
-    <div class="smart-widget">
-        <div class="smart-widget-header">
+    <div>
+        <h3 class="smart-widget-header">
             申报
-        </div>
+        </h3>
         <div class="smart-widget-inner">
             <form class="no-margin" name="declareForm" data-validate="parsley" novalidate>
                 <div class="smart-widget-body">
@@ -47,8 +47,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">政治面貌:</label>
-                                <input class="" type="text" class="form-control input-lg"
-                                       ng-model="declare.staffPoliticalStatus" data-parsley-required="true">
+                                <input type="text" class="form-control input-lg" ng-model="declare.staffPoliticalStatus" data-parsley-required="true">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -66,7 +65,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">配偶:</label>
-                                <input class="" type="text" class="form-control input-lg"
+                                <input type="text" class="form-control input-lg"
                                        ng-model="declare.staffSpouse" data-parsley-required="true">
                             </div>
                         </div>
@@ -188,7 +187,7 @@
                             <div class="form-group">
                                 <label class="control-label">本人承诺:</label>
                                 <br>
-                                <textarea ng-model="declare.selfPromise" cols="50" rows="10"></textarea>
+                                <textarea ng-model="declare.selfPromise" cols="100" rows="8"></textarea>
                             </div>
                         </div>
                         <div class="col-md-4">

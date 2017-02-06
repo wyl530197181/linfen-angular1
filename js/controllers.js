@@ -10,7 +10,7 @@ angular.module("myApp.controller", [])
         };
         $scope.nameLogin = function () {
             if ($scope.user.name == '' || $scope.user.password == '') {
-                alert('信息不全');
+                swal("信息不全!")
                 return;
             } else {
                 loginUser.login($scope.user).then(
@@ -26,7 +26,7 @@ angular.module("myApp.controller", [])
         }
     })
     //申报
-    .controller('declareCtrl', function ($scope, userList) {
+    .controller('declareCtrl', function ($scope, UserList) {
         $scope.relation = function () {
             $scope.declare.staffRelationship = this.declare.staffRelationship;
         };
@@ -58,17 +58,18 @@ angular.module("myApp.controller", [])
             attachmentFileCode: '',//所属部门
             selfPromise: '',//邀请名单
             promisePeople: '',//本人承诺
-            staffOrgId: ''//承诺人
+            staffOrgId: '',//承诺人
+            token: sessionStorage.getItem('token'),
         };
         $scope.submit = function () {
             UserList.userlist($scope.declare).then(
                 function (data) {
                     console.log(data);
-                    alert('提交成功')
+                    swal("提交成功!", "", "success")
                 },
                 function () {
                     console.log(arguments);
-                    alert('提交失败')
+                    swal("提交失败!")
                 }
             )
         }
@@ -78,26 +79,6 @@ angular.module("myApp.controller", [])
         $scope.logout = function () {
             $state.go('login')
         };
-        // 跳转审批接口
-        $scope.approvallist = {
-            token: '',
-            staff: '',
-            auditStatus: '',
-            page: '',
-            start: '',
-            limit: ''
-        };
-        $scope.approvals = function () {
-            approval.approvalList().then(
-                function (data) {
-                    // console.log(data);
-                },
-                function () {
-                    console.log(arguments);
-                }
-            )
-        };
-        $scope.approvals();
     })
     //公示
     .controller('publicityCtrl', function ($scope, $state, publicity) {
@@ -122,9 +103,6 @@ angular.module("myApp.controller", [])
     //监督页面
     .controller('supervisionCtrl', function ($scope, Supervision) {
         //未监督页面展示
-        $scope.queryChange = function () {
-
-        }
         $scope.superviseUser = {
             token: sessionStorage.getItem('token'),
             staff: '',
@@ -139,7 +117,7 @@ angular.module("myApp.controller", [])
                     $scope.list = data.data.result;
                     // console.log($scope.list);
                 }, function () {
-                    alert('信息错误')
+                    swal("信息错误!")
                 });
         };
         refresh();
@@ -158,7 +136,7 @@ angular.module("myApp.controller", [])
                 function (data) {
                     console.log(data)
                 }, function () {
-                    alert('信息错误')
+                    swal("信息错误!")
                 });
             refresh();
         };
@@ -171,7 +149,7 @@ angular.module("myApp.controller", [])
                 function (data) {
                     console.log(data);
                 }, function () {
-                    alert('信息错误')
+                    swal("信息错误!")
                 });
             $scope.disciplineData = {
                 token: sessionStorage.getItem('token'),
@@ -191,7 +169,7 @@ angular.module("myApp.controller", [])
                 function (data) {
                     // console.log(data);
                 }, function () {
-                    alert('信息错误')
+                    swal("信息错误!")
                 });
         };
         //现场监督--已监督
@@ -212,7 +190,7 @@ angular.module("myApp.controller", [])
                 // console.log(data);
                 $scope.roleManage = data.data.result;
             }, function () {
-                alert('信息有误')
+                swal("信息错误!")
             });
         };
         page();
@@ -226,7 +204,7 @@ angular.module("myApp.controller", [])
                 $scope.manageData = data.data.result.name;
                 $scope.manageDataChock = data.data.result.functions;
             }, function () {
-                alert('信息有误')
+                swal("信息错误!")
             });
         }
         //角色删除
@@ -239,7 +217,7 @@ angular.module("myApp.controller", [])
                 Role.roleDel(data).then(function (data) {
                     console.log(data);
                 }, function () {
-                    alert('信息有误')
+                    swal("信息错误!")
                 });
             };
             swal({
@@ -247,14 +225,13 @@ angular.module("myApp.controller", [])
                 type: "info",
                 showCancelButton: true,
                 closeOnConfirm: false,
-                showLoaderOnConfirm: true,
+                showLoaderOnConfirm: true
             }, function () {
                 setTimeout(function () {
                     delData();
                     swal("删除成功!");
                     page();
                 }, 2000);
-
             });
         }
     })
