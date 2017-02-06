@@ -38,7 +38,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/role-management',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'roleManage',
                         templateUrl: 'templates/role-management.html'
                     }
                 }
