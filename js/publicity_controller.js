@@ -30,19 +30,36 @@ angular.module('myApp.publicityCtrl', [])
             $scope.refresh();
 
         };
-
-// 公示内容接口
+        // 公示内容接口
         $scope.publicContend = function () {
             console.log(this);
-            $scope.publicContendList = {
-                token: sessionStorage.getItem('token'),
-                eventId: this.data.id,
-                content: '',
-                attachmentFileCode: ''
-            };
+            publicity.publicContent(
+                {
+                    token: sessionStorage.getItem('token'),
+                    eventId: this.data.id
+                }
+            )
+                .then(
+                    function (success) {
+                        console.log(success);
+                    },
+                    function (error) {
+                        alert('接口出错')
+                    }
+                )
+        };
+        //公示内容确认
+        $scope.publicContendList = {
+            token: sessionStorage.getItem('token'),
+            eventId: '',
+            content: '',
+            attachmentFileCode: ''
         };
         $scope.publicContendConfirm = function () {
-            publicity.publicContent($scope.publicContendList)
+            console.log(this);
+
+            $scope.publicContendList.eventId = this.data.id;
+            publicity.publicContentConfirm($scope.publicContendList)
                 .then(
                     function (success) {
                         console.log(success);
@@ -50,20 +67,48 @@ angular.module('myApp.publicityCtrl', [])
                     function (error) {
                         alert('接口出错')
                     }
-                )
+                );
+            swal({
+                    title: "",
+                    text: "公示成功!",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
+                }
+            );
+            $scope.refresh()
         };
-        //公示结果
+//公示结果
         $scope.publicOutcome = function () {
             console.log(this);
-            $scope.publicOutcomeList = {
-                token: sessionStorage.getItem('token'),
-                eventId: this.data.id,
-                content: '',
-                status: ''
-            };
+            publicity.publicContent(
+                {
+                    token: sessionStorage.getItem('token'),
+                    eventId: this.data.id
+                }
+            ).then(
+                function (success) {
+                    console.log(success);
+                },
+                function (error) {
+                    alert('接口出错')
+                }
+            )
+        };
+        $scope.publicOutcomeList = {
+            token: sessionStorage.getItem('token'),
+            eventId: '',
+            content: '',
+            status: ''
         };
         $scope.publicOutcomeConfirm = function () {
-            publicity.publicOutcome($scope.publicOutcomeList)
+            // console.log(this);
+            $scope.publicOutcomeList.eventId = this.data.id;
+            $scope.publicOutcomeList.status = this.data.eventType;
+
+            publicity.publicOutcomeConfirm($scope.publicOutcomeList)
                 .then(
                     function (success) {
                         console.log(success);
@@ -71,6 +116,18 @@ angular.module('myApp.publicityCtrl', [])
                     function (error) {
                         alert('接口出错')
                     }
-                )
+                );
+            swal({
+                    title: "",
+                    text: "公示结果成功!",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
+                }
+            );
+            $scope.refresh();
         };
-    });
+    })
+;

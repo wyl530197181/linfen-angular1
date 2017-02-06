@@ -16,9 +16,9 @@ angular.module('myApp.approvalCtrl', [])
         $scope.refresh = function () {
             approval.approvalList($scope.approvallist).then(
                 function (succ) {
-                    console.log(succ);
+                    // console.log(succ);
                     $scope.approvalArry = succ.data.result;
-                    Page($scope.approvalArry);
+                    // Page($scope.approvalArry);
                 },
                 function () {
                     console.log(arguments);
@@ -26,7 +26,6 @@ angular.module('myApp.approvalCtrl', [])
             )
         };
         $scope.refresh();
-
         // 查询函数
         $scope.search = function () {
             $scope.refresh();//调用刷新页面
@@ -35,35 +34,32 @@ angular.module('myApp.approvalCtrl', [])
             console.log(event)
         };
         //审批通过
-        $scope.passLists = {
-            token: sessionStorage.getItem('token'),
-            eventId: '',
-            status: 1
-        };
-        $scope.pass = function (index) {
-            console.log(this);
-            $scope.passLists.eventId = $scope.approvalArry[index].id;
-            $scope.passId = $scope.passLists.eventId;
-            console.log($scope.passLists.eventId);
-            approval.passList($scope.passLists).then(
+
+        $scope.pass = function () {
+            approval.passList(
+                {
+                    token: sessionStorage.getItem('token'),
+                    eventId: this.obj.id,
+                    status: this.obj.eventType
+                }
+            ).then(
                 function (bb) {
                     console.log(bb);
                 },
                 function () {
                 }
-            )
+            );
         };
         //审批拒绝
-        $scope.rejectLists = {
-            token: sessionStorage.getItem('token'),
-            eventId: '',
-            status: 2
-        };
-        $scope.reject = function (index) {
-            console.log(index);
-            $scope.rejectLists.eventId = $scope.approvalArry[index].id;
-            $scope.rejectId = $scope.rejectLists.eventId;
-            approval.rejectList($scope.rejectLists).then(
+        $scope.reject = function () {
+            console.log(this);
+            approval.rejectList(
+                {
+                    token: sessionStorage.getItem('token'),
+                    eventId: this.obj.id,
+                    status: this.obj.eventType
+                }
+            ).then(
                 function (data) {
                     console.log(data);
                 },
@@ -75,18 +71,30 @@ angular.module('myApp.approvalCtrl', [])
         $scope.confirmLists = {
             token: sessionStorage.getItem('token'),
             eventId: '',
-            status: 1,
+            status: '',
             content: ''
         };
-        var aa = $scope.confirmLists.content;
         $scope.confirm = function () {
-            $scope.confirmLists.eventId = $scope.passId;
-            console.log($scope.confirmLists.eventId);
-            approval.confirmList($scope.confirmLists).then(
+            // console.log(this);
+            $scope.confirmLists.eventId = this.obj.id;
+            $scope.confirmLists.status = this.obj.eventType;
+            approval.confirmList(
+                $scope.confirmLists
+            ).then(
                 function (data) {
                     console.log(data);
                 },
                 function () {
+                }
+            );
+            swal({
+                    title: "",
+                    text: "审批成功!",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
                 }
             );
             $scope.refresh();
@@ -96,13 +104,13 @@ angular.module('myApp.approvalCtrl', [])
         $scope.rejectLists = {
             token: sessionStorage.getItem('token'),
             eventId: '',
-            status: 1,
+            status: '',
             content: ''
         };
-        var aa = $scope.rejectLists.content;
         $scope.rejects = function () {
-            $scope.rejectLists.eventId = $scope.$scope.rejectId;
-            console.log($scope.rejectLists.eventId);
+            // console.log(this);
+            $scope.rejectLists.eventId = this.obj.id;
+            $scope.rejectLists.status = this.obj.eventType;
             approval.confirmList($scope.rejectLists).then(
                 function (data) {
                     console.log(data);
@@ -110,34 +118,44 @@ angular.module('myApp.approvalCtrl', [])
                 function () {
                 }
             );
+            swal({
+                    title: "",
+                    text: "审批成功!",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
+                }
+            );
             $scope.refresh();
 
         };
         //分页
-        function Page(pagearr) {
-            $scope.length = pagearr.length;
-
-            $scope.numArry=[];
-            for (var i=0;i<$scope.length;i++){
-                $scope.numArry.push(i)
-            }
-            console.log($scope.numArry);
-            $scope.currentPage = 0;
-            $scope.changePage = function (num) {
-                console.log(num);
-                $scope.currentPage=num;
-            };
-            $scope.previous = function () {
-                if ($scope.currentPage > 1) {
-                    $scope.currentPage--;
-                }
-            };
-            $scope.next = function () {
-                console.log($scope.length);
-                if ($scope.currentPage < $scope.length)
-                    $scope.currentPage++;
-
-            }
-        }
+        // function Page(pagearr) {
+        //     $scope.length = pagearr.length;
+        //
+        //     $scope.numArry = [];
+        //     for (var i = 0; i < $scope.length; i++) {
+        //         $scope.numArry.push(i)
+        //     }
+        //     console.log($scope.numArry);
+        //     $scope.currentPage = 0;
+        //     $scope.changePage = function (num) {
+        //         console.log(num);
+        //         $scope.currentPage = num;
+        //     };
+        //     $scope.previous = function () {
+        //         if ($scope.currentPage > 1) {
+        //             $scope.currentPage--;
+        //         }
+        //     };
+        //     $scope.next = function () {
+        //         console.log($scope.length);
+        //         if ($scope.currentPage < $scope.length)
+        //             $scope.currentPage++;
+        //
+        //     }
+        // }
     });
 // 审批页面结束

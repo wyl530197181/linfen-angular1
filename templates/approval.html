@@ -38,7 +38,7 @@
             <td>{{obj.auditStatus==-1?'待审核':'通过'&&obj.auditStatus==1?'通过':'待审核'&&obj.auditStatus==2?'拒绝':'待审核'}}</td>
             <td>
                 <button type="button" class="btn btn-primary "
-                        data-toggle="modal" data-target="#myModal" ng-click="pass($index)">
+                        data-toggle="modal" data-target="#myModal" ng-click="pass()">
                     通过
                 </button>
                 <!-- Modal -->
@@ -65,7 +65,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-danger " ng-click="reject($index)"
+                <button type="button" class="btn btn-danger " ng-click="reject()"
                         data-toggle="modal" data-target="#myModals">
                     拒绝
                 </button>

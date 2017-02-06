@@ -1,6 +1,6 @@
 <!--用户管理页面-->
 <h3>用户管理</h3>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="add()">
     新增
 </button>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -11,12 +11,13 @@
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">添加用户</h4>
             </div>
+
             <div style="padding:10px">
                 <label>用户名:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-model="addData.name">
                 <br>
                 <label>姓名：</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-model="addData.userName">
                 <br>
                 <label>部门：</label>
                 <select style="width: 100%" class="form-control">
@@ -24,16 +25,17 @@
                 </select>
                 <br><br>
                 <label>密码:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-model="addData.password">
                 <br>
                 <label>确认密码：</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-model="addData.password">
                 <br>
                 <label>角色：</label>
                 <select style="width: 100%" class="form-control">
+                    <option>管理员</option>
                 </select>
                 <br><br>
-                <button class="btn btn-default" style="width: 100%">确定</button>
+                <button class="btn btn-default" style="width: 100%" ng-click="confirms()">确定</button>
             </div>
         </div>
     </div>

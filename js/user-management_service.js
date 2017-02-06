@@ -89,7 +89,42 @@ angular.module('myApp.userManage', [])
                         deferred.reject(e);
                     });
                 return deferred.promise;
-            }
+            },
+            deleteList: function (params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'post',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/user/delete.api',
+                    params: params
+                }).then(
+                    function (v) {
+                        // console.log(v);
+                        deferred.resolve(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                        deferred.reject(e);
+                    });
+                return deferred.promise;
+            },
+            confirmLists: function (params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'post',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/user/add.api',
+                    params: params
+                }).then(
+                    function (v) {
+                        // console.log(v);
+                        deferred.resolve(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                        deferred.reject(e);
+                    });
+                return deferred.promise;
+            },
+
         };
 
     });
