@@ -26,14 +26,12 @@ angular.module('myApp.publicityCtrl', [])
         };
         $scope.refresh();
 
-
         $scope.search = function () {
             $scope.refresh();
 
         };
 
-// 公示内容
-
+// 公示内容接口
         $scope.publicContend = function () {
             console.log(this);
             $scope.publicContendList = {
@@ -76,20 +74,3 @@ angular.module('myApp.publicityCtrl', [])
                 )
         };
     });
-// publicOutcomeList = {
-//     token: sessionStorage.getItem('token'),
-//     eventId: '',
-//     status: '',
-//     content: ''
-// }
-// $scope.publicOutcome = function () {
-//     publicity.publicOutcome($scope.publicOutcomeList)
-//         .then(
-//             function (success) {
-//                 console.log(success);
-//             },
-//             function (error) {
-//                 alert('接口出错')
-//             }
-//         )
-// }

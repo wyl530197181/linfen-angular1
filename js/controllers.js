@@ -26,7 +26,7 @@ angular.module("myApp.controller", [])
         }
     })
     //申报
-    .controller('declareCtrl', function ($scope, UserList) {
+    .controller('declareCtrl', function ($scope, userList) {
         $scope.relation = function () {
             $scope.declare.staffRelationship = this.declare.staffRelationship;
         };

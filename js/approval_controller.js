@@ -18,18 +18,18 @@ angular.module('myApp.approvalCtrl', [])
                 function (succ) {
                     console.log(succ);
                     $scope.approvalArry = succ.data.result;
-                    // console.log($scope.approvalArry)
+                    Page($scope.approvalArry);
                 },
                 function () {
                     console.log(arguments);
                 }
-            );
+            )
         };
         $scope.refresh();
+
         // 查询函数
         $scope.search = function () {
             $scope.refresh();//调用刷新页面
-
         };
         $scope.selectStatus = function () {
             console.log(event)
@@ -41,8 +41,9 @@ angular.module('myApp.approvalCtrl', [])
             status: 1
         };
         $scope.pass = function (index) {
-            // console.log(index);
+            console.log(this);
             $scope.passLists.eventId = $scope.approvalArry[index].id;
+            $scope.passId = $scope.passLists.eventId;
             console.log($scope.passLists.eventId);
             approval.passList($scope.passLists).then(
                 function (bb) {
@@ -61,6 +62,7 @@ angular.module('myApp.approvalCtrl', [])
         $scope.reject = function (index) {
             console.log(index);
             $scope.rejectLists.eventId = $scope.approvalArry[index].id;
+            $scope.rejectId = $scope.rejectLists.eventId;
             approval.rejectList($scope.rejectLists).then(
                 function (data) {
                     console.log(data);
@@ -69,7 +71,7 @@ angular.module('myApp.approvalCtrl', [])
                 }
             )
         };
-        // 模态框
+        // 通过模态框
         $scope.confirmLists = {
             token: sessionStorage.getItem('token'),
             eventId: '',
@@ -77,9 +79,9 @@ angular.module('myApp.approvalCtrl', [])
             content: ''
         };
         var aa = $scope.confirmLists.content;
-        $scope.confirm = function (index) {
-
-            $scope.confirmLists.eventId = $scope.approvalArry[index].id;
+        $scope.confirm = function () {
+            $scope.confirmLists.eventId = $scope.passId;
+            console.log($scope.confirmLists.eventId);
             approval.confirmList($scope.confirmLists).then(
                 function (data) {
                     console.log(data);
@@ -90,24 +92,52 @@ angular.module('myApp.approvalCtrl', [])
             $scope.refresh();
 
         };
+        //拒绝模态框
+        $scope.rejectLists = {
+            token: sessionStorage.getItem('token'),
+            eventId: '',
+            status: 1,
+            content: ''
+        };
+        var aa = $scope.rejectLists.content;
+        $scope.rejects = function () {
+            $scope.rejectLists.eventId = $scope.$scope.rejectId;
+            console.log($scope.rejectLists.eventId);
+            approval.confirmList($scope.rejectLists).then(
+                function (data) {
+                    console.log(data);
+                },
+                function () {
+                }
+            );
+            $scope.refresh();
+
+        };
         //分页
-        $scope.pageSplice = function () {
-            $scope.pageNum = 1;
-            $scope.count = 5;
-            //     Math.ceil( $scope.approvalArry.length / $scope.pageNum);//分几页
-            // console.log( $scope.approvalArry.length);
-            //按钮点击获取当前点击$index
-            $scope.numberClick = function ($index) {
-                $scope.tihsnum = $index + 1;
+        function Page(pagearr) {
+            $scope.length = pagearr.length;
+
+            $scope.numArry=[];
+            for (var i=0;i<$scope.length;i++){
+                $scope.numArry.push(i)
+            }
+            console.log($scope.numArry);
+            $scope.currentPage = 0;
+            $scope.changePage = function (num) {
+                console.log(num);
+                $scope.currentPage=num;
             };
-            //上一页
-            $scope.myLeft = function () {
-                $scope.tihsnum--;
+            $scope.previous = function () {
+                if ($scope.currentPage > 1) {
+                    $scope.currentPage--;
+                }
             };
-            //下一页
-            $scope.myRight = function () {
-                $scope.tihsnum++;
-            };
+            $scope.next = function () {
+                console.log($scope.length);
+                if ($scope.currentPage < $scope.length)
+                    $scope.currentPage++;
+
+            }
         }
     });
 // 审批页面结束

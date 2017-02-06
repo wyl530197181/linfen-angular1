@@ -3,35 +3,38 @@
     <h3>组合查询</h3>
     <div>
         <label>申请类型：</label>
-        <select class="form-control">
-            <option>全部</option>
-            <option>婚嫁</option>
-            <option>丧葬</option>
+        <select class="form-control" ng-change="selectStatus()"
+                ng-model="com_queryCtrlList.eventType" ng-init="com_queryCtrlList.eventType='0'">
+            <option value="0">全部</option>
+            <option value="1">婚嫁</option>
+            <option value="2">丧葬</option>
         </select>
         <label>宴请人数：</label>
-        <select class="form-control">
-            <option>全部</option>
-            <option>0~50</option>
-            <option>50~100</option>
-            <option>100~150</option>
-            <option>150~200</option>
+        <select class="form-control" ng-model="com_queryCtrlList. peopleCount"
+                ng-change="selectPeopleCount()" ng-init="com_queryCtrlList. peopleCount='0'">
+            <option value="0">全部</option>
+            <option value="00050">0~50</option>
+            <option value="050100">50~100</option>
+            <option value="100150">100~150</option>
+            <option value="150200">150~200</option>
         </select>
-        <button class="btn btn-default">查询</button>
+        <button class="btn btn-default" ng-click="search()">查询</button>
     </div>
     <br>
     <div>
         <label>申报时间：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="com_queryCtrlList.eventCreateTimeFrom">
         <label>至：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="com_queryCtrlList.eventCreateTimeTo">
         <label>宴请时间：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="com_queryCtrlList.eventTimeFrom">
         <label>至：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="com_queryCtrlList.eventTimeTo">
     </div>
 </form>
 <br><br>
 <table class="table table-striped">
+    <thead>
     <tr>
         <td>申请人</td>
         <td>部门</td>
@@ -41,5 +44,15 @@
         <td>宴请时间</td>
         <td>状态</td>
         <td>批示意见</td>
+    </tr>
+    <tr ng-repeat="obj in com_queryyArr">
+        <td>{{obj.staff}}</td>
+        <td>{{obj.staffOrgName}}</td>
+        <td>{{obj.objeventType}}</td>
+        <td>{{obj.peopleCount}}</td>
+        <td>{{obj.createTime}}</td>
+        <td>{{obj.eventDate}}</td>
+        <td>{{obj.auditStatus}}</td>
+        <td>{{obj.auditContent}}</td>
     </tr>
 </table>

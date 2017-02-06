@@ -11,7 +11,6 @@ angular.module('myApp.approval', [])
                     url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/show_audit.api',
                     params: params
                 }).then(function (success) {
-                    // console.log(success);
                     deferred.resolve(success);
                 }, function (erro) {
                     console.log(erro);
@@ -24,9 +23,9 @@ angular.module('myApp.approval', [])
                 $http({
                     method: 'POST',
                     url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event_audit/get_by_event.api',
+
                     params: params
                 }).then(function (v) {
-                    console.log(v);
                     deferred.resolve(v);
                 }, function (e) {
                     console.log(e);
@@ -40,6 +39,7 @@ angular.module('myApp.approval', [])
                     method: 'POST',
                     url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event_audit/get_by_event.api',
                     params: params
+
                 }).then(function (v) {
                     console.log(v);
                     deferred.resolve(v);
@@ -53,7 +53,7 @@ angular.module('myApp.approval', [])
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event_audit/get_by_event.api',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event/audit.api',
                     params: params
                 }).then(function (v) {
                     console.log(v);
@@ -64,7 +64,6 @@ angular.module('myApp.approval', [])
                 });
                 return deferred.promise;
             }
-
         }
     });
 

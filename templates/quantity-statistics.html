@@ -3,14 +3,18 @@
     <h3>数量统计</h3>
     <div>
         <label>申报时间：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="statisticsList.eventCreateTimeFrom">
         <label>至：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="statisticsList.eventCreateTimeTo">
         <label>宴请时间：</label>
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" ng-model="statisticsList.eventTimeFrom">
         <label>至：</label>
-        <input type="date" class="form-control">
-        <button class="btn btn-default">查询</button>
+        <input type="date" class="form-control" ng-model="statisticsList.eventTimeTo">
+        <button class="btn btn-default" ng-click="search()">查询</button>
     </div>
 </form>
-<br>
+<br/><br/><br/>
+<div id="main" style="width: 600px;height:400px;">
+
+</div>
+

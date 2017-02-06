@@ -2,8 +2,9 @@
  * Created by bobo on 17-1-11.
  */
 angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
-    'myApp.controller2','myApp.bo-service',
-    'myApp.approval','myApp.approvalCtrl','myApp.publicityCtrl','myApp.publicity'])
+    'myApp.controller2', 'myApp.bo-service',
+    'myApp.approval', 'myApp.approvalCtrl', 'myApp.publicityCtrl', 'myApp.publicity'
+    , 'myApp.queryCtrl', 'myApp.query', 'myApp.userManageCtrl', 'myApp.userManage'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
@@ -29,7 +30,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/user-management',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'userManageCtrl',
                         templateUrl: 'templates/user-management.html'
                     }
                 }
@@ -66,7 +67,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/precise-query',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'queryCtrl',
                         templateUrl: 'templates/precise-query.html'
                     }
                 }
@@ -75,7 +76,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/combination-query',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'combination-queryCtrl',
                         templateUrl: 'templates/combination-query.html'
                     }
                 }
@@ -84,7 +85,7 @@ angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
                 url: '/quantity-statistics',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'statisticsCtrl',
                         templateUrl: 'templates/quantity-statistics.html'
                     }
                 }

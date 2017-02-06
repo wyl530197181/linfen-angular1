@@ -20,7 +20,7 @@
                 <br>
                 <label>部门：</label>
                 <select style="width: 100%" class="form-control">
-                   <option>根组织</option>
+                    <option>根组织</option>
                 </select>
                 <br><br>
                 <label>密码:</label>
@@ -47,5 +47,62 @@
         <td>姓名</td>
         <td>部门</td>
         <td>操作</td>
+    </tr>
+    <tr ng-repeat="obj in tabArray">
+        <td>{{obj.name}}</td>
+        <td>{{obj.username}}</td>
+        <td>{{obj.orgName}}</td>
+        <td>
+            <button type="button" class="btn btn-primary "
+                    data-toggle="modal" data-target="#myModal1" ng-click="revise()">
+                修改
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel1">修改用户</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="padding:10px">
+                                <label>用户名:</label>
+                                <input type="text" class="form-control" ng-model="name">
+                                <br>
+                                <label>姓名：</label>
+                                <input type="text" class="form-control" ng-model="userName">
+                                <br>
+                                <label>部门：</label>
+                                <select style="width: 100%" class="form-control">
+                                    <option>根组织</option>
+                                </select>
+                                <br><br>
+                                <label>密码:</label>
+                                <input type="text" class="form-control">
+                                <br>
+                                <label>确认密码：</label>
+                                <input type="text" class="form-control">
+                                <br>
+                                <label>角色：</label>
+                                <select style="width: 100%" class="form-control">
+                                    <option>管理员</option>
+                                </select>
+                                <br><br>
+                                <button class="btn btn-default" style="width: 100%" ng-click="confirm()">确定</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger " ng-click="delete()">
+                删除
+            </button>
+
+        </td>
     </tr>
 </table>

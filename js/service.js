@@ -35,7 +35,7 @@ angular.module('myApp.service', [])
         }
     })
     //申报页面接口
-    .factory('UserList', function ($http, $q) {
+    .factory('userList', function ($http, $q) {
         return {
             userlist: function (params) {
                 var deferred = $q.defer();
