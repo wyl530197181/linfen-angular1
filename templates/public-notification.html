@@ -4,13 +4,11 @@
     <label>被通报人：</label>
     <div class="row">
         <div class="col-lg-2">
-            <div class="input-group">
-                <input type="text" class="form-control">
-            </div>
+            <input type="text" class="form-control">
         </div>
         <button class="btn btn-default" ng-click="search()">查询</button>
         <div class="pull-right">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 添加
             </button>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -25,10 +23,10 @@
                         </div>
                         <div style="padding:10px">
                             <label>标题:</label>
-                            <input type="text" class="form-control"  ng-model="addData.title">
+                            <input type="text" class="form-control" ng-model="revampData.title">
                             <br>
                             <label>人员：</label>
-                            <input type="text" class="form-control" ng-model="addData.staff">
+                            <input type="text" class="form-control" ng-model="revampData.staff">
                             <br>
                             <label>部门：</label>
                             <select style="width: 100%" class="form-control">
@@ -36,7 +34,7 @@
                             </select>
                             <br><br>
                             <label>内容：</label>
-                            <textarea cols="90" rows="4" ng-model="addData.content"></textarea>
+                            <textarea cols="90" rows="4" ng-model="revampData.content"></textarea>
                             <button class="btn btn-default" style="width: 100%" ng-click="addSure()">确定</button>
                         </div>
                     </div>
@@ -69,7 +67,42 @@
             <span>{{data.createTime}}</span>
         </td>
         <td>
-            <button class="btn btn-warning" ng-click="revamp()">修改</button>
+            <!--<button class="btn btn-warning" ng-click="revamp()">修改</button>-->
+
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal1" ng-click="revamp()">
+                修改
+            </button>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>
+                        <div style="padding:10px">
+                            <label>标题:</label>
+                            <input type="text" class="form-control" ng-model="title">
+                            <br>
+                            <label>人员：</label>
+                            <input type="text" class="form-control" ng-model="staff">
+                            <br>
+                            <label>部门：</label>
+                            <select style="width: 100%" class="form-control">
+                                <option>根组织</option>
+                            </select>
+                            <br><br>
+                            <label>内容：</label>
+                            <textarea cols="90" rows="4" ng-model="content"></textarea>
+                            <button class="btn btn-default" style="width: 100%">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <button class="btn btn-danger" ng-click="remove()">删除</button>
         </td>
     </tr>

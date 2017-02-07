@@ -46,8 +46,8 @@ angular.module("myApp.controller2", [])
             public.publicAdd($scope.addData).then(
                 function (data) {
                     console.log(data);
-                    $('#myModal').modal('hide');
                     swal("添加成功!", "", "success");
+                    $('#myModal').modal('hide');
                     $scope.search()
                 }, function () {
                     console.log(arguments)
@@ -87,20 +87,39 @@ angular.module("myApp.controller2", [])
 
         };
         //公开通报修改数据
-        $scope.revampData = {
-            token: sessionStorage.getItem('token'),
-            id: '',
-            title: '',
-            content: '',
-            staff: '',
-            staffOrgId: 1
-        };
         $scope.revamp = function () {
             console.log(this);
-            // $('#myModal').modal('show');
-            public.publicUpdate($scope.revampData).then(
+            // $('#myModal1').modal('show');
+            public.publicUpdate({
+                token: sessionStorage.getItem('token')
+                // id: this.data.id
+                // title: '',
+                // content: '',
+                // staff: '',
+                // staffOrgId: 1
+            }).then(
                 function (data) {
                     console.log(data);
+                    // $scope.title=data.title;
+                    // $scope.staff=data.staff;
+                    // $scope.content=data.content
+                }, function () {
+                    console.log(arguments)
+                });
+            // $scope.search()
+            public.publicUpdate2({
+                token: sessionStorage.getItem('token'),
+                id: this.data.id
+                // title: '',
+                // content: '',
+                // staff: '',
+                // staffOrgId: 1
+            }).then(
+                function (data) {
+                    console.log(data);
+                    $scope.title=data.title;
+                    $scope.staff=data.staff;
+                    $scope.content=data.content
                 }, function () {
                     console.log(arguments)
                 });

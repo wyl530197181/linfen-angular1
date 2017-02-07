@@ -63,7 +63,24 @@ angular.module('myApp.bo-service', [])
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/public_notification/update.api',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/public_notification/show.api',
+                    params: params
+                }).then(
+                    function (v) {
+                        console.log(v);
+                        deferred.resolve(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                        deferred.reject(e);
+                    });
+                return deferred.promise;
+            },
+            publicUpdate2:function (params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: 'http://bigbug.tech:8080/wdm-api/api/wdm/public_notification/get.api',
                     params: params
                 }).then(
                     function (v) {
@@ -76,7 +93,6 @@ angular.module('myApp.bo-service', [])
                     });
                 return deferred.promise;
             }
-
         }
     })
     .factory('diaciplinary', function ($http, $q) {
