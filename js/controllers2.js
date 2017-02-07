@@ -86,7 +86,7 @@ angular.module("myApp.controller2", [])
                 });
 
         };
-        //修改数据
+        //公开通报修改数据
         $scope.revampData = {
             token: sessionStorage.getItem('token'),
             id: '',
@@ -122,7 +122,7 @@ angular.module("myApp.controller2", [])
         }, function () {
             console.log(arguments)
         });
-        //查询数据
+        //纪律处分查询数据
         $scope.search = function () {
             diaciplinary.diaciplinaryData({
                 token: sessionStorage.getItem('token'),
@@ -138,7 +138,7 @@ angular.module("myApp.controller2", [])
                     console.log(arguments)
                 });
         };
-        //添加数据
+        //纪律处分添加数据
         $scope.addData = {
             token: sessionStorage.getItem('token'),
             title: '',
@@ -158,7 +158,7 @@ angular.module("myApp.controller2", [])
                 });
         };
 
-        //删除数据
+        //纪律处分删除数据
         $scope.deleteData = {
             token: sessionStorage.getItem('token'),
             id: ''
