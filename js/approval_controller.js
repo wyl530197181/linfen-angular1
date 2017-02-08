@@ -34,34 +34,48 @@ angular.module('myApp.approvalCtrl', [])
             console.log(event)
         };
         //审批通过
-
+        $scope.dataId = '';
+        $scope.dataType = '';
         $scope.pass = function () {
+            console.log(this);
+            $scope.confirmLists.content = '';
+            $scope.dataId = this.obj.id;
+            $scope.dataType = this.obj.eventType;
             approval.passList(
                 {
                     token: sessionStorage.getItem('token'),
-                    eventId: this.obj.id,
-                    status: this.obj.eventType
+                    eventId: $scope.dataId,
+                    status: $scope.dataType
                 }
             ).then(
                 function (bb) {
                     console.log(bb);
+                    $scope.confirmLists.content = bb.data.result.content
+
                 },
                 function () {
                 }
             );
         };
+
         //审批拒绝
+        $scope.dataIds = '';
+        $scope.dataTypes = '';
         $scope.reject = function () {
             console.log(this);
+            $scope.rejectLists.content = '';
+            $scope.dataIds = this.obj.id;
+            $scope.dataTypes = this.obj.eventType;
             approval.rejectList(
                 {
                     token: sessionStorage.getItem('token'),
-                    eventId: this.obj.id,
-                    status: this.obj.eventType
+                    eventId: $scope.dataIds,
+                    status: $scope.dataTypes
                 }
             ).then(
                 function (data) {
                     console.log(data);
+                    $scope.rejectLists.content = data.data.result.content
                 },
                 function () {
                 }
@@ -75,29 +89,30 @@ angular.module('myApp.approvalCtrl', [])
             content: ''
         };
         $scope.confirm = function () {
-            // console.log(this);
-            $scope.confirmLists.eventId = this.obj.id;
-            $scope.confirmLists.status = this.obj.eventType;
+            console.log($scope.dataId);
+            $scope.confirmLists.eventId = $scope.dataId;
+            $scope.confirmLists.status = $scope.dataType;
             approval.confirmList(
                 $scope.confirmLists
             ).then(
                 function (data) {
                     console.log(data);
+                    $scope.refresh();
+                    swal({
+                            title: "",
+                            text: "审批成功!",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: false
+                        }
+                    );
                 },
                 function () {
                 }
             );
-            swal({
-                    title: "",
-                    text: "审批成功!",
-                    type: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    closeOnConfirm: false
-                }
-            );
-            $scope.refresh();
 
         };
         //拒绝模态框
@@ -108,28 +123,28 @@ angular.module('myApp.approvalCtrl', [])
             content: ''
         };
         $scope.rejects = function () {
-            // console.log(this);
-            $scope.rejectLists.eventId = this.obj.id;
-            $scope.rejectLists.status = this.obj.eventType;
-            approval.confirmList($scope.rejectLists).then(
-                function (data) {
-                    console.log(data);
-                },
-                function () {
-                }
-            );
-            swal({
-                    title: "",
-                    text: "审批成功!",
-                    type: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    closeOnConfirm: false
-                }
-            );
-            $scope.refresh();
-
+            $scope.rejectLists.eventId = $scope.dataIds;
+            $scope.rejectLists.status = $scope.dataTypes;
+            approval.confirmList($scope.rejectLists)
+                .then(
+                    function (data) {
+                        console.log(data);
+                        $scope.refresh();
+                        swal({
+                                title: "",
+                                text: "审批成功!",
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确定",
+                                cancelButtonText: "取消",
+                                closeOnConfirm: false
+                            }
+                        );
+                    },
+                    function () {
+                    }
+                );
         };
         //分页
         // function Page(pagearr) {

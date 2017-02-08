@@ -21,7 +21,6 @@
             <th>类型</th>
             <th>人数</th>
             <th>申报时间</th>
-            .
             <th>宴请时间</th>
             <th>状态</th>
             <th>操作</th>
@@ -81,7 +80,7 @@
                                 <h4 class="modal-title" id="myModalLabels">意见内容</h4>
                             </div>
                             <div class="modal-body">
-                                <textarea class="form-control" rows="3" ng-model="confirmLists.content"></textarea>
+                                <textarea class="form-control" rows="3" ng-model="rejectLists.content"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default button1" data-dismiss="modal"
@@ -96,13 +95,13 @@
         </tbody>
     </table>
     <!--分页-->
-    <nav id="pagenav" style="text-align: center">
-        <ul class="pagination pagination-lg">
-            <li ng-click="previous()"><a>&laquo;</a></li>
-            <li  ng-class="{true:'currentStep',false:'step'}[num==currentPage]" ng-repeat="num in numArry|limitTo:5"
-                ng-click="changePage(num)"><span>{{num+1}}</span></li>
-            <li ng-click="next()"><a>&raquo;</a></li>
-        </ul>
-    </nav>
+    <!--<nav id="pagenav" style="text-align: center">-->
+        <!--<ul class="pagination pagination-lg">-->
+            <!--<li ng-click="previous()"><a>&laquo;</a></li>-->
+            <!--<li  ng-class="{true:'currentStep',false:'step'}[num==currentPage]" ng-repeat="num in numArry|limitTo:5"-->
+                <!--ng-click="changePage(num)"><span>{{num+1}}</span></li>-->
+            <!--<li ng-click="next()"><a>&raquo;</a></li>-->
+        <!--</ul>-->
+    <!--</nav>-->
 </div>
 

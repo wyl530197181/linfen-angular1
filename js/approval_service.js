@@ -23,7 +23,6 @@ angular.module('myApp.approval', [])
                 $http({
                     method: 'POST',
                     url: 'http://bigbug.tech:8080/wdm-api/api/wdm/event_audit/get_by_event.api',
-
                     params: params
                 }).then(function (v) {
                     deferred.resolve(v);

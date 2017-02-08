@@ -20,7 +20,7 @@ angular.module('myApp.publicityCtrl', [])
                         // console.log( $scope.publicArr);
                     },
                     function (error) {
-                        alert('接口出错')
+                        swal('接口出错')
                     }
                 )
         };
@@ -30,23 +30,28 @@ angular.module('myApp.publicityCtrl', [])
             $scope.refresh();
 
         };
+        $scope.selectStatus = function () {
+            console.log(event)
+        };
         // 公示内容接口
         $scope.publicContend = function () {
             console.log(this);
+            $scope.publicContendList.content='';
+            $scope.eventId = this.data.id;
             publicity.publicContent(
                 {
                     token: sessionStorage.getItem('token'),
-                    eventId: this.data.id
+                    eventId: $scope.eventId
+                }
+            ).then(
+                function (success) {
+                    console.log(success);
+                    $scope.publicContendList.content = success.data.result.content;
+                },
+                function (error) {
+                    swal('接口出错')
                 }
             )
-                .then(
-                    function (success) {
-                        console.log(success);
-                    },
-                    function (error) {
-                        alert('接口出错')
-                    }
-                )
         };
         //公示内容确认
         $scope.publicContendList = {
@@ -56,41 +61,43 @@ angular.module('myApp.publicityCtrl', [])
             attachmentFileCode: ''
         };
         $scope.publicContendConfirm = function () {
-            console.log(this);
-
-            $scope.publicContendList.eventId = this.data.id;
+            $scope.publicContendList.eventId = $scope.eventId;
             publicity.publicContentConfirm($scope.publicContendList)
                 .then(
                     function (success) {
-                        console.log(success);
+                        // console.log(success);
+                        $scope.refresh();
+                        swal({
+                                title: "",
+                                text: "公示成功!",
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确定",
+                                closeOnConfirm: false
+                            }
+                        );
                     },
                     function (error) {
-                        alert('接口出错')
+                        swal('接口出错')
                     }
                 );
-            swal({
-                    title: "",
-                    text: "公示成功!",
-                    type: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    closeOnConfirm: false
-                }
-            );
-            $scope.refresh()
+
         };
 //公示结果
         $scope.publicOutcome = function () {
             console.log(this);
+            $scope.publicOutcomeList.content='';
+            $scope.eventIds = this.data.id;
             publicity.publicContent(
                 {
                     token: sessionStorage.getItem('token'),
-                    eventId: this.data.id
+                    eventId: $scope.eventIds
                 }
             ).then(
                 function (success) {
                     console.log(success);
+                    $scope.publicOutcomeList.content = success.data.result.content;
                 },
                 function (error) {
                     alert('接口出错')
@@ -105,7 +112,7 @@ angular.module('myApp.publicityCtrl', [])
         };
         $scope.publicOutcomeConfirm = function () {
             // console.log(this);
-            $scope.publicOutcomeList.eventId = this.data.id;
+            $scope.publicOutcomeList.eventId = $scope.eventIds;
             $scope.publicOutcomeList.status = this.data.eventType;
 
             publicity.publicOutcomeConfirm($scope.publicOutcomeList)

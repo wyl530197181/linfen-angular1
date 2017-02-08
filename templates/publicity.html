@@ -13,7 +13,6 @@
         <button class="btn btn-primary" ng-click="search()">查询</button>
     </form>
     <table class="table table-striped" style="margin-top: 30px;margin-right:10%">
-
         <tr>
             <th>申报人</th>
             <th>部门</th>
@@ -31,7 +30,7 @@
             <td>{{data.peopleCount}}</td>
             <td>{{data.createTime}}</td>
             <td>{{data.eventDate}}</td>
-            <td>{{data.auditStatus==null?'未公示':'公示'}}</td>
+            <td>{{data.bulletinStatus==-1?'未公示':'公示'}}</td>
             <td>
                 <button type="button" class="btn btn-primary "
                         data-toggle="modal" data-target="#myModal" ng-click="publicContend()">
@@ -81,7 +80,8 @@
                                         <td>
                                             <form action="">
                                                 <lable><input type="radio" name="confirm"
-                                                              ng-model="publicOutcomeList.status" value="1">通过
+                                                              ng-model="publicOutcomeList.status"
+                                                              ng-init="publicOutcomeList.status='1'" value="1">通过
                                                 </lable>
                                                 <lable><input type="radio" name="confirm"
                                                               ng-model="publicOutcomeList.status" value="2">有异议
