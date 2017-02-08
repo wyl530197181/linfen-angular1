@@ -30,7 +30,7 @@
             <td>{{data.peopleCount}}</td>
             <td>{{data.createTime}}</td>
             <td>{{data.eventDate}}</td>
-            <td>{{data.bulletinStatus==-1?'未公示':'公示'}}</td>
+            <td>{{data.eventBulletinId==null?'未公示':'公示'}}</td>
             <td>
                 <button type="button" class="btn btn-primary "
                         data-toggle="modal" data-target="#myModal" ng-click="publicContend()">

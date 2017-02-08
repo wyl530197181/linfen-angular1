@@ -49,7 +49,11 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         ).then(
             function (success) {
                 console.log(success);
-                $scope.publicContendList.content = success.data.result.content;
+                if (success.data.result == null) {
+                    $scope.publicContendList.content = null
+                } else {
+                    $scope.publicContendList.content = success.data.result.content;
+                }
             },
             function (error) {
                 swal('接口出错')
@@ -101,7 +105,12 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         ).then(
             function (success) {
                 console.log(success);
-                $scope.publicOutcomeList.content = success.data.result.content;
+                if (success.data.result == null) {
+                    $scope.publicContendList.content = null
+                }
+                else {
+                    $scope.publicOutcomeList.content = success.data.result.content;
+                }
             },
             function (error) {
                 alert('接口出错')

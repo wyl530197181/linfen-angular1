@@ -15,6 +15,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         start: 0,
         limit: 20
     };
+
     $scope.selectPeopleCount = function () {
         if ($scope.com_queryCtrlList.peopleCount == '') {
             $scope.com_queryCtrlList.peopleCountMin = '';
@@ -32,7 +33,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         combination_query.com_queryLity($scope.com_queryCtrlList)
             .then(function (suc) {
                 console.log(suc);
-                $scope.com_queryyArr = suc.data.result
+                $scope.com_queryyArr = suc.data.result;
                 $.LoadingOverlay("hide")
 
             }, function () {

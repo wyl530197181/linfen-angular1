@@ -174,7 +174,7 @@ angular.module('myApp.service').factory('loginUser', function ($http, $q, $state
                         deferred.resolve(v.data.result);
                         $state.go('homePage');
                     } else {
-                        alert('信息有误');
+
                     }
                 }, function (e) {
                     console.log(e);

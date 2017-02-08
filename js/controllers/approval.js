@@ -53,7 +53,11 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         ).then(
             function (bb) {
                 console.log(bb);
-                $scope.confirmLists.content = bb.data.result.content
+                if (bb.data.result == null) {
+                    $scope.confirmLists.content = null
+                } else {
+                    $scope.confirmLists.content = bb.data.result.content
+                }
             },
             function () {
             }
@@ -77,7 +81,11 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         ).then(
             function (data) {
                 console.log(data);
-                $scope.rejectLists.content = data.data.result.content
+                if (data.data.result == null) {
+                    $scope.rejectLists.content = null
+                } else {
+                    $scope.rejectLists.content = data.data.result.content
+                }
             },
             function () {
             }

@@ -3,23 +3,28 @@
  */
 angular.module("myApp.controller").controller('loginCtrl', function ($scope, loginUser) {
     $scope.user = {
-        name: 'yiyi',
-        password: '123456'
+        token: sessionStorage.getItem('token'),
+        name: '',
+        password: ''
     };
     $scope.nameLogin = function () {
-        if ($scope.user.name == '' || $scope.user.password == '') {
-            swal("用户名或者密码有误!");
-            return;
-        } else {
+        if ($scope.user.name != '' && $scope.user.password != undefined) {
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
             loginUser.login($scope.user).then(
                 function (data) {
-                    // console.log(data);
+                    $.LoadingOverlay("hide");
+                    console.log(data);
                     window.sessionStorage.setItem('token', data.token);
                 },
                 function () {
-                    console.log(arguments);
+                    $.LoadingOverlay("hide");
                 }
             );
+        } else {
+            swal("用户名或者密码有误!");
         }
     }
 });

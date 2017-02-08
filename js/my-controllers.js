@@ -57,7 +57,11 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         ).then(
             function (bb) {
                 console.log(bb);
-                $scope.confirmLists.content = bb.data.result.content
+                if (bb.data.result == null) {
+                    $scope.confirmLists.content = null
+                } else {
+                    $scope.confirmLists.content = bb.data.result.content
+                }
             },
             function () {
             }
@@ -81,7 +85,11 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         ).then(
             function (data) {
                 console.log(data);
-                $scope.rejectLists.content = data.data.result.content
+                if (data.data.result == null) {
+                    $scope.rejectLists.content = null
+                } else {
+                    $scope.rejectLists.content = data.data.result.content
+                }
             },
             function () {
             }
@@ -196,6 +204,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         start: 0,
         limit: 20
     };
+
     $scope.selectPeopleCount = function () {
         if ($scope.com_queryCtrlList.peopleCount == '') {
             $scope.com_queryCtrlList.peopleCountMin = '';
@@ -213,7 +222,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         combination_query.com_queryLity($scope.com_queryCtrlList)
             .then(function (suc) {
                 console.log(suc);
-                $scope.com_queryyArr = suc.data.result
+                $scope.com_queryyArr = suc.data.result;
                 $.LoadingOverlay("hide")
 
             }, function () {
@@ -419,23 +428,28 @@ angular.module("myApp.controller").controller('homePageCtrl', function ($scope, 
  */
 angular.module("myApp.controller").controller('loginCtrl', function ($scope, loginUser) {
     $scope.user = {
-        name: 'yiyi',
-        password: '123456'
+        token: sessionStorage.getItem('token'),
+        name: '',
+        password: ''
     };
     $scope.nameLogin = function () {
-        if ($scope.user.name == '' || $scope.user.password == '') {
-            swal("用户名或者密码有误!");
-            return;
-        } else {
+        if ($scope.user.name != '' && $scope.user.password != undefined) {
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
             loginUser.login($scope.user).then(
                 function (data) {
-                    // console.log(data);
+                    $.LoadingOverlay("hide");
+                    console.log(data);
                     window.sessionStorage.setItem('token', data.token);
                 },
                 function () {
-                    console.log(arguments);
+                    $.LoadingOverlay("hide");
                 }
             );
+        } else {
+            swal("用户名或者密码有误!");
         }
     }
 });
@@ -614,7 +628,11 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         ).then(
             function (success) {
                 console.log(success);
-                $scope.publicContendList.content = success.data.result.content;
+                if (success.data.result == null) {
+                    $scope.publicContendList.content = null
+                } else {
+                    $scope.publicContendList.content = success.data.result.content;
+                }
             },
             function (error) {
                 swal('接口出错')
@@ -666,7 +684,12 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         ).then(
             function (success) {
                 console.log(success);
-                $scope.publicOutcomeList.content = success.data.result.content;
+                if (success.data.result == null) {
+                    $scope.publicContendList.content = null
+                }
+                else {
+                    $scope.publicOutcomeList.content = success.data.result.content;
+                }
             },
             function (error) {
                 alert('接口出错')
