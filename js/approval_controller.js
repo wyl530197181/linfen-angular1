@@ -17,6 +17,7 @@ angular.module('myApp.approvalCtrl', [])
             approval.approvalList($scope.approvallist).then(
                 function (succ) {
                     // console.log(succ);
+                    $.LoadingOverlay('hide');
                     $scope.approvalArry = succ.data.result;
                     // Page($scope.approvalArry);
                 },
@@ -29,6 +30,10 @@ angular.module('myApp.approvalCtrl', [])
         // 查询函数
         $scope.search = function () {
             $scope.refresh();//调用刷新页面
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
         };
         $scope.selectStatus = function () {
             console.log(event)
@@ -51,7 +56,6 @@ angular.module('myApp.approvalCtrl', [])
                 function (bb) {
                     console.log(bb);
                     $scope.confirmLists.content = bb.data.result.content
-
                 },
                 function () {
                 }
@@ -96,19 +100,19 @@ angular.module('myApp.approvalCtrl', [])
                 $scope.confirmLists
             ).then(
                 function (data) {
+                    $.LoadingOverlay('hide');
                     console.log(data);
                     $scope.refresh();
                     swal({
-                            title: "",
-                            text: "审批成功!",
-                            type: "success",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确定",
-                            cancelButtonText: "取消",
-                            closeOnConfirm: false
-                        }
-                    );
+                        title: "",
+                        text: "审批成功!",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    });
                 },
                 function () {
                 }

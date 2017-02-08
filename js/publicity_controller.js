@@ -17,7 +17,7 @@ angular.module('myApp.publicityCtrl', [])
                     function (success) {
                         console.log(success);
                         $scope.publicArr = success.data.result;
-                        // console.log( $scope.publicArr);
+                        $.LoadingOverlay('hide');
                     },
                     function (error) {
                         swal('接口出错')
@@ -28,6 +28,10 @@ angular.module('myApp.publicityCtrl', [])
 
         $scope.search = function () {
             $scope.refresh();
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
 
         };
         $scope.selectStatus = function () {

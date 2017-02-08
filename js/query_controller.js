@@ -12,11 +12,16 @@ angular.module('myApp.queryCtrl', [])
             limit: 30
         };
         $scope.query = function () {
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
             queryS.queryLity($scope.queryCtrlList)
                 .then(function (suc) {
-                    $scope.queryArr = suc.data.result
+                    $scope.queryArr = suc.data.result;
+                    $.LoadingOverlay("hide")
                 }, function () {
-                    console.log(123);
+                    swal('接口出错了');
                 })
         };
     })
@@ -44,12 +49,18 @@ angular.module('myApp.queryCtrl', [])
             }
         };
         $scope.search = function () {
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
             combination_query.com_queryLity($scope.com_queryCtrlList)
                 .then(function (suc) {
                     console.log(suc);
                     $scope.com_queryyArr = suc.data.result
+                    $.LoadingOverlay("hide")
+
                 }, function () {
-                    console.log('接口出错了');
+                    swal('接口出错了');
                 })
         };
     })
@@ -64,6 +75,10 @@ angular.module('myApp.queryCtrl', [])
             eventTimeTo: ''
         };
         $scope.search = function () {
+            $.LoadingOverlay("show", {
+                image: "img/oval.svg",
+                bgcolor: 'rgba(28,43,54,0.7)'
+            });
             Statistics.StatisticsLity($scope.statisticsList)
                 .then(function (suc) {
                     // console.log(suc);
@@ -138,10 +153,11 @@ angular.module('myApp.queryCtrl', [])
                     };
                     // 使用刚指定的配置项和数据显示图表。
                     myChart.setOption(option);
+                    $.LoadingOverlay("hide")
                 }, function () {
-                    console.log('接口出错了');
+                    swal('接口出错了');
                 });
         };
 
 
-    })
+    });
