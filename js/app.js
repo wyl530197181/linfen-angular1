@@ -10,7 +10,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                 templateUrl: 'templates/login.html'
             })
             .state('homePage', {
-                url: '/homePage',
+                url: '/homepage',
                 controller: 'homePageCtrl',
                 templateUrl: 'templates/homePage.html'
             })
@@ -23,7 +23,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.user-management', {
+            .state('homePage.userManagement', {
                 url: '/user-management',
                 views: {
                     'main': {
@@ -32,7 +32,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.role-management', {
+            .state('homePage.roleManagement', {
                 url: '/role-management',
                 views: {
                     'main': {
@@ -42,7 +42,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                 }
             })
 
-            .state('homePage.public-notification', {
+            .state('homePage.publicNotification', {
                 url: '/public-notification',
                 views: {
                     'main': {
@@ -51,7 +51,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.diaciplinary-treatment', {
+            .state('homePage.diaciplinaryTreatment', {
                 url: '/diaciplinary-treatment',
                 views: {
                     'main': {
@@ -60,7 +60,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.precise-query', {
+            .state('homePage.preciseQuery', {
                 url: '/precise-query',
                 views: {
                     'main': {
@@ -69,7 +69,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.combination-query', {
+            .state('homePage.combinationQuery', {
                 url: '/combination-query',
                 views: {
                     'main': {
@@ -78,7 +78,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                     }
                 }
             })
-            .state('homePage.quantity-statistics', {
+            .state('homePage.quantityStatistics', {
                 url: '/quantity-statistics',
                 views: {
                     'main': {
