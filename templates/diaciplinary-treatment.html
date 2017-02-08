@@ -4,9 +4,7 @@
     <label>被通报人：</label>
     <div class="row">
         <div class="col-lg-2">
-            <div class="input-group">
-                <input type="text" class="form-control">
-            </div>
+                <input type="text" class="form-control" ng-model="content.staff">
         </div>
         <button class="btn btn-default" ng-click="search()">查询</button>
         <div class="pull-right">
@@ -58,10 +56,12 @@
         <td>操作</td>
     </tr>
     <tr ng-repeat="data in arr">
-        <td>{{data.staff}}</td>
-        <td>{{data.staffOrgName}}</td>
-        <td>{{data.title}}</td>
-        <td>{{data.createTime}}</td>
+        <td>
+            <span>{{data.staff}}</span>
+        </td>
+        <td><span>{{data.staffOrgName}}</span></td>
+        <td><span>{{data.title}}</span></td>
+        <td><span>{{data.createTime}}</span></td>
         <td>
             <button class="btn btn-warning" ng-click="revamp()">修改</button>
             <button class="btn btn-danger" ng-click="remove()">删除</button>

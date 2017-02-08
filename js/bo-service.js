@@ -133,7 +133,7 @@ angular.module('myApp.bo-service', [])
                     });
                 return deferred.promise;
             },
-            //公开通报删除接口
+            //纪律处分删除接口
             diaciplinaryDel:function (params) {
                 var deferred = $q.defer();
                 $http({
@@ -150,6 +150,6 @@ angular.module('myApp.bo-service', [])
                         deferred.reject(e);
                     });
                 return deferred.promise;
-            },
+            }
         }
     })

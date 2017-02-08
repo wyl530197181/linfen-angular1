@@ -4,29 +4,16 @@
 angular.module("myApp.controller2", [])
     .controller('public-notificationCtrl', function ($scope, public) {
         //公开通报展示数据
-        public.publicData({
+        $scope.content = {
             token: sessionStorage.getItem('token'),
             staff: '',
             page: 1,
             start: 0,
             limit: 30
-        }).then(
-            function (data) {
-                console.log(data);
-                $scope.tabArray = data
-            }, function () {
-                console.log(arguments)
-            });
-
-        //公开通报查询数据
-        $scope.search = function () {
-            public.publicData({
-                token: sessionStorage.getItem('token'),
-                staff: '',
-                page: 1,
-                start: 0,
-                limit: 30
-            }).then(
+        };
+        //刷新页面
+        $scope.refresh = function () {
+            public.publicData($scope.content).then(
                 function (data) {
                     console.log(data);
                     $scope.tabArray = data
@@ -34,7 +21,17 @@ angular.module("myApp.controller2", [])
                     console.log(arguments)
                 });
         };
+        $scope.refresh();
+        //公开通报查询数据
+        $scope.search = function () {
+            $scope.refresh()
+        };
         //公开通报添加数据
+        $scope.add = function () {
+            $scope.addData.title = '';
+            $scope.addData.staff = '';
+            $scope.addData.content = ''
+        };
         $scope.addData = {
             token: sessionStorage.getItem('token'),
             title: '',
@@ -46,9 +43,9 @@ angular.module("myApp.controller2", [])
             public.publicAdd($scope.addData).then(
                 function (data) {
                     console.log(data);
-                    swal("添加成功!", "", "success");
                     $('#myModal').modal('hide');
-                    $scope.search()
+                    swal("添加成功!", "", "success");
+                    $scope.refresh()
                 }, function () {
                     console.log(arguments)
                 });
@@ -74,7 +71,7 @@ angular.module("myApp.controller2", [])
                     public.publicDel($scope.deleteData).then(
                         function (data) {
                             console.log(data);
-                            $scope.search()
+                            $scope.refresh()
                         },
                         function () {
                             console.log(arguments)
@@ -117,9 +114,9 @@ angular.module("myApp.controller2", [])
             }).then(
                 function (data) {
                     console.log(data);
-                    $scope.title=data.title;
-                    $scope.staff=data.staff;
-                    $scope.content=data.content
+                    $scope.title = data.title;
+                    $scope.staff = data.staff;
+                    $scope.content = data.content
                 }, function () {
                     console.log(arguments)
                 });
@@ -128,34 +125,32 @@ angular.module("myApp.controller2", [])
     })
     .controller('diaciplinary-treatmentCtrl', function ($scope, diaciplinary) {
         //纪律处分展示接口
-        diaciplinary.diaciplinaryData({
+        $scope.content={
             token: sessionStorage.getItem('token'),
             staff: '',
             page: 1,
             start: 0,
             limit: 30
-
-        }).then(function (data) {
-            console.log(data);
-            $scope.arr = data
-        }, function () {
-            console.log(arguments)
-        });
+        };
+        // diaciplinary.diaciplinaryData().then(function (data) {
+        //     console.log(data);
+        //     $scope.arr = data
+        // }, function () {
+        //     console.log(arguments)
+        // });
         //纪律处分查询数据
-        $scope.search = function () {
-            diaciplinary.diaciplinaryData({
-                token: sessionStorage.getItem('token'),
-                staff: '',
-                page: 1,
-                start: 0,
-                limit: 30
-            }).then(
+        $scope.refresh = function () {
+            diaciplinary.diaciplinaryData($scope.content).then(
                 function (data) {
                     console.log(data);
                     $scope.arr = data
                 }, function () {
                     console.log(arguments)
                 });
+        };
+        $scope.refresh();
+        $scope.search=function () {
+            $scope.refresh()
         };
         //纪律处分添加数据
         $scope.addData = {
@@ -171,7 +166,7 @@ angular.module("myApp.controller2", [])
                     console.log(data);
                     $('#myModal').modal('hide');
                     swal("添加成功!", "", "success");
-                    $scope.search()
+                    $scope.refresh()
                 }, function () {
                     console.log(arguments)
                 });
@@ -198,7 +193,7 @@ angular.module("myApp.controller2", [])
                     diaciplinary.diaciplinaryDel($scope.deleteData).then(
                         function (data) {
                             console.log(data);
-                            $scope.search()
+                            $scope.refresh()
                         },
                         function () {
                             console.log(arguments)
