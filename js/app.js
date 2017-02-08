@@ -1,10 +1,7 @@
 /**
  * Created by bobo on 17-1-11.
  */
-angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
-    'myApp.controller2', 'myApp.bo-service',
-    'myApp.approval', 'myApp.approvalCtrl', 'myApp.publicityCtrl', 'myApp.publicity'
-    , 'myApp.queryCtrl', 'myApp.query', 'myApp.userManageCtrl', 'myApp.userManage','ui.bootstrap'])
+angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bootstrap'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {

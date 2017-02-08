@@ -1,3 +1,22 @@
 /**
  * Created by bobo on 17-2-8.
  */
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+
+// 合并controllers
+gulp.task('concat-controllers', function () {
+    gulp.src(['js/controllers/base.js', 'js/controllers/*.js'])
+        .pipe(concat('my-controllers.js'))
+        // .pipe(uglify())
+        .pipe(gulp.dest('js'));
+});
+
+
+// 合并services
+gulp.task('concat-services', function () {
+    gulp.src(['js/services/base.js', 'js/services/*.js'])
+        .pipe(concat('my-services.js'))
+        // .pipe(uglify())
+        .pipe(gulp.dest('js'));
+});
