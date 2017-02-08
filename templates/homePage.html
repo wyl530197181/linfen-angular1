@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="pull-right m-right-sm">
-                <button style="margin-top:10px " class="btn btn-default" ng-click="logout()">退出</button>
+                <button id="out" class="btn btn-default" ng-click="logout()">退出</button>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                                 申报管理
                             </span>
                         </a>
-                        <ul class="submenu bg-palette4 " style="display:block">
+                        <ul class="submenu bg-palette4 " id="declare">
                             <li>
                                 <a ui-sref=".declare">
                                     <span class="submenu-label">申报</span>
@@ -75,7 +75,7 @@
 								                  查询统计
 							                </span>
                                         </a>
-                                        <ul class="submenu" style="display: block">
+                                        <ul class="submenu">
                                             <li>
                                                 <a ui-sref=".precise-query">
                                                     <span class="submenu-label">精确查询</span>
@@ -108,7 +108,7 @@
 										责任追究
 									</span>
                         </a>
-                        <ul class="submenu" style="display: block">
+                        <ul class="submenu">
                             <li>
                                 <a ui-sref=".public-notification">
                                     <span class="submenu-label">公开通报</span>
@@ -132,7 +132,7 @@
 										系统设置
 									</span>
                         </a>
-                        <ul class="submenu" style="display: block">
+                        <ul class="submenu">
                             <li>
                                 <a ui-sref=".user-management">
                                     <span class="submenu-label">用户管理</span>
@@ -154,7 +154,7 @@
         <div class="padding-md">
             <div class="row">
                 <div class="col-sm-12" ui-view="main">
-                    <div class="page-title" style="text-align: center;padding:20% 0">
+                    <div class="page-title">
                         临汾经济开发区执法纪律监督系统
                     </div>
                 </div>

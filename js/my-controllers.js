@@ -602,7 +602,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
     // 公示内容接口
     $scope.publicContend = function () {
         console.log(this);
-        $scope.publicContendList.content='';
+        $scope.publicContendList.content = '';
         $scope.eventId = this.data.id;
         publicity.publicContent(
             {
@@ -640,6 +640,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "确定",
+                            cancelButtonText: "取消",
                             closeOnConfirm: false
                         }
                     );
@@ -653,7 +654,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
 //公示结果
     $scope.publicOutcome = function () {
         console.log(this);
-        $scope.publicOutcomeList.content='';
+        $scope.publicOutcomeList.content = '';
         $scope.eventIds = this.data.id;
         publicity.publicContent(
             {

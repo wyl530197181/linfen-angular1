@@ -12,7 +12,7 @@
                 <h4 class="modal-title" id="myModalLabel">添加用户</h4>
             </div>
 
-            <div style="padding:10px">
+            <div class="modal-border">
                 <label>用户名:</label>
                 <input type="text" class="form-control" ng-model="addData.name">
                 <br>
@@ -20,7 +20,7 @@
                 <input type="text" class="form-control" ng-model="addData.userName">
                 <br>
                 <label>部门：</label>
-                <select style="width: 100%" class="form-control">
+                <select class="form-control select-width">
                     <option>根组织</option>
                 </select>
                 <br><br>
@@ -35,7 +35,7 @@
                     <option>管理员</option>
                 </select>
                 <br><br>
-                <button class="btn btn-default" style="width: 100%" ng-click="confirms()">确定</button>
+                <button class="btn btn-default btn-width"  ng-click="confirms()">确定</button>
             </div>
         </div>
     </div>

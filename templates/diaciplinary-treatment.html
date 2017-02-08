@@ -21,7 +21,7 @@
                                 <span class="sr-only">Close</span>
                             </button>
                         </div>
-                        <div style="padding:10px">
+                        <div class="modal-border">
                             <label>标题:</label>
                             <input type="text" class="form-control" ng-model="addData.title">
                             <br>
@@ -29,13 +29,13 @@
                             <input type="text" class="form-control" ng-model="addData.staff">
                             <br>
                             <label>部门：</label>
-                            <select style="width: 100%" class="form-control">
+                            <select class="form-control select-width">
                                 <option>根组织</option>
                             </select>
                             <br><br>
                             <label>内容：</label>
                             <textarea cols="90" rows="4" ng-model="addData.content"></textarea>
-                            <button class="btn btn-default" style="width: 100%" ng-click="addSure()">确定</button>
+                            <button class="btn btn-default btn-width" ng-click="addSure()">确定</button>
                         </div>
                     </div>
                 </div>
