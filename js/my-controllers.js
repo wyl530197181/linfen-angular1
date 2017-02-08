@@ -698,6 +698,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
+                cancelButtonText: "取消",
                 closeOnConfirm: false
             }
         );
@@ -780,7 +781,8 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             type: "info",
             showCancelButton: true,
             closeOnConfirm: false,
-            showLoaderOnConfirm: true
+            showLoaderOnConfirm: true,
+            cancelButtonText:'取消'
         }, function () {
             setTimeout(function () {
                 delData();
@@ -1067,7 +1069,8 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             type: "info",
             showCancelButton: true,
             closeOnConfirm: false,
-            showLoaderOnConfirm: true
+            showLoaderOnConfirm: true,
+            cancelButtonText:'取消'
         }, function () {
             setTimeout(function () {
                 delData();

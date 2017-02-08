@@ -88,7 +88,8 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             type: "info",
             showCancelButton: true,
             closeOnConfirm: false,
-            showLoaderOnConfirm: true
+            showLoaderOnConfirm: true,
+            cancelButtonText:'取消'
         }, function () {
             setTimeout(function () {
                 delData();
