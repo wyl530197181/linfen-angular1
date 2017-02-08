@@ -6,6 +6,10 @@
     "angular-ui-bootstrap": "^2.5.0"
   },
   "devDependencies": {
+<<<<<<< cd93a5506c07e1d53933121305b65dd76c15755f
+=======
+    "gulp": "^3.9.1",
+>>>>>>> 32b364ef7a6eae96d8596301ec9b3a95aaf2b403
     "gulp-concat": "^2.6.1"
   },
   "scripts": {
