@@ -10,7 +10,7 @@ angular.module("myApp.controller", [])
         };
         $scope.nameLogin = function () {
             if ($scope.user.name == '' || $scope.user.password == '') {
-                swal("信息不全!")
+                swal("用户名或者密码有误!")
                 return;
             } else {
                 loginUser.login($scope.user).then(
@@ -69,7 +69,7 @@ angular.module("myApp.controller", [])
                 },
                 function () {
                     console.log(arguments);
-                    swal("提交失败!")
+                    swal("提交失败!信息不完整")
                 }
             )
         }
@@ -80,17 +80,17 @@ angular.module("myApp.controller", [])
             $state.go('login')
         };
         //控制侧边栏折叠,头部隐藏显示
-        $(function	()	{
+        $(function () {
 
             //控制侧边栏折叠
-            $('.sidebar-menu .openable > a').click(function()	{
+            $('.sidebar-menu .openable > a').click(function () {
 
-                if(!$('aside').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 991px)'))	{
-                    if( $(this).parent().children('.submenu').is(':hidden') ) {
+                if (!$('aside').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 991px)')) {
+                    if ($(this).parent().children('.submenu').is(':hidden')) {
                         $(this).parent().siblings().removeClass('open').children('.submenu').slideUp(200);
                         $(this).parent().addClass('open').children('.submenu').slideDown(200);
                     }
-                    else	{
+                    else {
                         $(this).parent().removeClass('open').children('.submenu').slideUp(200);
                     }
                 }
@@ -99,17 +99,17 @@ angular.module("myApp.controller", [])
             });
 
             //Open active menu
-            if(!$('.sidebar-menu').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 767px)'))	{
+            if (!$('.sidebar-menu').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 767px)')) {
                 $('.openable.open').children('.submenu').slideDown(200);
             }
 
             //顶部三杠按钮切换侧边栏隐藏显示
-            $('#sidebarToggleLG').click(function()	{
-                if($('.wrapper').hasClass('display-right'))	{
+            $('#sidebarToggleLG').click(function () {
+                if ($('.wrapper').hasClass('display-right')) {
                     $('.wrapper').removeClass('display-right');
                     $('.sidebar-right').removeClass('active');
                 }
-                else	{
+                else {
                     //$('.nav-header').toggleClass('hide');
                     $('.top-nav').toggleClass('sidebar-mini');
                     $('aside').toggleClass('sidebar-mini');
@@ -121,7 +121,7 @@ angular.module("myApp.controller", [])
                 }
             });
 
-            $('#sidebarToggleSM').click(function()	{
+            $('#sidebarToggleSM').click(function () {
                 $('aside').toggleClass('active');
                 $('.wrapper').toggleClass('display-left');
             });
@@ -156,13 +156,12 @@ angular.module("myApp.controller", [])
             superviseStatus: 1,
             page: 1,
             start: 0,
-            limit: 30
+            limit: 50
         };
         var refresh = function () {
             Supervision.supervisionList($scope.superviseUser).then(
                 function (data) {
                     $scope.list = data.data.result;
-                    // console.log($scope.list);
                 }, function () {
                     swal("信息错误!")
                 });
@@ -181,11 +180,11 @@ angular.module("myApp.controller", [])
             console.log($scope.determine);
             Supervision.superviseReport($scope.determine).then(
                 function (data) {
-                    console.log(data)
+                    refresh();
                 }, function () {
                     swal("信息错误!")
                 });
-            refresh();
+
         };
         //违纪登记
         $scope.discipline = function () {
@@ -223,6 +222,16 @@ angular.module("myApp.controller", [])
         $scope.query = function () {
             refresh();
         }
+        //分页
+        $scope.totalItems = 50;
+        $scope.currentPage = 1;
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+        $scope.maxSize = 5;
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
     })
     //角色管理
     .controller('roleManage', function ($scope, Role) {

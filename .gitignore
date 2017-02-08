@@ -12,6 +12,7 @@ out
 *.iws
 jshint-output.html
 bower_components/*
+node_modules/*
 
 /node_modules
 

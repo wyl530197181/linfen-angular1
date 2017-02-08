@@ -4,7 +4,7 @@
 angular.module("myApp", ['myApp.controller', 'myApp.service', 'ui.router',
     'myApp.controller2', 'myApp.bo-service',
     'myApp.approval', 'myApp.approvalCtrl', 'myApp.publicityCtrl', 'myApp.publicity'
-    , 'myApp.queryCtrl', 'myApp.query', 'myApp.userManageCtrl', 'myApp.userManage'])
+    , 'myApp.queryCtrl', 'myApp.query', 'myApp.userManageCtrl', 'myApp.userManage','ui.bootstrap'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login', {
