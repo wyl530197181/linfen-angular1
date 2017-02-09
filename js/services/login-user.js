@@ -5,19 +5,25 @@
 angular.module('myApp.service').factory('loginUser', function ($http, $q, $state) {
         //生成deferred异步对象
         return {
-            login: function (params) {
+            login: function (user) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
                     url: 'http://bigbug.tech:8080/wdm-api/api/user/auth.api',
-                    params:params
+                    params: {
+                        username: user.name,
+                        password: user.password
+                    }
                 }).then(function (v) {
                     console.log(v);
                     if (v.data.result != null) {
-                        deferred.resolve(v.data.result);
+                        deferred.resolve(v);
                         $state.go('homePage');
-                    } else {
+                        $.LoadingOverlay("hide");
 
+                    } else {
+                        swal('帐号或密码不正确,请重新输入!');
+                        $.LoadingOverlay("hide");
                     }
                 }, function (e) {
                     console.log(e);

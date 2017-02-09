@@ -167,20 +167,21 @@ angular.module('myApp.service').factory('loginUser', function ($http, $q, $state
                         username: user.name,
                         password: user.password
                     }
-
                 }).then(function (v) {
-                    // console.log(v);
+                    console.log(v);
                     if (v.data.result != null) {
-                        deferred.resolve(v.data.result);
+                        deferred.resolve(v);
                         $state.go('homePage');
-                    } else {
+                        $.LoadingOverlay("hide");
 
+                    } else {
+                        swal('帐号或密码不正确,请重新输入!');
+                        $.LoadingOverlay("hide");
                     }
                 }, function (e) {
                     console.log(e);
                     deferred.reject(e);
                 });
-
                 return deferred.promise;
             }
         }

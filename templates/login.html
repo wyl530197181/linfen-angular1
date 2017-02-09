@@ -6,12 +6,19 @@
                 <div class="login-brand text-center">
                     <strong class="text-skin">临汾经济技术开发区党风廉政建设责任监督系统</strong>
                 </div>
-                <form>
-                    <div class="form-group m-bottom-md">
-                        <input ng-model="user.name" type="text" class="form-control" placeholder="用户名">
+                <form name="loginForm" novalidate>
+                    <div class="form-group m-bottom-md"
+                         ng-class="{'has-success':!loginForm.loginName.$dirty&&!loginForm.loginName.$error.required,'has-error':loginForm.loginName.$error.required&&loginForm.$submitted}">
+                        <input ng-model="user.name" type="text" name=loginName  required
+                               class="form-control" placeholder="用户名">
+                        <span ng-show="loginForm.loginName.$error.required&&loginForm.$submitted">用户名不能为空</span>
                     </div>
-                    <div class="form-group">
-                        <input ng-model="user.password" type="password" class="form-control" placeholder="密码">
+                    <div class="form-group"
+                         ng-class="{'has-success':!loginForm.loginPassword.$dirty&&!loginForm.loginPassword.$error.required,'has-error':loginForm.loginPassword.$error.required&&loginForm.$submitted}">
+                        <input ng-model="user.password" type="password" name="loginPassword" required
+                               class="form-control" placeholder="密码">
+                        <span ng-show="loginForm.loginPassword.$error.required&&loginForm.$submitted">用户名密码不能为空</span>
+
                     </div>
                     <div class="form-group">
                         <div class="custom-checkbox">

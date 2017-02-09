@@ -3,28 +3,36 @@
  */
 angular.module("myApp.controller").controller('loginCtrl', function ($scope, loginUser) {
     $scope.user = {
-        token: sessionStorage.getItem('token'),
-        name: 'yiyi',
-        password: '123456'
+        name: '',
+        password: ''
     };
     $scope.nameLogin = function () {
-        if ($scope.user.name != '' && $scope.user.password != undefined) {
+        if (Boolean($scope.user.name )==true && Boolean($scope.user.password )== true) {
             $.LoadingOverlay("show", {
                 image: "img/oval.svg",
                 bgcolor: 'rgba(28,43,54,0.7)'
             });
-            loginUser.login($scope.user).then(
-                function (data) {
-                    $.LoadingOverlay("hide");
-                    console.log(data);
-                    window.sessionStorage.setItem('token', data.token);
+            loginUser.login($scope.user)
+                .then(function (data) {
+                    console.log(data,'success');
+                    $scope.data=data;
+                    if (data.data.result == null) {
+                        console.log(data.data.result);
+                        swal('帐号或密码不正确,请重新输入!');
+                        $.LoadingOverlay("hide");
+                    }else{
+                        window.sessionStorage.setItem('token', data.token);
+                        $.LoadingOverlay("hide");
+                    }
                 },
-                function () {
+                function (data) {
+                    console.log(data,'fail');
                     $.LoadingOverlay("hide");
                 }
             );
-        } else {
-            swal("用户名或者密码有误!");
+        }
+        else {
+            swal("帐号或密码不能为空,请输入!");
         }
     }
 });
