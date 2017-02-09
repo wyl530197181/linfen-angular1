@@ -2,6 +2,8 @@
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('approvalCtrl', function ($scope, $state, approval) {
+
+
     $scope.approvallist = {
         token: sessionStorage.getItem('token'),
         staff: '',

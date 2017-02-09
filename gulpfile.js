@@ -12,11 +12,25 @@ gulp.task('concat-controllers', function () {
         .pipe(gulp.dest('js'));
 });
 
-
 // 合并services
+
 gulp.task('concat-services', function () {
     gulp.src(['js/services/base.js', 'js/services/*.js'])
         .pipe(concat('my-services.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('js'));
+});
+//监听变动
+gulp.task('watch', ['concat-controllers'],function(){
+   var watcher= gulp.watch('js/controllers/*.js', ['concat-controllers']);
+    watcher.on( 'change',function(event){
+        console.log('Controller ' + event.path);
+    });
+});
+
+gulp.task('watch', ['concat-services'],function(){
+    var watcher= gulp.watch('js/services/*.js', ['concat-services']);
+    watcher.on( 'change',function(event){
+        console.log('Controller ' + event.path);
+    });
 });

@@ -55,7 +55,7 @@ angular.module("myApp", ['myApp.controller','myApp.service', 'ui.router', 'ui.bo
                 url: '/diaciplinary-treatment',
                 views: {
                     'main': {
-                        controller: '',
+                        controller: 'diaciplinary-treatmentCtrl',
                         templateUrl: 'templates/diaciplinary-treatment.html'
                     }
                 }

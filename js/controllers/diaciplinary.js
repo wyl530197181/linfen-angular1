@@ -10,13 +10,7 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
         start: 0,
         limit: 30
     };
-    // diaciplinary.diaciplinaryData().then(function (data) {
-    //     console.log(data);
-    //     $scope.arr = data
-    // }, function () {
-    //     console.log(arguments)
-    // });
-    //纪律处分查询数据
+    //刷新页面
     $scope.refresh = function () {
         diaciplinary.diaciplinaryData($scope.content).then(
             function (data) {
@@ -27,10 +21,16 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
             });
     };
     $scope.refresh();
+    //纪律处分查询数据
     $scope.search=function () {
         $scope.refresh()
     };
     //纪律处分添加数据
+    $scope.add = function () {
+        $scope.addData.title = '';
+        $scope.addData.staff = '';
+        $scope.addData.content = ''
+    };
     $scope.addData = {
         token: sessionStorage.getItem('token'),
         title: '',
