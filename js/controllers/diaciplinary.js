@@ -12,9 +12,14 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
     };
     //刷新页面
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         diaciplinary.diaciplinaryData($scope.content).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.arr = data;
                 console.log(data.length);
                 $scope.bigTotalItems =  data.length;

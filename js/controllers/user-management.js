@@ -4,6 +4,10 @@
 angular.module("myApp.controller") .controller('userManageCtrl', function ($scope, userManage) {
     //公开通报展示数据
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         userManage.userManageData({
             token: sessionStorage.getItem('token'),
             staff: '',
@@ -12,6 +16,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             limit: 999
         }).then(
             function (data) {
+                $.LoadingOverlay("hide");
                 // console.log(data);
                 $scope.tabArray = data;
                 $scope.bigTotalItems =  data.length;
@@ -55,13 +60,14 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
     };
 
     $scope.confirm = function () {
-        console.log(this);
+        console.log($scope.name);
         userManage.confirmList({
             token: sessionStorage.getItem('token'),
             userId: this.obj.id,
             orgId: 1,
             roleId: 1,
-            name: this.obj.username,
+            name:$scope.name,
+            // this.obj.username,
             password: ''
         }).then(
             function (data) {

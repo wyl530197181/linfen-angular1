@@ -14,13 +14,16 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     };
     // 更新函数
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         approval.approvalList($scope.approvallist).then(
             function (succ) {
                 console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
                 $scope.bigTotalItems =  succ.data.result.length;
-                // Page($scope.approvalArry);
             },
             function () {
                 console.log(arguments);
@@ -31,10 +34,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     // 查询函数
     $scope.search = function () {
         $scope.refresh();//调用刷新页面
-        $.LoadingOverlay("show", {
-            image: "img/oval.svg",
-            bgcolor: 'rgba(28,43,54,0.7)'
-        });
     };
     $scope.selectStatus = function () {
         console.log(event)

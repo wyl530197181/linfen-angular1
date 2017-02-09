@@ -11,6 +11,10 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         limit: 999
     };
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         publicity.publicList($scope.publicityCtrlList)
             .then(
                 function (success) {
@@ -28,11 +32,6 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
 
     $scope.search = function () {
         $scope.refresh();
-        $.LoadingOverlay("show", {
-            image: "img/oval.svg",
-            bgcolor: 'rgba(28,43,54,0.7)'
-        });
-
     };
     $scope.selectStatus = function () {
         console.log(event)

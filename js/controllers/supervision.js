@@ -12,9 +12,14 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         limit: 9999
     };
     var refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         Supervision.supervisionList($scope.superviseUser).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide")
                 $scope.list = data.data.result;
                 $scope.bigTotalItems =  data.data.result.length;
             }, function () {

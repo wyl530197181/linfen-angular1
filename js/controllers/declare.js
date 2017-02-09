@@ -40,6 +40,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         token: sessionStorage.getItem('token')
     };
     $scope.submit = function () {
+
         if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
             UserList.userlist($scope.declare).then(
                 function (data) {

@@ -4,6 +4,10 @@
 angular.module("myApp.controller").controller('roleManage', function ($scope, Role) {
     //角色页面展示
     var page = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         Role.UserName({
             token: sessionStorage.getItem('token'),
             page: 1,
@@ -11,6 +15,7 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             limit: 999
         }).then(function (data) {
             // console.log(data);
+            $.LoadingOverlay("hide");
             $scope.roleManage = data.data.result;
             $scope.bigTotalItems =  data.data.result.length;
         }, function () {

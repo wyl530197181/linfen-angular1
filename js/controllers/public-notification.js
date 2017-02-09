@@ -12,9 +12,14 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
     };
     //刷新页面
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         public.publicData($scope.content).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.tabArray = data;
                 $scope.bigTotalItems =  data.length;
             }, function () {
@@ -24,7 +29,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
     $scope.refresh();
     //公开通报查询数据
     $scope.search = function () {
-        $scope.refresh()
+        $scope.refresh();
     };
     //公开通报添加数据
     $scope.add = function () {

@@ -18,13 +18,16 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     };
     // 更新函数
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         approval.approvalList($scope.approvallist).then(
             function (succ) {
                 console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
                 $scope.bigTotalItems =  succ.data.result.length;
-                // Page($scope.approvalArry);
             },
             function () {
                 console.log(arguments);
@@ -35,10 +38,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     // 查询函数
     $scope.search = function () {
         $scope.refresh();//调用刷新页面
-        $.LoadingOverlay("show", {
-            image: "img/oval.svg",
-            bgcolor: 'rgba(28,43,54,0.7)'
-        });
     };
     $scope.selectStatus = function () {
         console.log(event)
@@ -305,6 +304,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         token: sessionStorage.getItem('token')
     };
     $scope.submit = function () {
+
         if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
             UserList.userlist($scope.declare).then(
                 function (data) {
@@ -333,9 +333,14 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
     };
     //刷新页面
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         diaciplinary.diaciplinaryData($scope.content).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.arr = data;
                 console.log(data.length);
                 $scope.bigTotalItems =  data.length;
@@ -528,9 +533,14 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
     };
     //刷新页面
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         public.publicData($scope.content).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.tabArray = data;
                 $scope.bigTotalItems =  data.length;
             }, function () {
@@ -540,7 +550,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
     $scope.refresh();
     //公开通报查询数据
     $scope.search = function () {
-        $scope.refresh()
+        $scope.refresh();
     };
     //公开通报添加数据
     $scope.add = function () {
@@ -665,6 +675,10 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         limit: 999
     };
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         publicity.publicList($scope.publicityCtrlList)
             .then(
                 function (success) {
@@ -682,11 +696,6 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
 
     $scope.search = function () {
         $scope.refresh();
-        $.LoadingOverlay("show", {
-            image: "img/oval.svg",
-            bgcolor: 'rgba(28,43,54,0.7)'
-        });
-
     };
     $scope.selectStatus = function () {
         console.log(event)
@@ -868,6 +877,10 @@ angular.module("myApp.controller").controller('queryCtrl', function ($scope, $st
 angular.module("myApp.controller").controller('roleManage', function ($scope, Role) {
     //角色页面展示
     var page = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         Role.UserName({
             token: sessionStorage.getItem('token'),
             page: 1,
@@ -875,6 +888,7 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             limit: 999
         }).then(function (data) {
             // console.log(data);
+            $.LoadingOverlay("hide");
             $scope.roleManage = data.data.result;
             $scope.bigTotalItems =  data.data.result.length;
         }, function () {
@@ -1052,9 +1066,14 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         limit: 9999
     };
     var refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         Supervision.supervisionList($scope.superviseUser).then(
             function (data) {
                 console.log(data);
+                $.LoadingOverlay("hide")
                 $scope.list = data.data.result;
                 $scope.bigTotalItems =  data.data.result.length;
             }, function () {
@@ -1174,6 +1193,10 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
 angular.module("myApp.controller") .controller('userManageCtrl', function ($scope, userManage) {
     //公开通报展示数据
     $scope.refresh = function () {
+        $.LoadingOverlay("show", {
+            image: "img/oval.svg",
+            bgcolor: 'rgba(28,43,54,0.7)'
+        });
         userManage.userManageData({
             token: sessionStorage.getItem('token'),
             staff: '',
@@ -1182,6 +1205,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             limit: 999
         }).then(
             function (data) {
+                $.LoadingOverlay("hide");
                 // console.log(data);
                 $scope.tabArray = data;
                 $scope.bigTotalItems =  data.length;
@@ -1225,13 +1249,14 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
     };
 
     $scope.confirm = function () {
-        console.log(this);
+        console.log($scope.name);
         userManage.confirmList({
             token: sessionStorage.getItem('token'),
             userId: this.obj.id,
             orgId: 1,
             roleId: 1,
-            name: this.obj.username,
+            name:$scope.name,
+            // this.obj.username,
             password: ''
         }).then(
             function (data) {
