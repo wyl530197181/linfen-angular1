@@ -2,6 +2,9 @@
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('combination-queryCtrl', function ($scope, $state, combination_query) {
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.com_queryCtrlList = {
         token: sessionStorage.getItem('token'),
         eventType: '',

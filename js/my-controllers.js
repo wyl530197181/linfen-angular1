@@ -188,11 +188,29 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     //
     //     }
     // }
+    $scope.totalItems = 50;
+    $scope.currentPage = 1;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=1;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
 /**
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('combination-queryCtrl', function ($scope, $state, combination_query) {
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.com_queryCtrlList = {
         token: sessionStorage.getItem('token'),
         eventType: '',
@@ -236,6 +254,9 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('declareCtrl', function ($scope, UserList) {
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.relation = function () {
         $scope.declare.staffRelationship = this.declare.staffRelationship;
     };
@@ -268,7 +289,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         selfPromise: '',//邀请名单
         promisePeople: '',//本人承诺
         staffOrgId: '',//承诺人
-        token: sessionStorage.getItem('token'),
+        token: sessionStorage.getItem('token')
     };
     $scope.submit = function () {
         if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
@@ -823,7 +844,9 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('statisticsCtrl', function ($scope, $state, Statistics) {
-    var aa;
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.statisticsList = {
         token: sessionStorage.getItem('token'),
         eventCreateTimeFrom: '',
@@ -838,9 +861,9 @@ angular.module("myApp.controller").controller('statisticsCtrl', function ($scope
         });
         Statistics.StatisticsLity($scope.statisticsList)
             .then(function (suc) {
-                // console.log(suc);
+                console.log(suc);
                 $scope.aa = suc.data.result;
-                console.log($scope.aa);
+                console.log(suc.data.result);
                 var myChart = echarts.init(document.getElementById('main'));
                 // 指定图表的配置项和数据
                 var option = {

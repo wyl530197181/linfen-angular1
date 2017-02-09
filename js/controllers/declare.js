@@ -2,6 +2,9 @@
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('declareCtrl', function ($scope, UserList) {
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.relation = function () {
         $scope.declare.staffRelationship = this.declare.staffRelationship;
     };
@@ -34,7 +37,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         selfPromise: '',//邀请名单
         promisePeople: '',//本人承诺
         staffOrgId: '',//承诺人
-        token: sessionStorage.getItem('token'),
+        token: sessionStorage.getItem('token')
     };
     $scope.submit = function () {
         if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){

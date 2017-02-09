@@ -2,7 +2,9 @@
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('statisticsCtrl', function ($scope, $state, Statistics) {
-    var aa;
+    $('.datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'
+    });
     $scope.statisticsList = {
         token: sessionStorage.getItem('token'),
         eventCreateTimeFrom: '',
@@ -17,9 +19,9 @@ angular.module("myApp.controller").controller('statisticsCtrl', function ($scope
         });
         Statistics.StatisticsLity($scope.statisticsList)
             .then(function (suc) {
-                // console.log(suc);
+                console.log(suc);
                 $scope.aa = suc.data.result;
-                console.log($scope.aa);
+                console.log(suc.data.result);
                 var myChart = echarts.init(document.getElementById('main'));
                 // 指定图表的配置项和数据
                 var option = {
