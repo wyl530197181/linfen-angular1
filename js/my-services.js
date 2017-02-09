@@ -184,7 +184,7 @@ angular.module('myApp.service').factory('loginUser', function ($http, $q, $state
                 return deferred.promise;
             }
         }
-    })
+    });
 /**
  * Created by bobo on 17-2-8.
  */
