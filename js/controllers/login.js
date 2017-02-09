@@ -16,12 +16,12 @@ angular.module("myApp.controller").controller('loginCtrl', function ($scope, log
                 .then(function (data) {
                     console.log(data,'success');
                     $scope.data=data;
+                        window.sessionStorage.setItem('token', data.data.result.token);
                     if (data.data.result == null) {
                         console.log(data.data.result);
                         swal('帐号或密码不正确,请重新输入!');
                         $.LoadingOverlay("hide");
                     }else{
-                        window.sessionStorage.setItem('token', data.token);
                         $.LoadingOverlay("hide");
                     }
                 },
