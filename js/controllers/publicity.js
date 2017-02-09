@@ -8,7 +8,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         bulletinStatus: -1,
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
     $scope.refresh = function () {
         publicity.publicList($scope.publicityCtrlList)
@@ -16,6 +16,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                 function (success) {
                     console.log(success);
                     $scope.publicArr = success.data.result;
+                    $scope.bigTotalItems =  success.data.result.length-10;
                     $.LoadingOverlay('hide');
                 },
                 function (error) {
@@ -150,4 +151,20 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         );
         $scope.refresh();
     };
+    //分页
+    // $scope.totalItems = 50;
+    // $scope.currentPage = 1;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=1;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });

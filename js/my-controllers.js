@@ -14,15 +14,16 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         auditStatus: -1,
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
     // 更新函数
     $scope.refresh = function () {
         approval.approvalList($scope.approvallist).then(
             function (succ) {
-                // console.log(succ);
+                console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
+                $scope.bigTotalItems =  succ.data.result.length-10;
                 // Page($scope.approvalArry);
             },
             function () {
@@ -188,9 +189,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     //
     //     }
     // }
-    $scope.totalItems = 50;
-    $scope.currentPage = 1;
-
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
@@ -222,7 +220,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         eventTimeTo: '',
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
 
     $scope.selectPeopleCount = function () {
@@ -243,12 +241,27 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
+                $scope.bigTotalItems =  suc.data.result.length-10;
                 $.LoadingOverlay("hide")
 
             }, function () {
                 swal('接口出错了');
-            })
+            });
+        // 分页
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+        $scope.maxSize = 5;
+
+        $scope.bigCurrentPage = 1;
+
+        $scope.zero=1;
+
+        $scope.paging=function () {
+            $scope.zero=10*this.bigCurrentPage
+        }
     };
+
 });
 /**
  * Created by bobo on 17-2-8.
@@ -316,14 +329,15 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
         staff: '',
         page: 1,
         start: 0,
-        limit: 30
+        limit: 999
     };
     //刷新页面
     $scope.refresh = function () {
         diaciplinary.diaciplinaryData($scope.content).then(
             function (data) {
                 console.log(data);
-                $scope.arr = data
+                $scope.arr = data;
+                $scope.bigTotalItems =  data.length-10;
             }, function () {
                 console.log(arguments)
             });
@@ -390,6 +404,19 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
                 }, 2000)
             });
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
 /**
  * Created by bobo on 17-2-8.
@@ -610,7 +637,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         bulletinStatus: -1,
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
     $scope.refresh = function () {
         publicity.publicList($scope.publicityCtrlList)
@@ -618,6 +645,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                 function (success) {
                     console.log(success);
                     $scope.publicArr = success.data.result;
+                    $scope.bigTotalItems =  success.data.result.length-10;
                     $.LoadingOverlay('hide');
                 },
                 function (error) {
@@ -752,6 +780,22 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
         );
         $scope.refresh();
     };
+    //分页
+    // $scope.totalItems = 50;
+    // $scope.currentPage = 1;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=1;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
 /**
  * Created by bobo on 17-2-8.

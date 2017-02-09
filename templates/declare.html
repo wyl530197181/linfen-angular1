@@ -152,7 +152,7 @@
                                 <label class="control-label">用车来源:</label>
                                 <input name="declareCar" type="text" class="form-control input-lg"
                                        ng-model="declare.carSource" required data-parsley-required="true">
-                                <span ng-show="declareForm.declareCar.$error.required&&declareForm.$submitted">电话不能为空</span>
+                                <span ng-show="declareForm.declareCar.$error.required&&declareForm.$submitted">用车来源不能为空</span>
 
                             </div>
                         </div>
@@ -211,85 +211,6 @@
         </div><!-- ./smart-widget-inner -->
     </div><!-- ./smart-widget -->
 </div>
-
-
-<!--<div>-->
-<!--<form class="form-inline">-->
-<!--<h3>申报</h3>-->
-<!--<label>申报人:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.staff">-->
-<!--<label>与申报人关系:</label>-->
-<!--<select class="form-control" ng-model="declare.staffRelationship" ng-change="relation()"-->
-<!--ng-init="declare.staffRelationship='1'">-->
-<!--<option value="1">本人</option>-->
-<!--<option value="2">直系亲属</option>-->
-<!--</select>-->
-<!--<label>政治面貌:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.staffPoliticalStatus">-->
-<!--<label>单位职务:</label>-->
-<!--<select class="form-control" ng-model="declare.staffJob" ng-change="duty()" ng-init="declare.staffJob='1'">-->
-<!--<option value="1">县级党员干部</option>-->
-<!--<option value="2">科级党员干部</option>-->
-<!--<option value="3">社区基层干部</option>-->
-<!--<option value="4">一般工作人员</option>-->
-<!--</select>-->
-<!--<br><br>-->
-<!--<div>-->
-<!--<label>配偶:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.staffSpouse" ng-init="declare.staffSpouse='meng'">-->
-<!--<label>联系电话:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.staffPhone" ng-init="eclare.staffPhone='1008611'">-->
-<!--<label>操办事项:</label>-->
-<!--<select class="form-control" ng-model="declare.eventType" ng-change="matter()" ng-init="declare.eventType='1'">-->
-<!--<option value="1">婚嫁</option>-->
-<!--<option value="2">丧葬</option>-->
-<!--</select>-->
-<!--<label>操办次数:</label>-->
-<!--<input type="number" class="form-control" ng-model="declare.eventCount" ng-init="declare.eventCount=1">-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<div>-->
-<!--<label>操办时间:</label>-->
-<!--<input type="date" class="form-control" ng-model="declare.eventDate">-->
-<!--<label>操办地点:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.location">-->
-<!--<label>操办桌数:</label>-->
-<!--<input type="number" class="form-control" ng-model="declare.tableCount" ng-init="declare.tableCount=50">-->
-<!--<label>参加人数:</label>-->
-<!--<input type="number" class="form-control" ng-model="declare.peopleCount" ng-init="declare.peopleCount=50">-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<div>-->
-<!--<label>邀请范围:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.peopleRange">-->
-<!--<label>用车数量:</label>-->
-<!--<input type="number" class="form-control" ng-model="declare.carCount" ng-init="declare.carCount=10">-->
-<!--<label>用车来源:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.carSource">-->
-<!--<label>所属部门:</label>-->
-<!--<select class="form-control" ng-model="declare.attachmentFileCode" ng-change="section()"-->
-<!--ng-init="declare.attachmentFileCode='1'">-->
-<!--<option value="1">根组织</option>-->
-<!--</select>-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<div>-->
-<!--<label>宴请名单:</label>-->
-<!--<input type="file" class="form-control" ng-model="declare.selfPromise">-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<label>本人承诺:</label>-->
-<!--<div>-->
-<!--<textarea cols="100" rows="4" ng-model="declare.promisePeople"></textarea>-->
-<!--<label>承诺人:</label>-->
-<!--<input type="text" class="form-control" ng-model="declare.staffOrgId">-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<div>-->
-<!--<button class="btn btn-default" ng-click="submit()">提交申报</button>-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
 
 
 

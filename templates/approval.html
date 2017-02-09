@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="obj in approvalArry">
+        <tr ng-repeat="obj in approvalArry|limitTo:10:zero">
             <td>{{obj.staff}}</td>
             <td>{{obj.staffOrgName}}</td>
             <td>{{obj.eventType==1?'婚嫁': '丧葬'}}</td>

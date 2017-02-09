@@ -23,7 +23,7 @@
             <th>状态</th>
             <th>操作</th>
         </tr>
-        <tr ng-repeat="data in publicArr">
+        <tr ng-repeat="data in publicArr|limitTo:10:zero">
             <td>{{data.staff}}</td>
             <td>{{data.staffOrgName}}</td>
             <td>{{data.eventType==1?'婚嫁': '丧葬'}}</td>
@@ -114,4 +114,5 @@
             </td>
         </tr>
     </table>
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
 </div>

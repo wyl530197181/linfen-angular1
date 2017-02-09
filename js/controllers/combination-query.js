@@ -16,7 +16,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
         eventTimeTo: '',
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
 
     $scope.selectPeopleCount = function () {
@@ -37,10 +37,25 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
+                $scope.bigTotalItems =  suc.data.result.length-10;
                 $.LoadingOverlay("hide")
 
             }, function () {
                 swal('接口出错了');
-            })
+            });
+        // 分页
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+        $scope.maxSize = 5;
+
+        $scope.bigCurrentPage = 1;
+
+        $scope.zero=1;
+
+        $scope.paging=function () {
+            $scope.zero=10*this.bigCurrentPage
+        }
     };
+
 });

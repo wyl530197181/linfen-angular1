@@ -10,15 +10,16 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         auditStatus: -1,
         page: 1,
         start: 0,
-        limit: 20
+        limit: 999
     };
     // 更新函数
     $scope.refresh = function () {
         approval.approvalList($scope.approvallist).then(
             function (succ) {
-                // console.log(succ);
+                console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
+                $scope.bigTotalItems =  succ.data.result.length-10;
                 // Page($scope.approvalArry);
             },
             function () {
@@ -184,9 +185,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     //
     //     }
     // }
-    $scope.totalItems = 50;
-    $scope.currentPage = 1;
-
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };

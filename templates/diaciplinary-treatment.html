@@ -55,7 +55,7 @@
         <td>时间</td>
         <td>操作</td>
     </tr>
-    <tr ng-repeat="data in arr">
+    <tr ng-repeat="data in arr|limitTo:10:zero">
         <td>
             <span>{{data.staff}}</span>
         </td>
@@ -68,3 +68,4 @@
         </td>
     </tr>
 </table>
+<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>

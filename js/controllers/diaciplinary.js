@@ -8,14 +8,15 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
         staff: '',
         page: 1,
         start: 0,
-        limit: 30
+        limit: 999
     };
     //刷新页面
     $scope.refresh = function () {
         diaciplinary.diaciplinaryData($scope.content).then(
             function (data) {
                 console.log(data);
-                $scope.arr = data
+                $scope.arr = data;
+                $scope.bigTotalItems =  data.length-10;
             }, function () {
                 console.log(arguments)
             });
@@ -82,4 +83,17 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
                 }, 2000)
             });
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
