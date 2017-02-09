@@ -92,6 +92,23 @@ angular.module('myApp.service').factory('public', function ($http, $q) {
                     deferred.reject(e);
                 });
             return deferred.promise;
+        },
+        publicUpdate3:function (params) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: 'http://bigbug.tech:8080/wdm-api/api/wdm/public_notification/update.api',
+                params: params
+            }).then(
+                function (v) {
+                    console.log(v);
+                    deferred.resolve(v);
+                },
+                function (e) {
+                    console.log(e);
+                    deferred.reject(e);
+                });
+            return deferred.promise;
         }
     }
 });

@@ -47,3 +47,12 @@
 textarea{
     resize: none;
 }
+table td{
+    max-width: 100px;
+    /*文本溢出时内容会被修剪，并且其余内容是不可见的*/
+    overflow: hidden;
+    /*文本溢出部分用省略号代替*/
+    text-overflow: ellipsis;
+    /*文本超出部分不换行*/
+    white-space: nowrap;
+}

@@ -59,11 +59,17 @@
         <td>
             <span>{{data.staff}}</span>
         </td>
-        <td><span>{{data.staffOrgName}}</span></td>
-        <td><span>{{data.title}}</span></td>
-        <td><span>{{data.createTime}}</span></td>
         <td>
-            <button class="btn btn-warning" ng-click="revamp()">修改</button>
+            <span>{{data.staffOrgName}}</span>
+        </td>
+        <td>
+            <span>{{data.title}}</span>
+        </td>
+        <td>
+            <span>{{data.createTime}}</span>
+        </td>
+        <td>
+            <button class="btn btn-primary" ng-click="revamp()">修改</button>
             <button class="btn btn-danger" ng-click="remove()">删除</button>
         </td>
     </tr>
