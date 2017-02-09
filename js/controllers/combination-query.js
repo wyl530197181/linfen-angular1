@@ -37,7 +37,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
-                $scope.bigTotalItems =  suc.data.result.length-10;
+                $scope.bigTotalItems =  suc.data.result.length;
                 $.LoadingOverlay("hide")
 
             }, function () {
@@ -51,10 +51,10 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
 
         $scope.bigCurrentPage = 1;
 
-        $scope.zero=1;
+        $scope.zero=0;
 
         $scope.paging=function () {
-            $scope.zero=10*this.bigCurrentPage
+            $scope.zero=(this.bigCurrentPage-1)*10;
         }
     };
 

@@ -9,11 +9,12 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             staff: '',
             page: 1,
             start: 0,
-            limit: 30
+            limit: 999
         }).then(
             function (data) {
                 // console.log(data);
                 $scope.tabArray = data;
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 // console.log(arguments)
             });
@@ -135,5 +136,17 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             });
         $scope.refresh();
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
 
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
+    }
 });

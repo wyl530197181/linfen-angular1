@@ -19,7 +19,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                 console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
-                $scope.bigTotalItems =  succ.data.result.length-10;
+                $scope.bigTotalItems =  succ.data.result.length;
                 // Page($scope.approvalArry);
             },
             function () {
@@ -192,9 +192,9 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

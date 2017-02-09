@@ -50,7 +50,7 @@
         <td>部门</td>
         <td>操作</td>
     </tr>
-    <tr ng-repeat="obj in tabArray">
+    <tr ng-repeat="obj in tabArray|limitTo:10:zero">
         <td>{{obj.name}}</td>
         <td>{{obj.username}}</td>
         <td>{{obj.orgName}}</td>
@@ -104,7 +104,7 @@
             <button type="button" class="btn btn-danger " ng-click="delete()">
                 删除
             </button>
-
         </td>
     </tr>
 </table>
+<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>

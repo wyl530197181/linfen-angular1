@@ -23,7 +23,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                 console.log(succ);
                 $.LoadingOverlay('hide');
                 $scope.approvalArry = succ.data.result;
-                $scope.bigTotalItems =  succ.data.result.length-10;
+                $scope.bigTotalItems =  succ.data.result.length;
                 // Page($scope.approvalArry);
             },
             function () {
@@ -196,10 +196,10 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
 /**
@@ -241,7 +241,7 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
-                $scope.bigTotalItems =  suc.data.result.length-10;
+                $scope.bigTotalItems =  suc.data.result.length;
                 $.LoadingOverlay("hide")
 
             }, function () {
@@ -255,10 +255,10 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
 
         $scope.bigCurrentPage = 1;
 
-        $scope.zero=1;
+        $scope.zero=0;
 
         $scope.paging=function () {
-            $scope.zero=10*this.bigCurrentPage
+            $scope.zero=(this.bigCurrentPage-1)*10;
         }
     };
 
@@ -337,7 +337,8 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
             function (data) {
                 console.log(data);
                 $scope.arr = data;
-                $scope.bigTotalItems =  data.length-10;
+                console.log(data.length);
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 console.log(arguments)
             });
@@ -405,6 +406,8 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
             });
     };
     // 分页
+    // $scope.totalItems = 50;
+    $scope.currentPage = 1;
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
@@ -415,7 +418,7 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
     $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
 /**
@@ -479,8 +482,8 @@ angular.module("myApp.controller").controller('homePageCtrl', function ($scope, 
 angular.module("myApp.controller").controller('loginCtrl', function ($scope, loginUser) {
     $scope.user = {
         token: sessionStorage.getItem('token'),
-        name: '',
-        password: ''
+        name: 'yiyi',
+        password: '123456'
     };
     $scope.nameLogin = function () {
         if ($scope.user.name != '' && $scope.user.password != undefined) {
@@ -513,14 +516,15 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         staff: '',
         page: 1,
         start: 0,
-        limit: 30
+        limit: 999
     };
     //刷新页面
     $scope.refresh = function () {
         public.publicData($scope.content).then(
             function (data) {
                 console.log(data);
-                $scope.tabArray = data
+                $scope.tabArray = data;
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 console.log(arguments)
             });
@@ -625,7 +629,19 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
                 console.log(arguments)
             });
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
 
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
+    }
 });
 /**
  * Created by bobo on 17-2-8.
@@ -645,7 +661,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                 function (success) {
                     console.log(success);
                     $scope.publicArr = success.data.result;
-                    $scope.bigTotalItems =  success.data.result.length-10;
+                    $scope.bigTotalItems =  success.data.result.length;
                     $.LoadingOverlay('hide');
                 },
                 function (error) {
@@ -791,10 +807,10 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
 /**
@@ -817,11 +833,25 @@ angular.module("myApp.controller").controller('queryCtrl', function ($scope, $st
         queryS.queryLity($scope.queryCtrlList)
             .then(function (suc) {
                 $scope.queryArr = suc.data.result;
+                $scope.bigTotalItems =  suc.data.result.length;
                 $.LoadingOverlay("hide")
             }, function () {
                 swal('接口出错了');
             })
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
+    }
 });
 /**
  * Created by bobo on 17-2-8.
@@ -833,10 +863,11 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             token: sessionStorage.getItem('token'),
             page: 1,
             start: 0,
-            limit: 30
+            limit: 999
         }).then(function (data) {
             // console.log(data);
             $scope.roleManage = data.data.result;
+            $scope.bigTotalItems =  data.data.result.length;
         }, function () {
             swal("信息错误!")
         });
@@ -882,6 +913,19 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
                 page();
             }, 2000);
         });
+    };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
 /**
@@ -1003,7 +1047,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             function (data) {
                 console.log(data);
                 $scope.list = data.data.result;
-                $scope.bigTotalItems =  data.data.result.length-10;
+                $scope.bigTotalItems =  data.data.result.length;
             }, function () {
                 swal("信息错误!")
             });
@@ -1104,10 +1148,10 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
 /**
@@ -1121,11 +1165,12 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             staff: '',
             page: 1,
             start: 0,
-            limit: 30
+            limit: 999
         }).then(
             function (data) {
                 // console.log(data);
                 $scope.tabArray = data;
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 // console.log(arguments)
             });
@@ -1247,5 +1292,17 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             });
         $scope.refresh();
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
 
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
+    }
 });

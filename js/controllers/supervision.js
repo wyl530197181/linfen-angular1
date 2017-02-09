@@ -16,7 +16,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             function (data) {
                 console.log(data);
                 $scope.list = data.data.result;
-                $scope.bigTotalItems =  data.data.result.length-10;
+                $scope.bigTotalItems =  data.data.result.length;
             }, function () {
                 swal("信息错误!")
             });
@@ -117,9 +117,9 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

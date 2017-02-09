@@ -16,7 +16,8 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
             function (data) {
                 console.log(data);
                 $scope.arr = data;
-                $scope.bigTotalItems =  data.length-10;
+                console.log(data.length);
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 console.log(arguments)
             });
@@ -84,6 +85,8 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
             });
     };
     // 分页
+    // $scope.totalItems = 50;
+    $scope.currentPage = 1;
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
@@ -94,6 +97,6 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
     $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

@@ -22,7 +22,7 @@
         <td>状态</td>
         <td>批示意见</td>
     </tr>
-    <tr ng-repeat="obj in queryArr">
+    <tr ng-repeat="obj in queryArr|limitTo:10:zero">
         <td>{{obj.staff}}</td>
         <td>{{obj.staffOrgName}}</td>
         <td>{{obj.objeventType}}</td>
@@ -33,3 +33,5 @@
         <td>{{obj.auditContent}}</td>
     </tr>
 </table>
+<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
+

@@ -18,9 +18,23 @@ angular.module("myApp.controller").controller('queryCtrl', function ($scope, $st
         queryS.queryLity($scope.queryCtrlList)
             .then(function (suc) {
                 $scope.queryArr = suc.data.result;
+                $scope.bigTotalItems =  suc.data.result.length;
                 $.LoadingOverlay("hide")
             }, function () {
                 swal('接口出错了');
             })
     };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
+    }
 });

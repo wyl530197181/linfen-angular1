@@ -4,8 +4,8 @@
 angular.module("myApp.controller").controller('loginCtrl', function ($scope, loginUser) {
     $scope.user = {
         token: sessionStorage.getItem('token'),
-        name: '',
-        password: ''
+        name: 'yiyi',
+        password: '123456'
     };
     $scope.nameLogin = function () {
         if ($scope.user.name != '' && $scope.user.password != undefined) {

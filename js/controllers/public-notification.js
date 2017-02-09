@@ -8,14 +8,15 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         staff: '',
         page: 1,
         start: 0,
-        limit: 30
+        limit: 999
     };
     //刷新页面
     $scope.refresh = function () {
         public.publicData($scope.content).then(
             function (data) {
                 console.log(data);
-                $scope.tabArray = data
+                $scope.tabArray = data;
+                $scope.bigTotalItems =  data.length;
             }, function () {
                 console.log(arguments)
             });
@@ -120,19 +121,17 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
                 console.log(arguments)
             });
     };
-    $scope.revampSure=function () {
-        public.publicUpdate3({
-            token: sessionStorage.getItem('token'),
-            id: this.data.id
-        }).then(
-            function (data) {
-                console.log(data);
-                // $scope.title=data.title;
-                // $scope.staff=data.staff;
-                // $scope.content=data.content
-                $scope.search()
-            }, function () {
-                console.log(arguments)
-            });
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

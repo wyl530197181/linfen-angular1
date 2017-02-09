@@ -16,7 +16,7 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
                 function (success) {
                     console.log(success);
                     $scope.publicArr = success.data.result;
-                    $scope.bigTotalItems =  success.data.result.length-10;
+                    $scope.bigTotalItems =  success.data.result.length;
                     $.LoadingOverlay('hide');
                 },
                 function (error) {
@@ -162,9 +162,9 @@ angular.module("myApp.controller").controller('publicityCtrl', function ($scope,
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=1;
+    $scope.zero=0;
 
     $scope.paging=function () {
-        $scope.zero=10*this.bigCurrentPage
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

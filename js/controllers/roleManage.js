@@ -8,10 +8,11 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             token: sessionStorage.getItem('token'),
             page: 1,
             start: 0,
-            limit: 30
+            limit: 999
         }).then(function (data) {
             // console.log(data);
             $scope.roleManage = data.data.result;
+            $scope.bigTotalItems =  data.data.result.length;
         }, function () {
             swal("信息错误!")
         });
@@ -57,5 +58,18 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
                 page();
             }, 2000);
         });
+    };
+    // 分页
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=0;
+
+    $scope.paging=function () {
+        $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });

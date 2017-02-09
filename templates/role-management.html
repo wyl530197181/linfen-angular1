@@ -169,7 +169,7 @@
         <th>操作</th>
     </tr>
     </thead>
-    <tbody ng-repeat="role in roleManage">
+    <tbody ng-repeat="role in roleManage|limitTo:10:zero">
     <tr>
         <td>{{role.name}}</td>
         <td>
@@ -333,3 +333,4 @@
     </tr>
     </tbody>
 </table>
+<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
