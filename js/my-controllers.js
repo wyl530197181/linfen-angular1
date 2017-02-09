@@ -260,16 +260,18 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         token: sessionStorage.getItem('token'),
     };
     $scope.submit = function () {
-        UserList.userlist($scope.declare).then(
-            function (data) {
-                console.log(data);
-                swal("提交成功!", "", "success")
-            },
-            function () {
-                console.log(arguments);
-                swal("提交失败!信息不完整")
-            }
-        )
+        if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
+            UserList.userlist($scope.declare).then(
+                function (data) {
+                    console.log(data);
+                    swal("提交成功!", "", "success")
+                },
+                function () {
+                    console.log(arguments);
+                    swal("提交失败!信息不完整")
+                }
+            )
+        }
     }
 });
 /**
@@ -899,7 +901,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
     $scope.superviseUser = {
         token: sessionStorage.getItem('token'),
         staff: '',
-        superviseStatus: 1,
+        superviseStatus: -1,
         page: 1,
         start: 0,
         limit: 50
@@ -934,15 +936,6 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
     };
     //违纪登记
     $scope.discipline = function () {
-        Supervision.disciplineData({
-            token: sessionStorage.getItem('token'),
-            eventId: this.lists.id
-        }).then(
-            function (data) {
-                console.log(data);
-            }, function () {
-                swal("信息错误!")
-            });
         $scope.disciplineData = {
             token: sessionStorage.getItem('token'),
             eventId: this.lists.id,
@@ -955,6 +948,44 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             otherQuestion: '',//其他问题
             content: ''//意见内容
         }
+        Supervision.disciplineData({
+            token: sessionStorage.getItem('token'),
+            eventId: this.lists.id
+        }).then(
+            function (data) {
+                if(data.data.result!=null){
+                    // $scope.disciplineData.eventId=data.data.result.id;
+                    if(data.data.result.isCashGiftOutOfLimits==true){
+                        $scope.disciplineData.isCashGiftOutOfLimits='1';
+                    }else {
+                        $scope.disciplineData.isCashGiftOutOfLimits='0';
+                    }
+                    if(data.data.result.isUsePublicCar==true){
+                        $scope.disciplineData.isUsePublicCar='1';
+                    }else {
+                        $scope.disciplineData.isUsePublicCar='0';
+                    }
+                    if(data.data.result.isUsePublicGoods==true){
+                        $scope.disciplineData.isUsePublicGoods='1';
+                    }else {
+                        $scope.disciplineData.isUsePublicGoods='0';
+                    }
+                    if(data.data.result.isUsePublicAsserts==true){
+                        $scope.disciplineData.isUsePublicAsserts='1';
+                    }else {
+                        $scope.disciplineData.isUsePublicAsserts='0';
+                    }
+                    if(data.data.result.isUsePublicMoney==true){
+                        $scope.disciplineData.isUsePublicMoney='1';
+                    }else {
+                        $scope.disciplineData.isUsePublicMoney='0';
+                    }
+                    $scope.disciplineData.otherQuestion=data.data.result.otherQuestion;
+                    $scope.disciplineData.content=data.data.result.content;
+                }
+            }, function () {
+                swal("信息错误!")
+            });
     };
     $scope.disciplineConfirm = function () {
         Supervision.disciplineList($scope.disciplineData).then(

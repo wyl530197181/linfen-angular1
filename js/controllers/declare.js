@@ -37,15 +37,17 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
         token: sessionStorage.getItem('token'),
     };
     $scope.submit = function () {
-        UserList.userlist($scope.declare).then(
-            function (data) {
-                console.log(data);
-                swal("提交成功!", "", "success")
-            },
-            function () {
-                console.log(arguments);
-                swal("提交失败!信息不完整")
-            }
-        )
+        if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
+            UserList.userlist($scope.declare).then(
+                function (data) {
+                    console.log(data);
+                    swal("提交成功!", "", "success")
+                },
+                function () {
+                    console.log(arguments);
+                    swal("提交失败!信息不完整")
+                }
+            )
+        }
     }
 });
