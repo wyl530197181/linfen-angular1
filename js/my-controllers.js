@@ -620,20 +620,20 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
             }, function () {
                 console.log(arguments)
             });
-        // $scope.search()
+
         public.publicUpdate2({
             token: sessionStorage.getItem('token'),
-            id: this.data.id
-            // title: '',
-            // content: '',
-            // staff: '',
-            // staffOrgId: 1
+            id: this.data.id,
+            title: '',
+            content: '',
+            staff: '',
+            staffOrgId: 1
         }).then(
             function (data) {
                 console.log(data);
-                $scope.title = data.title;
-                $scope.staff = data.staff;
-                $scope.content = data.content
+                $scope.title = addData.title;
+                $scope.staff = addData.staff;
+                $scope.content = addData.content
             }, function () {
                 console.log(arguments)
             });
@@ -652,6 +652,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         $scope.zero=(this.bigCurrentPage-1)*10;
     }
 });
+
 /**
  * Created by bobo on 17-2-8.
  */
@@ -1143,6 +1144,11 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             });
     };
     //现场监督--已监督
+    $scope.superviseChange=function () {
+        console.log(this);
+        $scope.superviseUser.superviseStatus = this.superviseUser.superviseStatus;
+        console.log($scope.superviseUser.superviseStatus);
+    };
     $scope.query = function () {
         refresh();
     };

@@ -103,6 +103,11 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             });
     };
     //现场监督--已监督
+    $scope.superviseChange=function () {
+        console.log(this);
+        $scope.superviseUser.superviseStatus = this.superviseUser.superviseStatus;
+        console.log($scope.superviseUser.superviseStatus);
+    };
     $scope.query = function () {
         refresh();
     };

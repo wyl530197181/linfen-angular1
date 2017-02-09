@@ -4,8 +4,8 @@
     <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
             <label>申报人:</label>
-            <input type="text" class="form-control">
-            <select class="form-control">
+            <input type="text" class="form-control" ng-model="superviseUser.staff">
+            <select class="form-control" ng-change="superviseChange()" ng-model="superviseUser.superviseStatus" ng-init="superviseUser.superviseStatus='-1'">
                 <option value="-1">未监督</option>
                 <option value="1">已监督</option>
             </select>
