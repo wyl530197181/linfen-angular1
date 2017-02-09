@@ -25,7 +25,7 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody ng-repeat="lists in list">
+        <tbody ng-repeat="lists in list|limitTo:10:zero">
         <tr>
             <td>{{lists.staff}}</td>
             <td>{{lists.staffOrgName}}</td>
@@ -167,5 +167,5 @@
         </tbody>
     </table>
     <h4>Default</h4>
-    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
 </div>

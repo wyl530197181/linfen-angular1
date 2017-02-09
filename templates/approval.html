@@ -94,14 +94,6 @@
         </tr>
         </tbody>
     </table>
-    <!--分页-->
-    <!--<nav id="pagenav" style="text-align: center">-->
-        <!--<ul class="pagination pagination-lg">-->
-            <!--<li ng-click="previous()"><a>&laquo;</a></li>-->
-            <!--<li  ng-class="{true:'currentStep',false:'step'}[num==currentPage]" ng-repeat="num in numArry|limitTo:5"-->
-                <!--ng-click="changePage(num)"><span>{{num+1}}</span></li>-->
-            <!--<li ng-click="next()"><a>&raquo;</a></li>-->
-        <!--</ul>-->
-    <!--</nav>-->
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
 </div>
 

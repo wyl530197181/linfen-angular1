@@ -929,12 +929,14 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         superviseStatus: -1,
         page: 1,
         start: 0,
-        limit: 50
+        limit: 9999
     };
     var refresh = function () {
         Supervision.supervisionList($scope.superviseUser).then(
             function (data) {
+                console.log(data);
                 $scope.list = data.data.result;
+                $scope.bigTotalItems =  data.data.result.length-10;
             }, function () {
                 swal("信息错误!")
             });
@@ -1032,8 +1034,14 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         $scope.currentPage = pageNo;
     };
     $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
+
     $scope.bigCurrentPage = 1;
+
+    $scope.zero=1;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
 /**
  * Created by bobo on 17-2-8.

@@ -184,4 +184,19 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     //
     //     }
     // }
+    $scope.totalItems = 50;
+    $scope.currentPage = 1;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.maxSize = 5;
+
+    $scope.bigCurrentPage = 1;
+
+    $scope.zero=1;
+
+    $scope.paging=function () {
+        $scope.zero=10*this.bigCurrentPage
+    }
 });
