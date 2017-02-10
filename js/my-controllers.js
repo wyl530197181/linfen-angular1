@@ -6,8 +6,6 @@ angular.module("myApp.controller",[]);
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('approvalCtrl', function ($scope, $state, approval) {
-
-
     $scope.approvallist = {
         token: sessionStorage.getItem('token'),
         staff: '',
@@ -108,9 +106,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         console.log($scope.dataId);
         $scope.confirmLists.eventId = $scope.dataId;
         $scope.confirmLists.status = $scope.dataType;
-        approval.confirmList(
-            $scope.confirmLists
-        ).then(
+        approval.confirmList($scope.confirmLists).then(
             function (data) {
                 $.LoadingOverlay('hide');
                 console.log(data);
@@ -163,31 +159,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
             );
     };
     //分页
-    // function Page(pagearr) {
-    //     $scope.length = pagearr.length;
-    //
-    //     $scope.numArry = [];
-    //     for (var i = 0; i < $scope.length; i++) {
-    //         $scope.numArry.push(i)
-    //     }
-    //     console.log($scope.numArry);
-    //     $scope.currentPage = 0;
-    //     $scope.changePage = function (num) {
-    //         console.log(num);
-    //         $scope.currentPage = num;
-    //     };
-    //     $scope.previous = function () {
-    //         if ($scope.currentPage > 1) {
-    //             $scope.currentPage--;
-    //         }
-    //     };
-    //     $scope.next = function () {
-    //         console.log($scope.length);
-    //         if ($scope.currentPage < $scope.length)
-    //             $scope.currentPage++;
-    //
-    //     }
-    // }
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
@@ -1072,8 +1043,8 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         });
         Supervision.supervisionList($scope.superviseUser).then(
             function (data) {
-                console.log(data);
-                $.LoadingOverlay("hide")
+                // console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.list = data.data.result;
                 $scope.bigTotalItems =  data.data.result.length;
             }, function () {
@@ -1081,6 +1052,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             });
     };
     refresh();
+    //监督报告
     $scope.supervise = function () {
         $scope.determine = {
             title: '',
@@ -1088,17 +1060,28 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             token: sessionStorage.getItem('token'),
             eventId: this.lists.id
         };
+        Supervision.getSupervision({
+            token: sessionStorage.getItem('token'),
+            eventId:this.lists.id
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.data.result!=null){
+                    $scope.determine.title=data.data.result.title;
+                    $scope.determine.content=data.data.result.content;
+                }
+            }, function () {
+                swal("信息错误!")
+            });
     };
-    //监督报告
     $scope.reportConfirm = function () {
-        console.log($scope.determine);
+        // console.log($scope.determine);
         Supervision.superviseReport($scope.determine).then(
             function (data) {
                 refresh();
             }, function () {
                 swal("信息错误!")
             });
-
     };
     //违纪登记
     $scope.discipline = function () {
@@ -1113,7 +1096,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             attachmentFileCode: '',//附件
             otherQuestion: '',//其他问题
             content: ''//意见内容
-        }
+        };
         Supervision.disciplineData({
             token: sessionStorage.getItem('token'),
             eventId: this.lists.id
@@ -1171,18 +1154,12 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         refresh();
     };
     //分页
-    $scope.totalItems = 50;
-    $scope.currentPage = 1;
-
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
     $scope.maxSize = 5;
-
     $scope.bigCurrentPage = 1;
-
     $scope.zero=0;
-
     $scope.paging=function () {
         $scope.zero=(this.bigCurrentPage-1)*10;
     }

@@ -21,16 +21,16 @@ gulp.task('concat-services', function () {
         .pipe(gulp.dest('js'));
 });
 //监听变动
-gulp.task('watch', ['concat-controllers'],function(){
-   var watcher= gulp.watch('js/controllers/*.js', ['concat-controllers']);
+gulp.task('watch', ['concat-controllers','concat-services'],function(){
+   var watcher= gulp.watch(['js/controllers/*.js','js/services/*.js'], ['concat-controllers','concat-services']);
     watcher.on( 'change',function(event){
         console.log('Controller ' + event.path);
     });
 });
 
-gulp.task('watch', ['concat-services'],function(){
-    var watcher= gulp.watch('js/services/*.js', ['concat-services']);
-    watcher.on( 'change',function(event){
-        console.log('Controller ' + event.path);
-    });
-});
+// gulp.task('watch', [],function(){
+//     var watcher= gulp.watch('js/services/*.js', ['concat-services']);
+//     watcher.on( 'change',function(event){
+//         console.log('Controller ' + event.path);
+//     });
+// });

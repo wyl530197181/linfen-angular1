@@ -33,7 +33,7 @@
             <td>{{lists.peopleCount}}</td>
             <td>{{lists.createTime}}</td>
             <td>{{lists.eventDate}}</td>
-            <td>{{lists.superviseStatus==null?'未监督':'已监督'}}</td>
+            <td>{{lists.eventSuperviseReportId==null?'未监督':'已监督'}}</td>
             <td>
                 <!--监督报告弹框-->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="supervise()">

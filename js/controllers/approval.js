@@ -2,8 +2,6 @@
  * Created by bobo on 17-2-8.
  */
 angular.module("myApp.controller").controller('approvalCtrl', function ($scope, $state, approval) {
-
-
     $scope.approvallist = {
         token: sessionStorage.getItem('token'),
         staff: '',
@@ -104,9 +102,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
         console.log($scope.dataId);
         $scope.confirmLists.eventId = $scope.dataId;
         $scope.confirmLists.status = $scope.dataType;
-        approval.confirmList(
-            $scope.confirmLists
-        ).then(
+        approval.confirmList($scope.confirmLists).then(
             function (data) {
                 $.LoadingOverlay('hide');
                 console.log(data);
@@ -159,31 +155,6 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
             );
     };
     //分页
-    // function Page(pagearr) {
-    //     $scope.length = pagearr.length;
-    //
-    //     $scope.numArry = [];
-    //     for (var i = 0; i < $scope.length; i++) {
-    //         $scope.numArry.push(i)
-    //     }
-    //     console.log($scope.numArry);
-    //     $scope.currentPage = 0;
-    //     $scope.changePage = function (num) {
-    //         console.log(num);
-    //         $scope.currentPage = num;
-    //     };
-    //     $scope.previous = function () {
-    //         if ($scope.currentPage > 1) {
-    //             $scope.currentPage--;
-    //         }
-    //     };
-    //     $scope.next = function () {
-    //         console.log($scope.length);
-    //         if ($scope.currentPage < $scope.length)
-    //             $scope.currentPage++;
-    //
-    //     }
-    // }
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };

@@ -18,8 +18,8 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         });
         Supervision.supervisionList($scope.superviseUser).then(
             function (data) {
-                console.log(data);
-                $.LoadingOverlay("hide")
+                // console.log(data);
+                $.LoadingOverlay("hide");
                 $scope.list = data.data.result;
                 $scope.bigTotalItems =  data.data.result.length;
             }, function () {
@@ -27,6 +27,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             });
     };
     refresh();
+    //监督报告
     $scope.supervise = function () {
         $scope.determine = {
             title: '',
@@ -34,17 +35,28 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             token: sessionStorage.getItem('token'),
             eventId: this.lists.id
         };
+        Supervision.getSupervision({
+            token: sessionStorage.getItem('token'),
+            eventId:this.lists.id
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.data.result!=null){
+                    $scope.determine.title=data.data.result.title;
+                    $scope.determine.content=data.data.result.content;
+                }
+            }, function () {
+                swal("信息错误!")
+            });
     };
-    //监督报告
     $scope.reportConfirm = function () {
-        console.log($scope.determine);
+        // console.log($scope.determine);
         Supervision.superviseReport($scope.determine).then(
             function (data) {
                 refresh();
             }, function () {
                 swal("信息错误!")
             });
-
     };
     //违纪登记
     $scope.discipline = function () {
@@ -59,7 +71,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
             attachmentFileCode: '',//附件
             otherQuestion: '',//其他问题
             content: ''//意见内容
-        }
+        };
         Supervision.disciplineData({
             token: sessionStorage.getItem('token'),
             eventId: this.lists.id
@@ -117,18 +129,12 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
         refresh();
     };
     //分页
-    $scope.totalItems = 50;
-    $scope.currentPage = 1;
-
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };
     $scope.maxSize = 5;
-
     $scope.bigCurrentPage = 1;
-
     $scope.zero=0;
-
     $scope.paging=function () {
         $scope.zero=(this.bigCurrentPage-1)*10;
     }
