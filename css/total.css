@@ -54,5 +54,5 @@ table td{
     /*文本溢出部分用省略号代替*/
     text-overflow: ellipsis;
     /*文本超出部分不换行*/
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }

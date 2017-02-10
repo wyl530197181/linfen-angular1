@@ -1,7 +1,7 @@
 /**
  * Created by bobo on 17-2-8.
  */
-angular.module("myApp.controller") .controller('userManageCtrl', function ($scope, userManage) {
+angular.module("myApp.controller").controller('userManageCtrl', function ($scope, userManage) {
     //公开通报展示数据
     $scope.refresh = function () {
         $.LoadingOverlay("show", {
@@ -19,14 +19,22 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
                 $.LoadingOverlay("hide");
                 // console.log(data);
                 $scope.tabArray = data;
-                $scope.bigTotalItems =  data.length;
+                $scope.bigTotalItems = data.length;
             }, function () {
                 // console.log(arguments)
             });
     };
     $scope.refresh();
     $scope.revise = function () {
-        console.log(this);
+        // console.log(this);
+        $scope.updateParams = {
+            token: sessionStorage.getItem('token'),
+            userId: this.obj.id,
+            orgId: 1,
+            roleId: 1,
+            name: '',
+            password: ''
+        };
         userManage.reviseList1({
             token: sessionStorage.getItem('token'),
             userId: this.obj.id
@@ -34,7 +42,6 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             function (data) {
                 // console.log(data);
             }, function () {
-                // console.log(arguments)
             });
         userManage.reviseList2({
             token: sessionStorage.getItem('token'),
@@ -51,31 +58,21 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
         }).then(
             function (data) {
                 console.log(data);
-                $scope.name = data.name;
-                $scope.userName = data.username;
-                // $scope.roleName=data.role.functions;
+                $scope.updateParams.name=data.name;
+                $scope.userName = data.username;//用户名
             }, function () {
-                // console.log(arguments)
             });
     };
 
+
     $scope.confirm = function () {
-        console.log($scope.name);
-        userManage.confirmList({
-            token: sessionStorage.getItem('token'),
-            userId: this.obj.id,
-            orgId: 1,
-            roleId: 1,
-            name:$scope.name,
-            // this.obj.username,
-            password: ''
-        }).then(
+
+        userManage.confirmList($scope.updateParams).then(
             function (data) {
                 console.log(data);
+                $scope.refresh();
             }, function () {
-                // console.log(arguments)
             });
-        $scope.refresh();
     };
     $scope.delete = function () {
         console.log(this);
@@ -87,7 +84,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             userManage.deleteList(data).then(function (data) {
                 console.log(data);
             }, function () {
-                alert('信息有误')
+                swal('信息有误')
             });
         };
         swal({
@@ -96,7 +93,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             showCancelButton: true,
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
-            cancelButtonText:'取消'
+            cancelButtonText: '取消'
         }, function () {
             setTimeout(function () {
                 delData();
@@ -129,7 +126,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
         token: sessionStorage.getItem('token'),
         orgId: 1,
         username: '',
-        roleId: '',
+        roleId: '266',
         name: '',
         password: ''
     };
@@ -150,9 +147,9 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=0;
+    $scope.zero = 0;
 
-    $scope.paging=function () {
-        $scope.zero=(this.bigCurrentPage-1)*10;
+    $scope.paging = function () {
+        $scope.zero = (this.bigCurrentPage - 1) * 10;
     }
 });

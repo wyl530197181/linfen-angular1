@@ -16,7 +16,7 @@
                 <input type="text" class="form-control" ng-model="addData.name">
                 <br>
                 <label>姓名：</label>
-                <input type="text" class="form-control" ng-model="addData.userName">
+                <input type="text" class="form-control" ng-model="addData.username">
                 <br>
                 <label>部门：</label>
                 <select class="form-control select-width">
@@ -50,8 +50,8 @@
         <td>操作</td>
     </tr>
     <tr ng-repeat="obj in tabArray|limitTo:10:zero">
-        <td>{{obj.name}}</td>
         <td>{{obj.username}}</td>
+        <td>{{obj.name}}</td>
         <td>{{obj.orgName}}</td>
         <td>
             <button type="button" class="btn btn-primary "
@@ -72,10 +72,10 @@
                         <div class="modal-body">
                             <div style="padding:10px">
                                 <label>用户名:</label>
-                                <input type="text" class="form-control" ng-model="name">
+                                <input type="text" class="form-control" ng-model=userName>
                                 <br>
                                 <label>姓名：</label>
-                                <input type="text" class="form-control" ng-model="userName">
+                                <input type="text" class="form-control" ng-model=updateParams.name>
                                 <br>
                                 <label>部门：</label>
                                 <select style="width: 100%" class="form-control">

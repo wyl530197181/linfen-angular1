@@ -37,9 +37,8 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
-                $scope.bigTotalItems =  suc.data.result.length;
+                $scope.bigTotalItems = suc.data.result.length;
                 $.LoadingOverlay("hide")
-
             }, function () {
                 swal('接口出错了');
             });
@@ -51,10 +50,10 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
 
         $scope.bigCurrentPage = 1;
 
-        $scope.zero=0;
+        $scope.zero = 0;
 
-        $scope.paging=function () {
-            $scope.zero=(this.bigCurrentPage-1)*10;
+        $scope.paging = function () {
+            $scope.zero = (this.bigCurrentPage - 1) * 10;
         }
     };
 

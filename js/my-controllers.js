@@ -42,17 +42,15 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     };
     //审批通过
     $scope.dataId = '';
-    $scope.dataType = '';
     $scope.pass = function () {
         console.log(this);
         $scope.confirmLists.content = '';
         $scope.dataId = this.obj.id;
-        $scope.dataType = this.obj.eventType;
         approval.passList(
             {
                 token: sessionStorage.getItem('token'),
                 eventId: $scope.dataId,
-                status: $scope.dataType
+                status: 1
             }
         ).then(
             function (bb) {
@@ -64,23 +62,21 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                 }
             },
             function () {
+
             }
         );
     };
-
     //审批拒绝
     $scope.dataIds = '';
-    $scope.dataTypes = '';
     $scope.reject = function () {
         console.log(this);
         $scope.rejectLists.content = '';
         $scope.dataIds = this.obj.id;
-        $scope.dataTypes = this.obj.eventType;
         approval.rejectList(
             {
                 token: sessionStorage.getItem('token'),
                 eventId: $scope.dataIds,
-                status: $scope.dataTypes
+                status: 2
             }
         ).then(
             function (data) {
@@ -99,14 +95,15 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     $scope.confirmLists = {
         token: sessionStorage.getItem('token'),
         eventId: '',
-        status: '',
+        status: 1,
         content: ''
     };
     $scope.confirm = function () {
+        $('#myModal').modal('hide');
         console.log($scope.dataId);
         $scope.confirmLists.eventId = $scope.dataId;
-        $scope.confirmLists.status = $scope.dataType;
-        approval.confirmList($scope.confirmLists).then(
+        approval.confirmList($scope.confirmLists)
+       .then(
             function (data) {
                 $.LoadingOverlay('hide');
                 console.log(data);
@@ -124,19 +121,20 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
             },
             function () {
             }
-        );
+        )
 
     };
     //拒绝模态框
     $scope.rejectLists = {
         token: sessionStorage.getItem('token'),
         eventId: '',
-        status: '',
+        status: 2,
         content: ''
     };
     $scope.rejects = function () {
+
         $scope.rejectLists.eventId = $scope.dataIds;
-        $scope.rejectLists.status = $scope.dataTypes;
+        // $scope.rejectLists.status = $scope.dataTypes;
         approval.confirmList($scope.rejectLists)
             .then(
                 function (data) {
@@ -153,6 +151,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                             closeOnConfirm: false
                         }
                     );
+                    $('#myModals').modal('hide');
                 },
                 function () {
                 }
@@ -211,9 +210,8 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
             .then(function (suc) {
                 console.log(suc);
                 $scope.com_queryyArr = suc.data.result;
-                $scope.bigTotalItems =  suc.data.result.length;
+                $scope.bigTotalItems = suc.data.result.length;
                 $.LoadingOverlay("hide")
-
             }, function () {
                 swal('接口出错了');
             });
@@ -225,10 +223,10 @@ angular.module("myApp.controller").controller('combination-queryCtrl', function 
 
         $scope.bigCurrentPage = 1;
 
-        $scope.zero=0;
+        $scope.zero = 0;
 
-        $scope.paging=function () {
-            $scope.zero=(this.bigCurrentPage-1)*10;
+        $scope.paging = function () {
+            $scope.zero = (this.bigCurrentPage - 1) * 10;
         }
     };
 
@@ -1167,7 +1165,7 @@ angular.module("myApp.controller").controller('supervisionCtrl', function ($scop
 /**
  * Created by bobo on 17-2-8.
  */
-angular.module("myApp.controller") .controller('userManageCtrl', function ($scope, userManage) {
+angular.module("myApp.controller").controller('userManageCtrl', function ($scope, userManage) {
     //公开通报展示数据
     $scope.refresh = function () {
         $.LoadingOverlay("show", {
@@ -1185,14 +1183,22 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
                 $.LoadingOverlay("hide");
                 // console.log(data);
                 $scope.tabArray = data;
-                $scope.bigTotalItems =  data.length;
+                $scope.bigTotalItems = data.length;
             }, function () {
                 // console.log(arguments)
             });
     };
     $scope.refresh();
     $scope.revise = function () {
-        console.log(this);
+        // console.log(this);
+        $scope.updateParams = {
+            token: sessionStorage.getItem('token'),
+            userId: this.obj.id,
+            orgId: 1,
+            roleId: 1,
+            name: '',
+            password: ''
+        };
         userManage.reviseList1({
             token: sessionStorage.getItem('token'),
             userId: this.obj.id
@@ -1200,7 +1206,6 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             function (data) {
                 // console.log(data);
             }, function () {
-                // console.log(arguments)
             });
         userManage.reviseList2({
             token: sessionStorage.getItem('token'),
@@ -1217,31 +1222,21 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
         }).then(
             function (data) {
                 console.log(data);
-                $scope.name = data.name;
-                $scope.userName = data.username;
-                // $scope.roleName=data.role.functions;
+                $scope.updateParams.name=data.name;
+                $scope.userName = data.username;//用户名
             }, function () {
-                // console.log(arguments)
             });
     };
 
+
     $scope.confirm = function () {
-        console.log($scope.name);
-        userManage.confirmList({
-            token: sessionStorage.getItem('token'),
-            userId: this.obj.id,
-            orgId: 1,
-            roleId: 1,
-            name:$scope.name,
-            // this.obj.username,
-            password: ''
-        }).then(
+
+        userManage.confirmList($scope.updateParams).then(
             function (data) {
                 console.log(data);
+                $scope.refresh();
             }, function () {
-                // console.log(arguments)
             });
-        $scope.refresh();
     };
     $scope.delete = function () {
         console.log(this);
@@ -1253,7 +1248,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             userManage.deleteList(data).then(function (data) {
                 console.log(data);
             }, function () {
-                alert('信息有误')
+                swal('信息有误')
             });
         };
         swal({
@@ -1262,7 +1257,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
             showCancelButton: true,
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
-            cancelButtonText:'取消'
+            cancelButtonText: '取消'
         }, function () {
             setTimeout(function () {
                 delData();
@@ -1295,7 +1290,7 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
         token: sessionStorage.getItem('token'),
         orgId: 1,
         username: '',
-        roleId: '',
+        roleId: '266',
         name: '',
         password: ''
     };
@@ -1316,9 +1311,9 @@ angular.module("myApp.controller") .controller('userManageCtrl', function ($scop
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=0;
+    $scope.zero = 0;
 
-    $scope.paging=function () {
-        $scope.zero=(this.bigCurrentPage-1)*10;
+    $scope.paging = function () {
+        $scope.zero = (this.bigCurrentPage - 1) * 10;
     }
 });

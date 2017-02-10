@@ -38,17 +38,15 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     };
     //审批通过
     $scope.dataId = '';
-    $scope.dataType = '';
     $scope.pass = function () {
         console.log(this);
         $scope.confirmLists.content = '';
         $scope.dataId = this.obj.id;
-        $scope.dataType = this.obj.eventType;
         approval.passList(
             {
                 token: sessionStorage.getItem('token'),
                 eventId: $scope.dataId,
-                status: $scope.dataType
+                status: 1
             }
         ).then(
             function (bb) {
@@ -60,23 +58,21 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                 }
             },
             function () {
+
             }
         );
     };
-
     //审批拒绝
     $scope.dataIds = '';
-    $scope.dataTypes = '';
     $scope.reject = function () {
         console.log(this);
         $scope.rejectLists.content = '';
         $scope.dataIds = this.obj.id;
-        $scope.dataTypes = this.obj.eventType;
         approval.rejectList(
             {
                 token: sessionStorage.getItem('token'),
                 eventId: $scope.dataIds,
-                status: $scope.dataTypes
+                status: 2
             }
         ).then(
             function (data) {
@@ -95,14 +91,15 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
     $scope.confirmLists = {
         token: sessionStorage.getItem('token'),
         eventId: '',
-        status: '',
+        status: 1,
         content: ''
     };
     $scope.confirm = function () {
+        $('#myModal').modal('hide');
         console.log($scope.dataId);
         $scope.confirmLists.eventId = $scope.dataId;
-        $scope.confirmLists.status = $scope.dataType;
-        approval.confirmList($scope.confirmLists).then(
+        approval.confirmList($scope.confirmLists)
+       .then(
             function (data) {
                 $.LoadingOverlay('hide');
                 console.log(data);
@@ -120,19 +117,20 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
             },
             function () {
             }
-        );
+        )
 
     };
     //拒绝模态框
     $scope.rejectLists = {
         token: sessionStorage.getItem('token'),
         eventId: '',
-        status: '',
+        status: 2,
         content: ''
     };
     $scope.rejects = function () {
+
         $scope.rejectLists.eventId = $scope.dataIds;
-        $scope.rejectLists.status = $scope.dataTypes;
+        // $scope.rejectLists.status = $scope.dataTypes;
         approval.confirmList($scope.rejectLists)
             .then(
                 function (data) {
@@ -149,6 +147,7 @@ angular.module("myApp.controller").controller('approvalCtrl', function ($scope, 
                             closeOnConfirm: false
                         }
                     );
+                    $('#myModals').modal('hide');
                 },
                 function () {
                 }

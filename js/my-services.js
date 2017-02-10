@@ -731,7 +731,7 @@ angular.module('myApp.service').factory('userManage', function ($http, $q) {
                     deferred.reject(e);
                 });
             return deferred.promise;
-        },
+        }
 
     };
 
