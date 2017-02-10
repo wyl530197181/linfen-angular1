@@ -70,7 +70,38 @@
             <span>{{data.createTime}}</span>
         </td>
         <td>
-            <button class="btn btn-primary" ng-click="revamp()">修改</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" ng-click="revamp()">
+                修改
+            </button>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>
+                        <div  class="modal-border">
+                            <label>标题:</label>
+                            <input type="text" class="form-control" ng-model="diaciplinaryUpdate.title">
+                            <br>
+                            <label>人员：</label>
+                            <input type="text" class="form-control" ng-model="diaciplinaryUpdate.staff">
+                            <br>
+                            <label>部门：</label>
+                            <select class="form-control select-width">
+                                <option>根组织</option>
+                            </select>
+                            <br><br>
+                            <label>内容：</label>
+                            <textarea cols="90" rows="4" ng-model="diaciplinaryUpdate.content"></textarea>
+                            <button class="btn btn-default btn-width" ng-click="revampSure()">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="btn btn-danger" ng-click="remove()">删除</button>
         </td>
     </tr>

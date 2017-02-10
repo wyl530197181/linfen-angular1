@@ -293,7 +293,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
  */
 angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', function ($scope, diaciplinary) {
     //纪律处分展示接口
-    $scope.content={
+    $scope.content = {
         token: sessionStorage.getItem('token'),
         staff: '',
         page: 1,
@@ -312,14 +312,14 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
                 $.LoadingOverlay("hide");
                 $scope.arr = data;
                 console.log(data.length);
-                $scope.bigTotalItems =  data.length;
+                $scope.bigTotalItems = data.length;
             }, function () {
                 console.log(arguments)
             });
     };
     $scope.refresh();
     //纪律处分查询数据
-    $scope.search=function () {
+    $scope.search = function () {
         $scope.refresh()
     };
     //纪律处分添加数据
@@ -379,6 +379,45 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
                 }, 2000)
             });
     };
+    //纪律处分修改数据
+    $scope.diaciplinaryUpdate = {
+        token: sessionStorage.getItem('token'),
+        id: '',
+        title: '',
+        content: '',
+        staff: '',
+        staffOrgId: 1
+    };
+    $scope.revamp = function () {
+        console.log(this.data.id);
+        $scope.diaciplinaryUpdate.id = this.data.id;
+        $('#myModal1').modal('hide');
+        diaciplinary.diaciplinaryUpdate($scope.diaciplinaryUpdate).then(
+            function (data) {
+                console.log(data);
+                if (data.data.success) {
+                        $scope.diaciplinaryUpdate.title = data.data.result.title,
+                        $scope.diaciplinaryUpdate.staff = data.data.result.staff,
+                        $scope.diaciplinaryUpdate.content = data.data.result.content
+                }
+            }, function () {
+                console.log(arguments)
+            });
+    };
+    //修改模态中的确认
+    $scope.revampSure = function () {
+        console.log(this.data.id);
+        $scope.diaciplinaryUpdate.id = this.data.id;
+        diaciplinary.diaciplinaryUpdate1($scope.diaciplinaryUpdate).then(
+            function (data) {
+                console.log(data);
+                $('#myModal').modal('hide');
+                swal("修改成功!", "", "success");
+                $scope.refresh()
+            }, function () {
+                console.log(arguments)
+            });
+    };
     // 分页
     // $scope.totalItems = 50;
     $scope.currentPage = 1;
@@ -389,10 +428,10 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
 
     $scope.bigCurrentPage = 1;
 
-    $scope.zero=0;
+    $scope.zero = 0;
 
-    $scope.paging=function () {
-        $scope.zero=(this.bigCurrentPage-1)*10;
+    $scope.paging = function () {
+        $scope.zero = (this.bigCurrentPage - 1) * 10;
     }
 });
 /**
@@ -579,39 +618,40 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
 
     };
     //公开通报修改数据
+    $scope.publicUpdate= {
+        token: sessionStorage.getItem('token'),
+        id: '',
+        title: '',
+        content: '',
+        staff: '',
+        staffOrgId: 1
+    };
     $scope.revamp = function () {
-        console.log(this);
-        // $('#myModal1').modal('show');
-        public.publicUpdate({
-            token: sessionStorage.getItem('token')
-            // id: this.data.id
-            // title: '',
-            // content: '',
-            // staff: '',
-            // staffOrgId: 1
-        }).then(
+        console.log(this.data.id);
+        $scope.publicUpdate.id = this.data.id;
+        $('#myModal1').modal('hide');
+        public.publicUpdate($scope.publicUpdate).then(
             function (data) {
                 console.log(data);
-                // $scope.title=data.title;
-                // $scope.staff=data.staff;
-                // $scope.content=data.content
+                if(data.data.success){
+                    $scope.publicUpdate.title=data.data.result.title,
+                    $scope.publicUpdate.staff=data.data.result.staff,
+                    $scope.publicUpdate.content=data.data.result.content
+                }
             }, function () {
                 console.log(arguments)
             });
-
-        public.publicUpdate2({
-            token: sessionStorage.getItem('token'),
-            id: this.data.id,
-            title: '',
-            content: '',
-            staff: '',
-            staffOrgId: 1
-        }).then(
+    };
+    //修改模态中的确认
+    $scope.revampSure = function () {
+        console.log(this.data.id);
+        $scope.publicUpdate.id = this.data.id;
+        public.publicUpdate1($scope.publicUpdate).then(
             function (data) {
                 console.log(data);
-                $scope.title = addData.title;
-                $scope.staff = addData.staff;
-                $scope.content = addData.content
+                $('#myModal').modal('hide');
+                swal("修改成功!", "", "success");
+                $scope.refresh()
             }, function () {
                 console.log(arguments)
             });
