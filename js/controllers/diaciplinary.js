@@ -121,7 +121,7 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
         diaciplinary.diaciplinaryUpdate1($scope.diaciplinaryUpdate).then(
             function (data) {
                 console.log(data);
-                $('#myModal').modal('hide');
+                $('#myModal1').modal('hide');
                 swal("修改成功!", "", "success");
                 $scope.refresh()
             }, function () {

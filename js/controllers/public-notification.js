@@ -120,7 +120,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         public.publicUpdate1($scope.publicUpdate).then(
             function (data) {
                 console.log(data);
-                $('#myModal').modal('hide');
+                $('#myModal1').modal('hide');
                 swal("修改成功!", "", "success");
                 $scope.refresh()
             }, function () {

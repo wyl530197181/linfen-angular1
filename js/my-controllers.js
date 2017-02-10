@@ -411,7 +411,7 @@ angular.module("myApp.controller").controller('diaciplinary-treatmentCtrl', func
         diaciplinary.diaciplinaryUpdate1($scope.diaciplinaryUpdate).then(
             function (data) {
                 console.log(data);
-                $('#myModal').modal('hide');
+                $('#myModal1').modal('hide');
                 swal("修改成功!", "", "success");
                 $scope.refresh()
             }, function () {
@@ -649,7 +649,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         public.publicUpdate1($scope.publicUpdate).then(
             function (data) {
                 console.log(data);
-                $('#myModal').modal('hide');
+                $('#myModal1').modal('hide');
                 swal("修改成功!", "", "success");
                 $scope.refresh()
             }, function () {
