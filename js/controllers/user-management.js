@@ -31,7 +31,7 @@ angular.module("myApp.controller").controller('userManageCtrl', function ($scope
             token: sessionStorage.getItem('token'),
             userId: this.obj.id,
             orgId: 1,
-            roleId: 1,
+            roleId: '',
             name: '',
             password: ''
         };
@@ -49,6 +49,7 @@ angular.module("myApp.controller").controller('userManageCtrl', function ($scope
         }).then(
             function (data) {
                 console.log(data);
+                $scope.arry=data;
             }, function () {
                 console.log(arguments)
             });
@@ -64,7 +65,9 @@ angular.module("myApp.controller").controller('userManageCtrl', function ($scope
             });
     };
 
-
+$scope.selectRevise=function (arr) {
+    $scope.updateParams.roleId=arr;
+};
     $scope.confirm = function () {
 
         userManage.confirmList($scope.updateParams).then(
@@ -104,6 +107,10 @@ angular.module("myApp.controller").controller('userManageCtrl', function ($scope
         });
     };
     $scope.add = function () {
+        $scope.addData.username='';
+        $scope.addData.name='';
+        $scope.addData.password='';
+        passwordagain='';
         userManage.reviseList1({
             token: sessionStorage.getItem('token')
         }).then(
@@ -118,26 +125,42 @@ angular.module("myApp.controller").controller('userManageCtrl', function ($scope
         }).then(
             function (data) {
                 console.log(data);
+                $scope.arr=data;
+                $scope.length=$scope.arr.length;
+                console.log($scope.arr.length)
             }, function () {
-                // console.log(arguments)
             });
     };
+    $scope.selectAdd=function (roleId) {
+        $scope.addData.roleId=roleId;
+
+    };
     $scope.addData = {
+
         token: sessionStorage.getItem('token'),
         orgId: 1,
         username: '',
-        roleId: '266',
+        roleId: '',
         name: '',
         password: ''
     };
     $scope.confirms = function () {
-        userManage.confirmLists($scope.addData).then(
-            function (data) {
-                console.log(data);
-            }, function () {
-                // console.log(arguments)
-            });
-        $scope.refresh();
+        $('#myModal').modal('hide');
+        console.log( $scope.addData.username);
+        if ( $scope.addData.username !=''&& $scope.addData.name !=''
+            && $scope.addData.password !=''&&$scope.addData.roldId !=''){
+            userManage.confirmLists($scope.addData).then(
+                function (data) {
+                    console.log(data);
+                    console.log($scope.addData.roleId);
+                    $scope.refresh();
+                }, function () {
+                });
+
+        }
+        else {
+            swal("提交失败!信息不完整")
+        }
     };
     // 分页
     $scope.setPage = function (pageNo) {

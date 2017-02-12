@@ -41,7 +41,7 @@ angular.module("myApp.controller").controller('declareCtrl', function ($scope, U
     };
     $scope.submit = function () {
 
-        if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&&$scope.declare.location!=''&&$scope.declare.carSource!=''){
+        if($scope.declare.staff!=''&&$scope.declare.staffPhone!=''&& $scope.declare.location!=''&&$scope.declare.carSource!=''){
             UserList.userlist($scope.declare).then(
                 function (data) {
                     console.log(data);

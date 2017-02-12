@@ -12,29 +12,42 @@
                 <h4 class="modal-title" id="myModalLabel">添加用户</h4>
             </div>
             <div class="modal-border">
+                <form  name="addForm" novalidate>
+                    <div ng-class="{'has-success':!addForm.userName.$dirty&&!addForm.userName.$error.required,'has-error':addForm.userName.$error.required&&addForm.$submitted}">
                 <label>用户名:</label>
-                <input type="text" class="form-control" ng-model="addData.name">
-                <br>
+                <input type="text" class="form-control" ng-model="addData.name" name="userName" required>
+                <br><span ng-show="addForm.userName.$error.required&&addForm.$submitted">用户名不能为空</span>
+                    </div>
+                    <div
+                            ng-class="{'has-success':!addForm.addName.$dirty&&!addForm.addName.$error.required,'has-error':addForm.addName.$error.required&&addForm.$submitted}">
                 <label>姓名：</label>
-                <input type="text" class="form-control" ng-model="addData.username">
-                <br>
+                <input type="text" class="form-control" ng-model="addData.username" name="addName" required>
+                        <br><span ng-show="addForm.addName.$error.required&&addForm.$submitted">姓名不能为空</span>
+                    </div>
                 <label>部门：</label>
                 <select class="form-control select-width">
                     <option>根组织</option>
                 </select>
                 <br><br>
-                <label>密码:</label>
-                <input type="text" class="form-control" ng-model="addData.password">
-                <br>
-                <label>确认密码：</label>
-                <input type="text" class="form-control" ng-model="addData.password">
-                <br>
+                    <div ng-class="{'has-success':!addForm.password.$dirty&&!addForm.password.$error.required,'has-error':addForm.password.$error.required&&addForm.$submitted}">
+                    <label>密码:</label>
+                <input type="password" class="form-control"  ng-model="addData.password" name="password" required>
+                        <br><span ng-show="addForm.password.$error.required&&addForm.$submitted">密码不能为空</span>
+                    </div>
+                    <div ng-class="{'has-success':!addForm.passwordagin.$dirty&&!addForm.passwordagin.$error.required,'has-error':addForm.passwordagin.$error.required&&addForm.$submitted &&addData.password!=passwordagain}">
+
+                    <label>确认密码：</label>
+                <input type="password" class="form-control" ng-model="passwordagain" name="passwordagin" required>
+                        <br><span ng-show="addForm.passwordagin.$error.required&&addForm.$submitted">密码不能为空</span>
+                        <span ng-show="addData.password!=passwordagain && addForm.passwordagin.$error.required&&addForm.$submitted">两次秘密不一致</span>
+                    </div>
                 <label>角色：</label>
-                <select style="width: 100%" class="form-control">
-                    <option>管理员</option>
+                <select style="width: 100%" class="form-control" ng-change="selectAdd(selectArr.id)"
+                        ng-model="selectArr " ng-options="obj.name for obj in arr" ng-init="arry[length-1]">
                 </select>
                 <br><br>
                 <button class="btn btn-default btn-width"  ng-click="confirms()">确定</button>
+                </form>
             </div>
         </div>
     </div>
@@ -89,8 +102,8 @@
                                 <input type="text" class="form-control">
                                 <br>
                                 <label>角色：</label>
-                                <select style="width: 100%" class="form-control">
-                                    <option>管理员</option>
+                                <select style="width: 100%" class="form-control" ng-options="obj.name for obj in arry"
+                                    ng-change="selectRevise(selectArry.id)" ng-model="selectArry " >
                                 </select>
                                 <br><br>
                                 <button class="btn btn-default" style="width: 100%" ng-click="confirm()">确定</button>

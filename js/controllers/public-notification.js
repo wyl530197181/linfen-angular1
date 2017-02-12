@@ -37,6 +37,7 @@ angular.module("myApp.controller").controller('public-notificationCtrl', functio
         $scope.addData.staff = '';
         $scope.addData.content = ''
     };
+
     $scope.addData = {
         token: sessionStorage.getItem('token'),
         title: '',
