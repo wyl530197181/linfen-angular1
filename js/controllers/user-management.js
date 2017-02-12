@@ -74,7 +74,9 @@ $scope.selectRevise=function (arr) {
             function (data) {
                 console.log(data);
                 $scope.refresh();
+                swal('修改成功')
             }, function () {
+                swal('信息有误')
             });
     };
     $scope.delete = function () {
