@@ -23,6 +23,30 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
         });
     };
     page();
+    //角色添加
+    $scope.added={
+        token: sessionStorage.getItem('token'),
+        roleName:'',
+        functionCodes:''
+    };
+    $scope.roleAdded=function () {
+        $('input[type="checkbox"]').each(function (value,a) {
+            if(a.checked==true){
+                $scope.added.functionCodes=a.value;
+                console.log($scope.added.functionCodes);
+            }
+        });
+        //添加角色接口
+        $('#myModal1').modal('hide');
+        Role.roleAdd($scope.added).then(
+            function (data) {
+
+                console.log(data);
+                page();
+            }, function () {
+                swal("信息错误!")
+        });
+    };
     //角色修改
     $scope.roleModify = function () {
         Role.roleUserModify({
