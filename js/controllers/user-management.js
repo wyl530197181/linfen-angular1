@@ -100,12 +100,9 @@ $scope.selectRevise=function (arr) {
             showLoaderOnConfirm: true,
             cancelButtonText: '取消'
         }, function () {
-            setTimeout(function () {
                 delData();
                 swal("删除成功!");
                 $scope.refresh();
-            }, 2000);
-
         });
     };
     $scope.add = function () {

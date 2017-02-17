@@ -81,11 +81,9 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             showLoaderOnConfirm: true,
             cancelButtonText:'取消'
         }, function () {
-            setTimeout(function () {
                 delData();
                 swal("删除成功!");
                 page();
-            }, 2000);
         });
     };
     // 分页

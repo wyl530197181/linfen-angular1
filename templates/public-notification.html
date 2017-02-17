@@ -1,5 +1,5 @@
 <!--公开通报页面-->
-<form>
+<div>
     <h3>公开通报</h3>
     <label>被通报人：</label>
     <div class="row">
@@ -22,12 +22,20 @@
                                 <span class="sr-only">Close</span>
                             </button>
                         </div>
-                        <div class="modal-border">
+                        <form class="modal-border" name="addForm" novalidate>
                             <label>标题:</label>
-                            <input type="text" class="form-control" ng-model="addData.title">
+                            <div ng-class="{'has-success':!addForm.addTitle.$error.required&&addForm.addTitle.$dirty,
+                                                  'has-error':addForm.addTitle.$error.required&&addForm.addTitle.$dirty}">
+                                <input type="text" name="addTitle" class="form-control" ng-model="addData.title" required>
+                                <div ng-show="addForm.addTitle.$error.required&&addForm.addTitle.$dirty">该输入为必填项</div>
+                            </div>
                             <br>
                             <label>人员：</label>
-                            <input type="text" class="form-control" ng-model="addData.staff">
+                            <div ng-class="{'has-success':!addForm.addStaff.$error.required&&addForm.addStaff.$dirty,
+                                                  'has-error':addForm.addStaff.$error.required&&addForm.addStaff.$dirty}">
+                                <input type="text" name="addStaff" class="form-control" ng-model="addData.staff" required>
+                                <div ng-show="addForm.addStaff.$error.required&&addForm.addStaff.$dirty">该输入为必填项</div>
+                            </div>
                             <br>
                             <label>部门：</label>
                             <select class="form-control select-width">
@@ -35,16 +43,20 @@
                             </select>
                             <br><br>
                             <label>内容：</label>
-                            <textarea cols="90" rows="4" ng-model="addData.content"></textarea>
+                            <div ng-class="{'has-success':!addForm.addContent.$error.required&&addForm.addContent.$dirty,
+                                                  'has-error':addForm.addContent.$error.required&&addForm.addContent.$dirty}">
+                                <textarea class="form-control" cols="90" rows="4" name="addContent" ng-model="addData.content" required></textarea>
+                                <div ng-show="addForm.addContent.$error.required&&addForm.addContent.$dirty">该输入为必填项</div>
+                            </div>
                             <button class="btn btn-default btn-width" ng-click="addSure()">确定</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-</form>
+</div>
 <br><br>
 <table class="table table-striped">
     <tr>
@@ -68,39 +80,53 @@
             <span>{{data.createTime}}</span>
         </td>
         <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1"
-                    ng-click="revamp()">
-                修改
-            </button>
-            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                        </div>
-                        <div class="modal-border">
-                            <label>标题:</label>
-                            <input type="text" class="form-control" ng-model="publicUpdate.title">
-                            <br>
-                            <label>人员：</label>
-                            <input type="text" class="form-control" ng-model="publicUpdate.staff">
-                            <br>
-                            <label>部门：</label>
-                            <select class="form-control select-width">
-                                <option>根组织</option>
-                            </select>
-                            <br><br>
-                            <label>内容：</label>
-                            <textarea cols="90" rows="4" ng-model="publicUpdate.content"></textarea>
-                            <button class="btn btn-default btn-width" ng-click="revampSure()">确定</button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1"
+                        ng-click="revamp()">
+                    修改
+                </button>
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <form class="modal-border" name="publicForm" novalidate>
+                                <label>标题:</label>
+                                <div ng-class="{'has-success':!publicForm.publicTitle.$error.required&&publicForm.publicTitle.$dirty,
+                                                  'has-error':publicForm.publicTitle.$error.required&&publicForm.publicTitle.$dirty}">
+                                    <input type="text" name="publicTitle" class="form-control" ng-model="publicUpdate.title" required>
+                                    <div ng-show="publicForm.publicTitle.$error.required&&publicForm.publicTitle.$dirty">该输入为必填项</div>
+                                </div>
+                                <br>
+                                <label>人员：</label>
+                                <div ng-class="{'has-success':!publicForm.publicStaff.$error.required&&publicForm.publicStaff.$dirty,
+                                                  'has-error':publicForm.publicStaff.$error.required&&publicForm.publicStaff.$dirty}">
+                                    <input type="text" name="publicStaff" class="form-control" ng-model="publicUpdate.staff" required>
+                                    <div ng-show="publicForm.publicStaff.$error.required&&publicForm.publicStaff.$dirty">该输入为必填项</div>
+                                </div>
+                                <br>
+                                <label>部门：</label>
+                                <select class="form-control select-width">
+                                    <option>根组织</option>
+                                </select>
+                                <br><br>
+                                <label>内容：</label>
+                                <div ng-class="{'has-success':!publicForm.publicContent.$error.required,
+                                                  'has-error':publicForm.publicContent.$error.required}">
+                                    <textarea class="form-control" cols="90" rows="4" name="publicContent" ng-model="publicUpdate.content" required></textarea>
+                                    <div ng-show="publicForm.publicContent.$error.required&&publicForm.publicContent.$dirty">该输入为必填项</div>
+                                </div>
+                                <button class="btn btn-default btn-width" ng-click="revampSure()">确定</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+
             <button class="btn btn-danger" ng-click="remove()">删除</button>
         </td>
     </tr>

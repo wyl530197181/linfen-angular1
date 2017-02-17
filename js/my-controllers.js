@@ -964,11 +964,9 @@ angular.module("myApp.controller").controller('roleManage', function ($scope, Ro
             showLoaderOnConfirm: true,
             cancelButtonText:'取消'
         }, function () {
-            setTimeout(function () {
                 delData();
                 swal("删除成功!");
                 page();
-            }, 2000);
         });
     };
     // 分页
@@ -1327,12 +1325,9 @@ $scope.selectRevise=function (arr) {
             showLoaderOnConfirm: true,
             cancelButtonText: '取消'
         }, function () {
-            setTimeout(function () {
                 delData();
                 swal("删除成功!");
                 $scope.refresh();
-            }, 2000);
-
         });
     };
     $scope.add = function () {

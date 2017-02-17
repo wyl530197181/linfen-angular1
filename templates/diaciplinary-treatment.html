@@ -1,5 +1,5 @@
 <!--纪律处分页面-->
-<form>
+<div>
     <h3>违纪处分</h3>
     <label>被通报人：</label>
     <div class="row">
@@ -22,12 +22,23 @@
                                 <span class="sr-only">Close</span>
                             </button>
                         </div>
-                        <div class="modal-border">
+                        <form class="modal-border" name="addForm" novalidate>
                             <label>标题:</label>
-                            <input type="text" class="form-control" ng-model="addData.title">
+                            <div ng-class="{'has-success':!addForm.addTitle.$error.required&&addForm.addTitle.$dirty,
+                                              'has-error':addForm.addTitle.$error.required&&addForm.addTitle.$dirty}">
+                                <input type="text" name="addTitle" class="form-control" ng-model="addData.title"
+                                       required>
+                                <div ng-show="addForm.addTitle.$error.required&&addForm.addTitle.$dirty">该输入为必填项</div>
+                            </div>
                             <br>
                             <label>人员：</label>
-                            <input type="text" class="form-control" ng-model="addData.staff">
+                            <div ng-class="{'has-success':!addForm.addStaff.$error.required&&addForm.addStaff.$dirty,
+                                              'has-error':addForm.addStaff.$error.required&&addForm.addStaff.$dirty}">
+                                <input type="text" name="addStaff" class="form-control" ng-model="addData.staff"
+                                       required>
+                                <div ng-show="addForm.addStaff.$error.required&&addForm.addStaff.$dirty">该输入为必填项
+                                </div>
+                            </div>
                             <br>
                             <label>部门：</label>
                             <select class="form-control select-width">
@@ -35,16 +46,24 @@
                             </select>
                             <br><br>
                             <label>内容：</label>
-                            <textarea cols="90" rows="4" ng-model="addData.content"></textarea>
+                            <div ng-class="{'has-success':!addForm.addContent.$error.required&&addForm.addContent.$dirty,
+                                              'has-error':addForm.addContent.$error.required&&addForm.addContent.$dirty}">
+                            <textarea class="form-control" cols="90" rows="4" name="addContent"
+                                      ng-model="addData.content"
+                                      required></textarea>
+                                <div ng-show="addForm.addContent.$error.required&&addForm.addContent.$dirty">
+                                    该输入为必填项
+                                </div>
+                            </div>
                             <button class="btn btn-default btn-width" ng-click="addSure()">确定</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-</form>
+</div>
 
 
 <br><br>
@@ -70,7 +89,8 @@
             <span>{{data.createTime}}</span>
         </td>
         <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" ng-click="revamp()">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1"
+                    ng-click="revamp()">
                 修改
             </button>
             <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -83,12 +103,26 @@
                                 <span class="sr-only">Close</span>
                             </button>
                         </div>
-                        <div  class="modal-border">
+                        <form class="modal-border" name="revampForm" novalidate>
                             <label>标题:</label>
-                            <input type="text" class="form-control" ng-model="diaciplinaryUpdate.title">
+                            <div ng-class="{'has-success':!revampForm.revampTitle.$error.required&&revampForm.revampTitle.$dirty,
+                                              'has-error':revampForm.revampTitle.$error.required&&revampForm.revampTitle.$dirty}">
+                                <input type="text" name="revampTitle" class="form-control"
+                                       ng-model="diaciplinaryUpdate.title" required>
+                                <div ng-show="revampForm.revampTitle.$error.required&&revampForm.revampTitle.$dirty">
+                                    该输入为必填项
+                                </div>
+                            </div>
                             <br>
                             <label>人员：</label>
-                            <input type="text" class="form-control" ng-model="diaciplinaryUpdate.staff">
+                            <div ng-class="{'has-success':!revampForm.revampStaff.$error.required&&revampForm.revampStaff.$dirty,
+                                              'has-error':revampForm.revampStaff.$error.required&&revampForm.revampStaff.$dirty}">
+                                <input type="text" name="revampStaff" class="form-control"
+                                       ng-model="diaciplinaryUpdate.staff" required>
+                                <div ng-show="revampForm.revampStaff.$error.required&&revampForm.revampStaff.$dirty">
+                                    该输入为必填项
+                                </div>
+                            </div>
                             <br>
                             <label>部门：</label>
                             <select class="form-control select-width">
@@ -96,9 +130,16 @@
                             </select>
                             <br><br>
                             <label>内容：</label>
-                            <textarea cols="90" rows="4" ng-model="diaciplinaryUpdate.content"></textarea>
+                            <div ng-class="{'has-success':!revampForm.revampContent.$error.required&&revampForm.revampContent.$dirty,
+                                              'has-error':revampForm.revampContent.$error.required&&revampForm.revampContent.$dirty}">
+                            <textarea class="form-control" cols="90" rows="4" name="revampContent"
+                                      ng-model="diaciplinaryUpdate.content" required></textarea>
+                                <div ng-show="revampForm.revampContent.$error.required&&revampForm.revampContent.$dirty">
+                                    该输入为必填项
+                                </div>
+                            </div>
                             <button class="btn btn-default btn-width" ng-click="revampSure()">确定</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -106,4 +147,5 @@
         </td>
     </tr>
 </table>
-<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
+<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+    boundary-link-numbers="true" rotate="false" ng-click="paging()"></ul>
