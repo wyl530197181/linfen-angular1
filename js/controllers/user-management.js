@@ -109,7 +109,7 @@ $scope.selectRevise=function (arr) {
         $scope.addData.username='';
         $scope.addData.name='';
         $scope.addData.password='';
-        passwordagain='';
+        $scope.passwordagain='';
         userManage.reviseList1({
             token: sessionStorage.getItem('token')
         }).then(
@@ -126,7 +126,8 @@ $scope.selectRevise=function (arr) {
                 console.log(data);
                 $scope.arr=data;
                 $scope.length=$scope.arr.length;
-                console.log($scope.arr.length)
+                $scope.roleManage=data[ $scope.length-1].name
+                console.log($scope.roleManage)
             }, function () {
             });
     };

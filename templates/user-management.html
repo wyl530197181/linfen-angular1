@@ -29,21 +29,22 @@
                     <option>根组织</option>
                 </select>
                 <br><br>
-                    <div ng-class="{'has-success':!addForm.password.$dirty&&!addForm.password.$error.required,'has-error':addForm.password.$error.required&&addForm.$submitted}">
+                    <div ng-class="{'has-success':!addForm.password.$dirty&&!addForm.password.$error.required,'has-error':(addForm.password.$error.required&&addForm.$submitted)||(addData.password!=passwordagain&&addForm.$submitted)}">
                     <label>密码:</label>
                 <input type="password" class="form-control"  ng-model="addData.password" name="password" required>
                         <br><span ng-show="addForm.password.$error.required&&addForm.$submitted">密码不能为空</span>
                     </div>
-                    <div ng-class="{'has-success':!addForm.passwordagin.$dirty&&!addForm.passwordagin.$error.required,'has-error':addForm.passwordagin.$error.required&&addForm.$submitted &&addData.password!=passwordagain}">
+
+                    <div ng-class="{'has-success':!addForm.passwordagin.$dirty&&!addForm.passwordagin.$error.required,'has-error':(addForm.passwordagin.$error.required&&addForm.$submitted) ||(addData.password!=passwordagain&&addForm.$submitted)}">
 
                     <label>确认密码：</label>
                 <input type="password" class="form-control" ng-model="passwordagain" name="passwordagin" required>
                         <br><span ng-show="addForm.passwordagin.$error.required&&addForm.$submitted">密码不能为空</span>
-                        <span ng-show="addData.password!=passwordagain && addForm.passwordagin.$error.required&&addForm.$submitted">两次秘密不一致</span>
+                        <span ng-show="addData.password!=passwordagain && !addForm.passwordagin.$error.required&&addForm.$submitted">两次秘密不一致</span>
                     </div>
                 <label>角色：</label>
-                <select style="width: 100%" class="form-control" ng-change="selectAdd(selectArr.id)"
-                        ng-model="selectArr " ng-options="obj.name for obj in arr" ng-init="arry[length-1]">
+                <select style="width: 100%" class="form-control" ng-change="selectAdd(selectArr.id)"  ng-init="selectArr=roleManage"
+                        ng-model="selectArr " ng-options="obj.name for obj in arr">
                 </select>
                 <br><br>
                 <button class="btn btn-default btn-width"  ng-click="confirms()">确定</button>
@@ -96,10 +97,10 @@
                                 </select>
                                 <br><br>
                                 <label>密码:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" placeholder="密码为空则不用修改">
                                 <br>
                                 <label>确认密码：</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"placeholder="密码为空则不用修改">
                                 <br>
                                 <label>角色：</label>
                                 <select style="width: 100%" class="form-control" ng-options="obj.name for obj in arry"
